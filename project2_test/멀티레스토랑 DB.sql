@@ -1,8 +1,9 @@
 CREATE TABLE User_Info(
     user_ID VARCHAR2(20) PRIMARY KEY,
     user_PW VARCHAR2(20) NOT NULL,
-    user_Name VARCHAR2(20) DEFAULT '회원',
-    user_Birth DATE,
+    user_Nickname VARCHAR2(20) DEFAULT '회원',
+    user_Birth INT,
+    user_gender INT,
     user_City VARCHAR2(20),
     user_Email VARCHAR2(20),
     user_Phone INT,
@@ -92,3 +93,11 @@ SELECT * FROM review_info;
 SELECT * FROM reviewimg_info;
 SELECT * FROM tag_info;
 SELECT * FROM rest_tag;
+
+DROP TABLE rest_tag;
+DROP TABLE tag_info;
+DROP TABLE reviewimg_info;
+DROP TABLE review_info;
+DROP TABLE likerest_info;
+DROP TABLE restaurant_info;
+DROP TABLE user_info;
