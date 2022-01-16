@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class testController {
-	@RequestMapping(value="/detail")
+	@RequestMapping(value="/content")
 	public String detail() {
-		return "detailPage";
+		return "contents";
 	}
 }
