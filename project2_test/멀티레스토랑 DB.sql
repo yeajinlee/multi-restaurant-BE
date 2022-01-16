@@ -8,6 +8,7 @@ CREATE TABLE User_Info(
     user_Phone INT,
     user_level INT DEFAULT 1,
     user_profile VARCHAR2(50)
+    
 );
 
 CREATE TABLE Restaurant_Info (
