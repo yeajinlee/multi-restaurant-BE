@@ -14,6 +14,26 @@ private String user_Email;
 private Integer user_Phone;
 private Integer user_Level;
 private String user_Profile;
+
+
+public MemberVO() {
+	// TODO Auto-generated constructor stub
+}
+public MemberVO(String user_ID, String user_PW, Integer user_Nickname, String user_Birth, Integer user_Gender,
+		String user_City, String user_Email, Integer user_Phone, Integer user_Level, String user_Profile) {
+	super();
+	this.user_ID = user_ID;
+	this.user_PW = user_PW;
+	this.user_Nickname = user_Nickname;
+	this.user_Birth = user_Birth;
+	this.user_Gender = user_Gender;
+	this.user_City = user_City;
+	this.user_Email = user_Email;
+	this.user_Phone = user_Phone;
+	this.user_Level = user_Level;
+	this.user_Profile = user_Profile;
+}
+
 public String getUser_ID() {
 	return user_ID;
 }
@@ -72,24 +92,6 @@ public String getUser_Profile() {
 	return user_Profile;
 }
 public void setUser_Profile(String user_Profile) {
-	this.user_Profile = user_Profile;
-}
-
-public MemberVO() {
-	// TODO Auto-generated constructor stub
-}
-public MemberVO(String user_ID, String user_PW, Integer user_Nickname, String user_Birth, Integer user_Gender,
-		String user_City, String user_Email, Integer user_Phone, Integer user_Level, String user_Profile) {
-	super();
-	this.user_ID = user_ID;
-	this.user_PW = user_PW;
-	this.user_Nickname = user_Nickname;
-	this.user_Birth = user_Birth;
-	this.user_Gender = user_Gender;
-	this.user_City = user_City;
-	this.user_Email = user_Email;
-	this.user_Phone = user_Phone;
-	this.user_Level = user_Level;
 	this.user_Profile = user_Profile;
 }
 
