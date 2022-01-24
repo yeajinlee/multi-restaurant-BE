@@ -17,7 +17,7 @@
 		<result property="user_Profile" column="user_Profile" />
 	</resultMap>
 
-	<select id="login" resultType="memberVO"
+	<select id="loginById" resultType="memberVO"
 		parameterType="java.util.Map">
 	    <![CDATA[
 			select * from User_Info
