@@ -190,8 +190,8 @@
 
 	<section class="r_info">
 		<div class="detail_info">
-			<span class="place_name">일조초밥</span> <span class="star_wish">
-				<i class="fas fa-star"></i>&nbsp; <span><b>4.5 / 5</b></span>&nbsp;&nbsp;&nbsp;
+			<span class="place_name">${detail.rest_Name }</span> <span class="star_wish">
+				<i class="fas fa-star"></i>&nbsp; <span><b>${detail.rest_Scope} / 5</b></span>&nbsp;&nbsp;&nbsp;
 				<span class="wish_cnt">리뷰 35 찜 12</span>&nbsp; <i
 				class="far fa-heart" id="heart" onclick="setWishList();"></i>
 			</th>
@@ -199,19 +199,23 @@
 			<table>
 				<tr>
 					<td>주소</td>
-					<td>서울특별시 중구 퇴계로 00길 00</td>
+					<td>${detail.rest_Address }</td>
 				</tr>
 				<tr>
 					<td>전화번호</td>
-					<td>02-000-0000</td>
+					<td>${detail.rest_Phone }</td>
 				</tr>
 				<tr>
 					<td>가격대</td>
-					<td>0만원-00만원</td>
+					<td>${detail.rest_Price }</td>
 				</tr>
 				<tr>
 					<td>소셜</td>
-					<td><a href="https://www.instagram.com/?hl=ko">인스타그램</a></td>
+					<td><a href="https://www.instagram.com/?hl=ko">${detail.rest_Social}</a></td>
+				</tr>
+				<tr>
+					<td>개업일</td>
+					<td>${detail.rest_OpenDate }</td>
 				</tr>
 				<tr>
 					<td colspan="2" class="tag"><input type="button" value="오마카세">
