@@ -1,22 +1,25 @@
 package com.spring.project2_test.member.controller;
 
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.project2_test.member.service.MemberService;
 import com.spring.project2_test.member.vo.MemberVO;
 
-////form,main, RequestMapping 
+////main, RequestMapping 
 @Controller("memberController")
 public class MemberControllerImpl implements MemberController{
 
@@ -72,6 +75,18 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-
+	@RequestMapping(value = "/project2_test/*Form.do", method =  RequestMethod.GET)
+	private ModelAndView form(@RequestParam(value= "result", required=false) String result,
+							  @RequestParam(value= "action", required=false) String action,
+						       HttpServletRequest request, 
+						       HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);  
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",result);
+		mav.setViewName(viewName);
+		return mav;
+	}
 
 }
