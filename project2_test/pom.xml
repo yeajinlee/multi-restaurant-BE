@@ -167,6 +167,11 @@
     <version>1.4</version>
   </dependency>
   
+  <dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20211205</version>
+</dependency>
   <!-- springaop, aspectj, tilesㅇㅈ   -->
 	</dependencies>
 	<build>
