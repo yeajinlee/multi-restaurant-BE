@@ -5,6 +5,7 @@
 <configuration>
   <typeAliases>
     <typeAlias type="com.spring.project2_test.member.vo.MemberVO" alias="memberVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.DetailVO" alias="detailVO" />
 <!-- typeAliases on vo -->
     
   </typeAliases>
