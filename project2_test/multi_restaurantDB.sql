@@ -1,3 +1,42 @@
+CREATE TABLE rest_Image 
+   (	IMAGE_ID int primary key, 
+	rest_NO int, 
+	FILENAME VARCHAR2(50), 
+	REG_ID VARCHAR2(30), 
+	FILETYPE VARCHAR2(40)	
+   ) ;
+   
+Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (2,3,'1.jpg','admin','main_image');
+Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (1,1,'hon','admin','main_image');
+drop table rest_image;
+SELECT * FROM restaurant_info;
+SELECT * FROM rest_image;
+
+
+CREATE TABLE Restaurant_Info (
+    rest_NO INT PRIMARY KEY,
+    rest_Name VARCHAR2(50) NOT NULL,
+    rest_Price VARCHAR2(50) NOT NULL,
+    rest_Address VARCHAR2(100) NOT NULL,
+    rest_Phone varchar2(30),
+    rest_Scope INT,
+        rest_Social VARCHAR2(50),
+        rest_fileName varchar(20),
+    rest_OpenDate DATE NOT NULL
+);
+ insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName,  rest_OpenDate) values (1,'돈가스나라','10만원','성남','131313',1,1,'hon',sysdate);
+insert into restaurant_info (rest_no, rest_name, rest_price, rest_address, rest_opendate)
+    values (3, '식당이름', '가격대', '주소', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values('2', '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+    
+    drop table Restaurant_Info;
+    
+    select ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
+     ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
+     and ri.rest_Name like '#{searchWord}%';
+    
+    
 CREATE USER MultiRestaurant_DB
 IDENTIFIED BY m1234
 DEFAULT TABLESPACE USERS
@@ -21,16 +60,6 @@ CREATE TABLE User_Info(
     user_profile VARCHAR2(50)
 );
 
-CREATE TABLE Restaurant_Info (
-    rest_NO INT PRIMARY KEY,
-    rest_Name VARCHAR2(50) NOT NULL,
-    rest_Price VARCHAR2(50) NOT NULL,
-    rest_Address VARCHAR2(100) NOT NULL,
-    rest_Phone varchar2(30),
-    rest_Scope INT,
-    rest_Social VARCHAR2(50),
-    rest_OpenDate DATE NOT NULL
-);
 
 
 CREATE TABLE LikeRest_Info (
@@ -106,10 +135,6 @@ insert into user_info(user_id, user_pw, user_nickname) values ('a0001', 'a0001',
 insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level) 
     values ('a0002', 'a0002', '테스트이름2', '1993', 1, '서울', 'a0002@gmail.com', '01000000000', 1);
 
-insert into restaurant_info (rest_no, rest_name, rest_price, rest_address, rest_opendate)
-    values (1, '식당이름', '가격대', '주소', sysdate);
-insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
-    values('2', '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
     
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
     values (1, 'a0001', 5, '테스트 리뷰', 1, sysdate);
@@ -123,7 +148,7 @@ insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, 
 commit;
 
 SELECT * FROM user_info;
-SELECT * FROM restaurant_info;
+
 SELECT * FROM likerest_info;
 SELECT * FROM review_info;
 SELECT * FROM reviewimg_info;

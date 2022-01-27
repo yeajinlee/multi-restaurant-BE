@@ -26,10 +26,10 @@
 			select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info where rownum < 7
 		]]>
 	</select>
-	<select id="selectImgList" resultMap="imageResult">
+<!-- 	<select id="selectImgList" resultMap="imageResult">
 		<![CDATA[
 			select * from reviewimg_info where rest_NO = #{rest_NO}
 		]]>
-		<!-- rest_NO가 null로 되어서 에러나는데 해결못함  -->
-	</select>
+		rest_NO가 null로 되어서 에러나는데 해결못함 
+	</select> -->
 </mapper>

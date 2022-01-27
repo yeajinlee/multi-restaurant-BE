@@ -69,12 +69,19 @@
                         <div class="text-center text-light">
                             <h1 class="mb-5">내 주변의 숨은 맛집 검색하기</h1>
                             <div class="row">
+                                      
+                            <form name="frmSearch" action="${pageContext.request.contextPath}/searchRest.do" >
                                 <div class="col">
-                                    <input class="form-control form-control-lg" id="search"
-                                        placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" />
+                                    <!-- <input class="form-control form-control-lg" id="search"
+                                        placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" /> -->
+                                	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
+                                
                                 </div>
-                                <div class="col-auto"><button class="btn btn-lg btn-outline-light" id="submitButton"
-                                        type="submit">SEARCH</button></div>
+                                <div class="col-auto">
+                            <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
+                                        type="submit">SEARCH</button></div> -->
+                                <input type="submit" name="search" class="btn1"  value="검색" >
+                         </div></form>
                             </div>
                         </div>
                     </div>
