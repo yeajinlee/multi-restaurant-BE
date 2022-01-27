@@ -25,7 +25,15 @@
 			 and user_PW=#{user_PW}			
 		]]>
 	</select>
+<<<<<<< HEAD
 
+=======
+	<select id="login_check" resultType="String">
+		select user_Nickname
+		from User_Info
+		where user_ID=#{user_ID} and user_PW=#{user_PW}
+	</select>
+>>>>>>> master
 
 	<insert id="insertNewMember" parameterType="memberVO">
   <![CDATA[

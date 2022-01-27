@@ -1,5 +1,10 @@
 package com.spring.project2_test.member.dao;
 
+<<<<<<< HEAD
+=======
+import javax.servlet.http.HttpSession;
+
+>>>>>>> master
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -27,4 +32,16 @@ public class MemberDAOImpl implements MemberDAO{
 		return result;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public String loginCheck(MemberVO vo) {
+		return sqlSession.selectOne("member.login_check", vo);
+	}
+
+	
+	
+	
+
+>>>>>>> master
 }

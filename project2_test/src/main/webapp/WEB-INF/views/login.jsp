@@ -8,7 +8,28 @@
     <title>로그인</title>
     <link rel="stylesheet" href="join_css.css">
     <script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$(function() {
+		$("#btnLogin").click(function() {
+			userid = $("#userid").val();
+			var passwd = $("#passwd").val();
+			if (userid == "") {
+				alert("아이디를 입력하세요");
+				$("#userid").focus(); //입력포커스 이동
 
+				return; //함수 종료
+			}
+			if (passwd == "") {
+				alert("비밀번호를 입력하세요");
+				$("#passwd").focus();
+				return;
+			}
+			//폼 내부의 데이터를 전송할 주소
+			document.form1.action = "${path}/member/login_check.do";
+			document.form1.submit(); //제출
+		});
+	});
+</script>
 
 </head>
 
@@ -18,7 +39,7 @@
         <a href="../main/main.html" target="_self" title="메인 페이지로"><img src="img/logo.png" id="logo"></a>
     </div>
 
-
+	<form name="form1" method="post">
     <!-- wrapper -->
     <div id="wrapper">
 
@@ -55,6 +76,14 @@
                 <button type="button" id="btnLogin" onclick="submit_check()">
                     <span>로그인</span>
                 </button>
+                <c:if test="${message == 'error'}">
+                                <div style="color:red;"> 아이디 또는 비밀번호가 일치하지 않습니다.
+                                </div>
+                </c:if>
+                <c:if test="${message == 'logout'}">
+                                <div style="color:red;"> 로그아웃되었습니다.
+                                </div>
+                </c:if>
             </div>
             
 
@@ -70,6 +99,7 @@
 
     </div>
     <!-- wrapper -->
+    </form>
     <script src="join_js.js"></script>
     
 </body>

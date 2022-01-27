@@ -9,15 +9,27 @@
 		<result property="user_ID" column="user_ID"/>
 		<result property="review_Scope" column="review_Scope"/>
 		<result property="review_Text" column="review_Text"/>
+<<<<<<< HEAD
 		<result property="review_Date" column="review_Date"/>
 	</resultMap>
 	
 	<select id="selectAllReviewOdd" resultMap="reviewResultOdd">
+=======
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="review_Date" column="review_Date"/>
+	</resultMap>
+	
+	<select id="selectAllReviewOdd" resultMap="reviewResult">
+>>>>>>> master
 		<![CDATA[
 			select * from Review_Info where MOD(review_NO,2)=1
 		]]>
 	</select>
+<<<<<<< HEAD
 	<select id="selectAllReviewEven" resultMap="reviewResultEven">
+=======
+	<select id="selectAllReviewEven" resultMap="reviewResult">
+>>>>>>> master
 		<![CDATA[
 			select * from Review_Info where MOD(review_NO,2)=0
 		]]>
