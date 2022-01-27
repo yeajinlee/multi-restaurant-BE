@@ -81,6 +81,8 @@ CREATE TABLE ReviewIMG_Info (
 );
 
 CREATE SEQUENCE reviewIMG_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, pizza.jpg, 1, 1);
+
 
 CREATE TABLE Tag_Info (
     tag_NO INT PRIMARY KEY,
@@ -117,6 +119,8 @@ insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, 
     values (3, 'a0001', 5, 'Å×½ºÆ® ¸®ºä3', 1, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
     values (4, 'a0002', 5, 'Å×½ºÆ® ¸®ºä4', 2, sysdate);
+    
+commit;
 
 SELECT * FROM user_info;
 SELECT * FROM restaurant_info;

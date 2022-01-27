@@ -17,7 +17,6 @@ import com.spring.project2_test.detail.service.DetailService;
 import com.spring.project2_test.detail.vo.DetailVO;
 
 @Controller("detailController")
-@RequestMapping(value="/restaurant")
 public class DetailControllerImpl implements DetailController {
 	@Autowired
 	private DetailService detailService;
