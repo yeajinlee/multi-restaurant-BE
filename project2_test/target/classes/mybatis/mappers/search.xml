@@ -14,33 +14,40 @@
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
 	
-	<result property="rest_filetype" column="rest_filetype"/>
+	<result property="rest_fileName" column="rest_fileName"/>
 	<result property="rest_Menu" column="rest_Menu"/>
 	</resultMap>
 	
+	<resultMap id="imageResult" type="ImageFileVO">
+	   <result property="rest_NO" column="rest_NO" />
+	   <result property="imageFileName" column="imageFileName" />
+	   <result property="reg_id" column="reg_id" />
+	   <result property="image_id" column="image_id" />
+	   <result property="fileType" column="fileType" />
+	</resultMap>
 
 	
 	  <select id="selectBySearchWord" resultMap="searchResult"   parameterType="String">
     <![CDATA[
-          
-     select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image rm where
-     rf.rest_NO=rm.rest_NO and rm.filetype='대표이미지'
-     and rf.rest_Name like '%'|| #{searchWord} || '%'
-     요것도 추가?  rf.rest_address like '%'|| #{searchWord} || '%'
-    요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%'
-     order by rf.rest_OpenDate 아니면 rest_Scope desc   ]]>
+    
+          select rest_NO, rest_Name, rest_Address from Restaurant_Info
+
+     ]]><!-- 아니면 rest_Scope desc -->      <!-- select ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
+     ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
+     and ri.rest_Name like '%'|| #{searchWord} || '%' -->
   </select>
-  
-  	<select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
+  <!--      요것도 추가?  rf.rest_address like '%'|| #{searchWord} || '%'
+    요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%' -->
+  	<!-- <select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
 	    <![CDATA[
         select rest_Name from Restaurant_Info
         where         
         goods_title like '%'|| #{keyword} || '%'
-        order by rest_OpenDate desc 아니면 rest_scope
+        order by rest_OpenDate desc 
 		]]>
-	</select>
+	</select> -->
   
-  	<select id="selectSideSearch" resultType="String"   parameterType="String"  >
+<!--   	<select id="selectSideSearch" resultType="String"   parameterType="String"  >
 	    <![CDATA[
          select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image rm where
      rf.rest_NO=rm.rest_NO and rm.filetype='대표이미지'
@@ -49,6 +56,6 @@
     요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%'
      order by 어떤가게 논의 desc
 		]]>
-	</select>
+	</select> -->
   
   </mapper>

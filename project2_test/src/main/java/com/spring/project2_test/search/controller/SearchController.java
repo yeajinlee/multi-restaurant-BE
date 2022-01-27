@@ -15,4 +15,5 @@ public interface SearchController {
 			response) throws Exception;
 
 	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword,HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }
