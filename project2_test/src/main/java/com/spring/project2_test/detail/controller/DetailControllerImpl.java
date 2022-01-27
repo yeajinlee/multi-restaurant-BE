@@ -33,7 +33,7 @@ public class DetailControllerImpl implements DetailController {
 		Map detailMap = detailService.detailContent(rest_NO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("detailMap", detailMap);
-//		DetailVO detailVO = (DetailVO) detailMap.get("detailVO");
+		DetailVO detailVO = (DetailVO) detailMap.get("detailVO");
 		return mav;
 	}
 		
