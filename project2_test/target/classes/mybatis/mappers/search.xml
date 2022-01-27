@@ -23,7 +23,7 @@
 	</resultMap>
 	
 	
-	  <select id="selectBySearchWord" resultMap="##"   parameterType="String">
+	  <select id="selectBySearchWord" resultMap="searchResult"   parameterType="String">
     <![CDATA[
           
      select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image rm where

@@ -94,7 +94,7 @@
 	</div>
 	
 	<c:choose>
-		<c:when test="${empty reviewListMapOdd && empty reviewListMapEven}">
+		<c:when test="${empty reviewListOdd && empty reviewListEven}">
 			<div>
 				<p align="center">등록된 후기가 없습니다.</p>
 			</div>
@@ -102,7 +102,7 @@
 		<c:otherwise>
 			<div class="row">
 				<div class="col1">
-					<c:forEach var="review" items="${reviewListMapOdd }">
+					<c:forEach var="review" items="${reviewListlOdd}">
 						<div class="ind_review">
 						<table>
 							<tr>
@@ -133,7 +133,7 @@
 					</c:forEach>
 				</div>
 				<div class="col2">
-					<c:forEach var="review" items="${reviewListMapEven }">
+					<c:forEach var="review" items="${reviewListlEven }">
 						<div class="ind_review">
 						<table>
 							<tr>
