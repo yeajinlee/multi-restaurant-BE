@@ -28,8 +28,6 @@ public class MemberControllerImpl implements MemberController{
 	@Autowired
 	private MemberVO memberVO;
 
-
-	
 	@Override
 	@RequestMapping(value="/login.do", method= RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,

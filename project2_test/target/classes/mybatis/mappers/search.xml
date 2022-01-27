@@ -14,13 +14,16 @@
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
 	
-	<result property="rest_filetype" column="rest_filetype"/>
-	<result property="rest_Menu" column="rest_Menu"/>
 	</resultMap>
 	
-
+	<resultMap id="imageResult" type="imageVO">
+		<result property="" column=""/>
+		
 	
-	  <select id="selectBySearchWord" resultMap="##"   parameterType="String">
+	</resultMap>
+	
+	
+	  <select id="selectBySearchWord" resultMap="searchResult"   parameterType="String">
     <![CDATA[
           
      select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image rm where

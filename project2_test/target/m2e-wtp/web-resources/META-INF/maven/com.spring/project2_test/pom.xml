@@ -117,17 +117,17 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-		
-<!-- 	오라클                                                       -->	
-     <dependency>
-	    <groupId>oracle.jdbc</groupId>
-	    <artifactId>OracleDriver</artifactId>
-	    <version>12.1.0.2.0</version>
-	    <scope>system</scope>
-	    <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
-      </dependency>
-		
-<!--                mybatis             -->
+
+		<!-- 오라클 -->
+		<dependency>
+			<groupId>oracle.jdbc</groupId>
+			<artifactId>OracleDriver</artifactId>
+			<version>12.1.0.2.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
+		</dependency>
+
+		<!-- mybatis -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -138,6 +138,12 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.9.0</version>
+		</dependency> -->
+
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
@@ -149,23 +155,25 @@
 			<version>1.1.0</version>
 		</dependency>
 		<dependency>
-		<groupId>cglib</groupId>
+			<groupId>cglib</groupId>
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
 		</dependency>
 
 		<!-- 파일 업로드 -->
 		<dependency>
-    <groupId>commons-fileupload</groupId>
-    <artifactId>commons-fileupload</artifactId>
-    <version>1.2.1</version>
-  </dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 
-  <dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>1.4</version>
-  </dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+  
   
   <dependency>
     <groupId>org.json</groupId>
