@@ -78,7 +78,7 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
-	@RequestMapping(value = "/project2_test/*Form.do", method =  RequestMethod.GET)
+	@RequestMapping(value = "/*Form.do", method =  RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value= "result", required=false) String result,
 							  @RequestParam(value= "action", required=false) String action,
 						       HttpServletRequest request, 

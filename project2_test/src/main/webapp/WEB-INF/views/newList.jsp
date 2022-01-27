@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>½Å±Ô°³¾÷</title>
+    <title>ì‹ ê·œê°œì—…</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,27 +33,27 @@
                         <div class="col-lg-6">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <strong style="color:white">Áö¿ªº°</strong>
+                                <strong style="color:white">ì§€ì—­ë³„</strong>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">¾îµð¾îµð</a>
-                                <a class="dropdown-item" href="#">Áö¿ª2</a>
-                                <a class="dropdown-item" href="#">Áö¿ª3</a>
-                                <a class="dropdown-item" href="#">Áö¿ª4</a>
+                                <a class="dropdown-item" href="#">ì–´ë””ì–´ë””</a>
+                                <a class="dropdown-item" href="#">ì§€ì—­2</a>
+                                <a class="dropdown-item" href="#">ì§€ì—­3</a>
+                                <a class="dropdown-item" href="#">ì§€ì—­4</a>
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../main/reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;ÃßÃµ ¸Þ´º</strong> </a>
+                        <a class="nav-link" href="../main/reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;ì¶”ì²œ ë©”ë‰´</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>ÃÖ±Ù ÈÄ±â</strong> </a>
+                        <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>ìµœê·¼ í›„ê¸°</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>½Å±Ô °³¾÷</strong> </a>
+                        <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>ì‹ ê·œ ê°œì—…</strong> </a>
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="¹ä ¹¹ ¸ÔÁö?" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="ë°¥ ë­ ë¨¹ì§€?" aria-label="Search">
                     <button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
                 </form>
             </div>
@@ -66,8 +66,8 @@
                     data-toggle="dropdown"><img src="resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="../login_join/login.html">·Î±×ÀÎ</a>
-                    <a class="dropdown-item" href="../login_join/join.html">È¸¿ø°¡ÀÔ</a>
+                    <a class="dropdown-item" href="../login_join/login.html">ë¡œê·¸ì¸</a>
+                    <a class="dropdown-item" href="../login_join/join.html">íšŒì›ê°€ìž…</a>
                 </div>
             </div>
             </ul>
@@ -76,64 +76,64 @@
         <div>
             <div class="title">
                 <div class="title_txt">
-                    <b>´Ð³×ÀÓ´ÔÀ» ±â´Ù¸®°í ÀÖ´Â °¡°Ô</b><br>
-                    È¸¿ø´Ô ÁÖº¯ÀÇ »õ·Î °³¾÷ÇÑ °¡°Ôµé<br><br><br>
-                    <div class="popup" onclick="popUp()"><u>¿Ö »õ·Î °³¾÷ÇÑ °¡°ÔµéÀ» ÃßÃµÇÒ±î¿ä?</u>
+                    <b>ë‹‰ë„¤ìž„ë‹˜ì„ ê¸°ë‹¤ë¦¬ê³  ìžˆëŠ” ê°€ê²Œ</b><br>
+                    íšŒì›ë‹˜ ì£¼ë³€ì˜ ìƒˆë¡œ ê°œì—…í•œ ê°€ê²Œë“¤<br><br><br>
+                    <div class="popup" onclick="popUp()"><u>ì™œ ìƒˆë¡œ ê°œì—…í•œ ê°€ê²Œë“¤ì„ ì¶”ì²œí• ê¹Œìš”?</u>
                         <span class="popuptext" id="myPopup">
-                            ¸ÖÆ¼·¹½ºÅä¶ûÀº Áö¿ªÀÇ ¿Ü½Ä »ó±ÇÀ» ÀÀ¿øÇÕ´Ï´Ù!<br><br>
-                            È¸¿ø´Ô Áö¿ªÀÇ »õ·Î °³¾÷ÇÑ °¡°Ô¿¡ ¹æ¹®ÇÏ½Å ÈÄ ¸®ºä¸¦ ³²°Ü ÁÖ½Ã¸é<br>
-                            °¡°Ô µî±Þ¿¡ µû¶ó ´õ ¸¹Àº Æ÷ÀÎÆ®°¡ Àû¸³µË´Ï´Ù
+                            ë©€í‹°ë ˆìŠ¤í† ëž‘ì€ ì§€ì—­ì˜ ì™¸ì‹ ìƒê¶Œì„ ì‘ì›í•©ë‹ˆë‹¤!<br><br>
+                            íšŒì›ë‹˜ ì§€ì—­ì˜ ìƒˆë¡œ ê°œì—…í•œ ê°€ê²Œì— ë°©ë¬¸í•˜ì‹  í›„ ë¦¬ë·°ë¥¼ ë‚¨ê²¨ ì£¼ì‹œë©´<br>
+                            ê°€ê²Œ ë“±ê¸‰ì— ë”°ë¼ ë” ë§Žì€ í¬ì¸íŠ¸ê°€ ì ë¦½ë©ë‹ˆë‹¤
                         </span>
                       </div>
                     
                 </div>
             </div>
             <div class="content">
-                <!-- <span class="l_map"><img src="../images/placeholder.png" alt="Áöµµ ºÎºÐ"></span> -->
+                <!-- <span class="l_map"><img src="../images/placeholder.png" alt="ì§€ë„ ë¶€ë¶„"></span> -->
                 <div class="l_map">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.390980157256!2d126.98338321450412!3d37.569410079797336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2e8bd68ec11%3A0x6ee78e54814af2d9!2z6rCT64207Iqk7Iuc!5e0!3m2!1sko!2skr!4v1641207292048!5m2!1sko!2skr" width="550" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 <span class="r_list">
                     <table>
-                        <th>À»Áö·Î</th>
+                        <th>ì„ì§€ë¡œ</th>
                         <tr>
                             <td><a href="../detail/detail.html"><img src="resources/image/sushi.jpg" alt=""></a></td>
-                            <td><a href="../detail/detail.html">ÀÏÁ¶ÃÊ¹ä 2È£Á¡</a><br>È¸, ÃÊ¹ä<br>À»Áö·Î<br>0¸¸¿ø~0¸¸¿ø´ë</td>
+                            <td><a href="../detail/detail.html">ì¼ì¡°ì´ˆë°¥ 2í˜¸ì </a><br>íšŒ, ì´ˆë°¥<br>ì„ì§€ë¡œ<br>0ë§Œì›~0ë§Œì›ëŒ€</td>
                             <td>
-                                <b>ÈÄ±â 0°³</b>
-                                <p class="open_date">°³¾÷: 2021.12.23</p>
+                                <b>í›„ê¸° 0ê°œ</b>
+                                <p class="open_date">ê°œì—…: 2021.12.23</p>
                             </td>
                         </tr>
                         <tr>
                             <td><img src="resources/image/burger.jpg" alt=""></td>
-                            <td><a href="#">¹ö°ÅÅ·</a><br>ÇÜ¹ö°Å<br>±¤Èñµ¿<br>0¸¸¿ø~0¸¸¿ø´ë</td>
+                            <td><a href="#">ë²„ê±°í‚¹</a><br>í–„ë²„ê±°<br>ê´‘í¬ë™<br>0ë§Œì›~0ë§Œì›ëŒ€</td>
                             <td>
-                                 ÈÄ±â 7°³
-                                <p class="open_date">°³¾÷: 2021.11.24</p>
+                                 í›„ê¸° 7ê°œ
+                                <p class="open_date">ê°œì—…: 2021.11.24</p>
                             </td>
                         </tr>
                         <tr>
                             <td><img src="resources/image/kimbap.jpg" alt=""></td>
-                            <td><a href="#">±è¹äÃµ±¹</a><br>ºÐ½Ä<br>±¤Èñµ¿<br>0Ãµ¿ø~0¸¸¿ø´ë</td>
+                            <td><a href="#">ê¹€ë°¥ì²œêµ­</a><br>ë¶„ì‹<br>ê´‘í¬ë™<br>0ì²œì›~0ë§Œì›ëŒ€</td>
                             <td>
-                                 ÈÄ±â 6°³
-                                <p class="open_date">°³¾÷: 2021.11.5</p>
+                                 í›„ê¸° 6ê°œ
+                                <p class="open_date">ê°œì—…: 2021.11.5</p>
                             </td>
                         </tr>
                         <tr>
                             <td><img src="resources/image/pasta.jpg" alt=""></td>
-                            <td><a href="#">º÷½º</a><br>ÇÇÀÚ, ÆÄ½ºÅ¸<br>À»Áö·Î<br>0¸¸¿ø~0¸¸¿ø´ë</td>
+                            <td><a href="#">ë¹•ìŠ¤</a><br>í”¼ìž, íŒŒìŠ¤íƒ€<br>ì„ì§€ë¡œ<br>0ë§Œì›~0ë§Œì›ëŒ€</td>
                             <td>
-                                 <b>ÈÄ±â 0°³</b>
-                                <p class="open_date">°³¾÷: 2021.12.23</p>
+                                 <b>í›„ê¸° 0ê°œ</b>
+                                <p class="open_date">ê°œì—…: 2021.12.23</p>
                             </td>
                         </tr>
                         <tr>
                             <td><img src="resources/image/pizza.jpg" alt=""></td>
-                            <td><a href="#">ÆÄÆÄÁ¸½º</a><br>ÇÇÀÚ, ÆÄ½ºÅ¸<br>Á¾·Î5°¡<br>0¸¸¿ø~0¸¸¿ø´ë</td>
+                            <td><a href="#">íŒŒíŒŒì¡´ìŠ¤</a><br>í”¼ìž, íŒŒìŠ¤íƒ€<br>ì¢…ë¡œ5ê°€<br>0ë§Œì›~0ë§Œì›ëŒ€</td>
                             <td>
-                                 <b>ÈÄ±â 0°³</b>
-                                <p class="open_date">°³¾÷: 2021.12.23</p>
+                                 <b>í›„ê¸° 0ê°œ</b>
+                                <p class="open_date">ê°œì—…: 2021.12.23</p>
                             </td>
                         </tr>
                        
@@ -146,23 +146,23 @@
     <footer>
         <div class="column1">
          
-            <h2 class="text-left1">About Us  <img src="../ÃßÃµ/footer_nav.png" alt=""></h2>
-            <p>¸ðµç À½½ÄÁ¡À» À§ÇÏ¿©</p>
+            <h2 class="text-left1">About Us  <img src="../ì¶”ì²œ/footer_nav.png" alt=""></h2>
+            <p>ëª¨ë“  ìŒì‹ì ì„ ìœ„í•˜ì—¬</p>
           
         </div>
         <div id="link1" class="column1">
             <h2>Links</h2>
             <ul>
-                <li><i class="fa fa-angle-double-right"></i><a href="#">Æ÷·ë</a></li>
-                <li><i class="fa fa-angle-double-right"></i><a href="#">ÀÌ¿ë¾à°ü</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a href="#">í¬ë£¸</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a href="#">ì´ìš©ì•½ê´€</a></li>
               
             </ul>
         </div>
         <div id="link1" class="column1">
             <h2>Links</h2>
             <ul>
-                <li><i class="fa fa-angle-double-right"></i><a href="#">°í°´¼¾ÅÍ</a></li>
-                <li><i class="fa fa-angle-double-right"></i><a href="#">ÀÚÁÖ¹¯´Â Áú¹®</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a href="#">ê³ ê°ì„¼í„°</a></li>
+                <li><i class="fa fa-angle-double-right"></i><a href="#">ìžì£¼ë¬»ëŠ” ì§ˆë¬¸</a></li>
               
             </ul>
         </div>
@@ -170,7 +170,7 @@
             <h2 class="text-left1">Address</h2>
         <ul class="address1">
                 <li>Email: info@multi.com</li>
-                <li>°í°´¼¾ÅÍ (8AM to 10PM):<br/> 031 222 3333</li>
+                <li>ê³ ê°ì„¼í„° (8AM to 10PM):<br/> 031 222 3333</li>
             
             </ul>
         </div>
