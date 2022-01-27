@@ -11,12 +11,38 @@ public class SearchVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
-	
-	
+	private String goods_fileName;
+	private String rest_Menu;
 	public SearchVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
+	public String getGoods_fileName() {
+		return goods_fileName;
+	}
+
+
+
+	public void setGoods_fileName(String goods_fileName) {
+		this.goods_fileName = goods_fileName;
+	}
+
+
+
+	public String getRest_Menu() {
+		return rest_Menu;
+	}
+
+
+
+	public void setRest_Menu(String rest_Menu) {
+		this.rest_Menu = rest_Menu;
+	}
+
+
+
 	public int getRest_NO() {
 		return rest_NO;
 	}

@@ -14,14 +14,11 @@
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
 	
+	<result property="rest_filetype" column="rest_filetype"/>
+	<result property="rest_Menu" column="rest_Menu"/>
 	</resultMap>
 	
-	<resultMap id="imageResult" type="imageVO">
-		<result property="" column=""/>
-		
-	
-	</resultMap>
-	
+
 	
 	  <select id="selectBySearchWord" resultMap="##"   parameterType="String">
     <![CDATA[
