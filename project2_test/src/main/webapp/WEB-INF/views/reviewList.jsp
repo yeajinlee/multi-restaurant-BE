@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +92,81 @@
 			<b>최근 후기</b><br>
 		</div>
 	</div>
-	<div class="row">
+	
+	<c:choose>
+		<c:when test="${empty reviewListOdd && empty reviewListEven}">
+			<div>
+				<p align="center">등록된 후기가 없습니다.</p>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="row">
+				<div class="col1">
+					<c:forEach var="review" items="${reviewListlOdd}">
+						<div class="ind_review">
+						<table>
+							<tr>
+								<td><img src="../images/burger.jpg" class="profile_img"></td>
+								<td>
+									<span class="username"><a href="../detail/detail.html"><b>${review.rest_Name}</b></a></span><br>
+									<span class="username">${review.user_ID}</span>
+									<span class="level">&nbsp;Lv.1 <br></span>
+									<span class="star">
+										${review.review_Scope}
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+									</span>
+									<span class="star_date">&nbsp; ${review.review_Date}</span>
+								</td>
+							</tr>
+						</table>
+						<div class="review_contents">${review.review_Text }</div>
+						<p class="re_bottom_img">
+							<img src="resources/image/sushi.jpg" alt="">
+							<img src="resources/image/sushi2.jpg" alt="">
+							<img src="resources/image/sushi3.jpg" alt="">
+						</p>
+					</div>
+					</c:forEach>
+				</div>
+				<div class="col2">
+					<c:forEach var="review" items="${reviewListlEven }">
+						<div class="ind_review">
+						<table>
+							<tr>
+								<td><img src="../images/burger.jpg" class="profile_img"></td>
+								<td>
+									<span class="username"><a href="../detail/detail.html"><b>${review.rest_Name}</b></a></span><br>
+									<span class="username">${review.user_ID}</span>
+									<span class="level">&nbsp;Lv.1 <br></span>
+									<span class="star">
+										${review.review_Scope}
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+									</span>
+									<span class="star_date">&nbsp; ${review.review_Date}</span>
+								</td>
+							</tr>
+						</table>
+						<div class="review_contents">${review.review_Text }</div>
+						<p class="re_bottom_img">
+							<img src="resources/image/sushi.jpg" alt="">
+							<img src="resources/image/sushi2.jpg" alt="">
+							<img src="resources/image/sushi3.jpg" alt="">
+						</p>
+					</div>
+					</c:forEach>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+	<%-- <div class="row">
 		<div class="col1">
 			<div class="ind_review">
 				<table>
@@ -162,6 +238,7 @@
 				</p>
 			</div>
 		</div>
+		
 		<div class="col2">
 			<div class="ind_review">
 				<table>
@@ -213,7 +290,7 @@
 				</p>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 	<footer>
 		<div class="column1">
