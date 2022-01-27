@@ -1,6 +1,7 @@
 package com.spring.project2_test.reviewList.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,14 @@ public class ReviewListServiceImpl implements ReviewListService{
 	private ReviewListDAO reviewListDAO;
 	
 	@Override
-	public Map reviewListOdd() throws Exception {
-		Map reviewListMap = new HashMap();
-		ReviewListVO reviewListVO = reviewListDAO.selectAllReviewOdd();
-		reviewListMap.put("reviewListVO", reviewListVO);
-		return reviewListMap;
+	public List<ReviewListVO> reviewListOdd() throws Exception {
+		List<ReviewListVO> reviewList = reviewListDAO.selectAllReviewOdd();
+		return reviewList;
 	}
 	
 	@Override
-	public Map reviewListEven() throws Exception {
-		Map reviewListMap = new HashMap();
-		ReviewListVO reviewListVO = reviewListDAO.selectAllReviewEven();
-		reviewListMap.put("reviewListVO", reviewListVO);
-		return reviewListMap;
+	public List<ReviewListVO> reviewListEven() throws Exception {
+		List<ReviewListVO> reviewList = reviewListDAO.selectAllReviewEven();
+		return reviewList;
 	}
 }

@@ -1,5 +1,7 @@
 package com.spring.project2_test.reviewList.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -13,14 +15,14 @@ public class ReviewListDAOImpl implements ReviewListDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public ReviewListVO selectAllReviewOdd() throws DataAccessException {
-		ReviewListVO reviewListVO = sqlSession.selectOne("mappers.reivew.selectAllReviewOdd");
-		return reviewListVO;
+	public List<ReviewListVO> selectAllReviewOdd() throws DataAccessException {
+		List<ReviewListVO> reviewList = sqlSession.selectList("mappers.review.selectAllReviewOdd");
+		return reviewList;
 	}
 
 	@Override
-		public ReviewListVO selectAllReviewEven() throws DataAccessException {
-		ReviewListVO reviewListVO = sqlSession.selectOne("mappers.reivew.selectAllReviewEven");
-		return reviewListVO;
+		public List selectAllReviewEven() throws DataAccessException {
+		List<ReviewListVO> reviewList = sqlSession.selectList("mappers.review.selectAllReviewEven");
+		return reviewList;
 		}
 }

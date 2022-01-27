@@ -60,5 +60,7 @@ public class ReviewListVO {
 	public void setReview_Date(Date review_Date) {
 		this.review_Date = review_Date;
 	}
+	
+	
 
 }
