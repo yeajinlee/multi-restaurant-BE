@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.project2_test.member.service.MemberService;
 import com.spring.project2_test.member.vo.MemberVO;
 
-////main, RequestMapping 
+////main, overlap
 @Controller("memberController")
 public class MemberControllerImpl implements MemberController{
 
@@ -29,6 +29,7 @@ public class MemberControllerImpl implements MemberController{
 	private MemberVO memberVO;
 
 	@Override
+	@RequestMapping(value="/login.do", method= RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 	ModelAndView mav = new ModelAndView();
@@ -42,35 +43,37 @@ public class MemberControllerImpl implements MemberController{
 		if(action!=null) {
 			mav.setViewName("redirect"+action);
 		}else {
-			mav.setViewName("redirect:/갈곳 아마 메인?");
+			mav.setViewName("redirect:/home.do");
 		}
 	}else {
 		rAttr.addAttribute("result","loginFailed");
-		mav.setViewName("redirect:/다시 로그인form으로");
+		mav.setViewName("redirect:/login.do");
 	}
 		return mav;
 	}
 
 
 	@Override
+	@RequestMapping(value = "/logout.do", method =  RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView ();
-		mav.setViewName("redirect:/member/아마 메인?");
+		mav.setViewName("redirect:/home.do");
 		return mav;
 	}
 
 
 	@Override
+	@RequestMapping(value="/addMember.do" ,method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		int result=0;
 		result = memberService.addMember(member);
-		ModelAndView mav= new ModelAndView("redirect/메안");
+		ModelAndView mav= new ModelAndView("redirect:/home.do");
 			
 		return mav;
 	}

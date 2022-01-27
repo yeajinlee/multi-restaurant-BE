@@ -3,11 +3,25 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-	<mapper namespace="">
-	<resultMap id="##" type="__VO">
-		<result property="" column="" />
+	<mapper namespace="mapper.search">
+	<resultMap id="searchResult" type="searchVO">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Phone" column="rest_Phone"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_Social"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
 	
 	</resultMap>
+	
+	<resultMap id="imageResult" type="imageVO">
+		<result property="" column=""/>
+		
+	
+	</resultMap>
+	
 	
 	  <select id="selectBySearchWord" resultMap="##"   parameterType="String">
     <![CDATA[
