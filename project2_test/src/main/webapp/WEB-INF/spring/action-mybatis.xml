@@ -8,8 +8,12 @@
 
 	<!-- <context:property-placeholder
 		location="classpath:../config/jdbc/oracle.properties" /> -->
-		<context:property-placeholder
-		location="classpath:../config/jdbc/jdbc.properties" />
+	<bean id="propertyPlaceholderConfigurer"
+	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations">
+	<value>/WEB-INF/config/jdbc/jdbc.properties</value>
+	</property>
+	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -23,16 +27,9 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis/models/modelConfig.xml" />
-		 <property name="mapperLocations"
-			value="classpath:mybatis/mappers/*.xml" />
-			
-          <!-- <property name="mapperLocations">
-			  <list>
-			    <value>classpath:mybatis/mappers/member.xml</value>
-			    <value>classpath:mybatis/mappers/detail.xml</value>
-			  </list>
-			</property> --> 
+		<property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" />
+		  <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+	
 	</bean>
 
 	<bean id="sqlSession"

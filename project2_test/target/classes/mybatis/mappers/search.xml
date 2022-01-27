@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.search">
+	<resultMap id="searchResult" type="searchVO">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Phone" column="rest_Phone"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_Social"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
+	
+	</resultMap>
+	
+	<resultMap id="imageResult" type="imageVO">
+		<result property="" column=""/>
+		
+	
+	</resultMap>
+	
+	
+	  <select id="selectBySearchWord" resultMap="##"   parameterType="String">
+    <![CDATA[
+          
+     select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image rm where
+     rf.rest_NO=rm.rest_NO and rm.filetype='대표이미지'
+     and rf.rest_Name like '%'|| #{searchWord} || '%'
+     요것도 추가?  rf.rest_address like '%'|| #{searchWord} || '%'
+    요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%'
+     order by rf.rest_OpenDate 아니면 rest_Scope desc   ]]>
+  </select>
+  
+  	<select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
+	    <![CDATA[
+        select rest_Name from Restaurant_Info
+        where         
+        goods_title like '%'|| #{keyword} || '%'
+        order by rest_OpenDate desc 아니면 rest_scope
+		]]>
+	</select>
+  
+  	<select id="selectSideSearch" resultType="String"   parameterType="String"  >
+	    <![CDATA[
+         select rf.(social), rm.대표이미지 이름 from Restaurant_Info ri, Restaurant_Image rm where
+     rf.rest_NO=rm.rest_NO and rm.filetype='대표이미지'
+     and rf.rest_Name like '%'|| #{searchWord} || '%'
+     요것도 추가?  rf.rest_address like '%'|| #{searchWord} || '%'
+    요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%'
+     order by 어떤가게 논의 desc
+		]]>
+	</select>
+  
+  </mapper>
