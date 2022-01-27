@@ -9,7 +9,7 @@ import com.spring.project2_test.search.vo.SearchVO;
 public interface SearchService {
 	public List<SearchVO> searchRest(String searchWord) throws Exception;
 
-	public List keywordSearch(String keyword);
+	public List<String> keywordSearch(String keyword);
 
 
 	

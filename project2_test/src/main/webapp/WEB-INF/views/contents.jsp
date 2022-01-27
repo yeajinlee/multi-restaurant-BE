@@ -107,40 +107,29 @@
             <a href="items.html"> <img src="./7.jpg" alt=""><div class="sidepic">일식집best</div></a></div>
             </div>
        
-       
-<c:forEach var="category" items="${categories}" varStatus="status" >
-   <c:if test="${status.count % 2 == 1}"> 
-      <tr>
-         </c:if>
-            <td>${myObject.name}</td>
-            <td>${myObject.name}</td>    
-   <c:if test="${status.count % 2 == 1}">
-      </tr>
-   </c:if>
-</c:forEach>  
-
-
         <div class="main">
+           
             <div class="row1">
- 
-<c:forEach var="category" items="${categories}" varStatus="status" >
+            <c:forEach var="category" items="${restList}" >
                 <div>
-                    <a href="$$$$items.html">!!!!!!
+                    <a href="${contextPath}/detail.do?rest_Id=${category.rest_Id}">
                         <div class="bottom-left3">
-                           <img src="${category}" alt="">!!!!!!!!
+                            <img src="./1.jpg${category.main_image}" alt="">
                             <div class="bottom-left2">
-                                <h4>$$$$정통 분식 베스트 ${category.name}</h4>!!!!!!!!!!
+                                <h4>정통 분식 베스트 ${category.name}</h4>없어질예정
                             </div>
                         </div>
                     </a>
-                    <h3><a href="$$$$items.html">참된돈가스</a></h3>!!!!!!!!!!!
-                    <h6>$$$$신사/압구정-이자캬야/오뎅/꼬치 ${category.detail}</h6>!!!!!!!!!!
+                    <h3><a href="${contextPath}/reviewList.do?rest_Id=${category.rest_Id}">참된돈가스</a></h3>
+                    <h6>신사/압구정-이자캬야/오뎅/꼬치${category.address}-${category.menu}</h6>
                 </div>
-</c:forEach>
+              </c:forEach>
+              
+              
                 <div>
                     <a href="items.html">
                         <div class="bottom-left3">
-                           <img src="resources/images2/2.jpg" alt="">
+                            <img src="./4.jpg" alt="">
                             <div class="bottom-left2">
                                 <h4>NEW 탐험가가 뽑은 BEST</h4>
                             </div>
@@ -148,13 +137,13 @@
                         <h3><a href="items.html">참된돈가스</a></h3>
                         <h6>신사/압구정-이자캬야/오뎅/꼬치</h6>
                 </div>
-            </div>
+ 
 
-            <div class="row1">
+         
                 <div>
                     <a href="items.html">
                         <div class="bottom-left3">
-                            <img src="resources/images2/3.jpg" alt="">
+                            <img src="./3.jpg" alt="">
                             <div class="bottom-left2">
                                 <h4>먹어보니 맛있다 베스트</h4>
                             </div>
@@ -167,7 +156,7 @@
                 <div>
                     <a href="items.html">
                     <div class="bottom-left3">
-                        <img src="resources/images2/4.jpg" alt="">
+                        <img src="./2.jpg" alt="">
                         <div class="bottom-left2">
                             <h4>장소</h4>
                         </div>
@@ -176,13 +165,11 @@
                     <h3><a href="items.html">참된돈가스</a></h3>
                     <h6>신사/압구정-이자캬야/오뎅/꼬치</h6>
                 </div>
-            </div>
-
-            <div class="row1">
+      
                 <div>
                     <a href="items.html">
                         <div class="bottom-left3">
-                             <img src="resources/images2/5.jpg" alt="">
+                            <img src="./9.jpg" alt="">
                             <div class="bottom-left2">
                                 <h4>모두가 찾는 음식점들</h4>
                             </div>
@@ -195,7 +182,7 @@
                 <div>
                     <a href="items.html">
                         <div class="bottom-left3">
-                             <img src="resources/images2/6.jpg" alt="">
+                            <img src="./8.jpg" alt="">
                             <div class="bottom-left2">
                                 <h4>할말없다 여기가 강남이다</h4>
                             </div>
@@ -204,9 +191,9 @@
                     <h3><a href="items.html">참된돈가스</a></h3>
                     <h6>신사/압구정-이자캬야/오뎅/꼬치</h6>
                 </div>
-            </div>
+           
 
-            <div class="row1">
+           
                 <div>
                     <a href="items.html">
                         <div class="bottom-left3">
