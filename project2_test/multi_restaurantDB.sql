@@ -16,11 +16,10 @@ CREATE TABLE User_Info(
     user_gender INT,
     user_City VARCHAR2(20),
     user_Email VARCHAR2(20),
-    user_Phone INT,
+    user_Phone varchar2(30),
     user_level INT DEFAULT 1,
     user_profile VARCHAR2(50)
 );
-
 
 CREATE TABLE Restaurant_Info (
     rest_NO INT PRIMARY KEY,
@@ -102,10 +101,22 @@ CREATE TABLE Rest_Tag (
 
 
 insert into user_info(user_id, user_pw, user_nickname) values ('a0001', 'a0001', '테스트 이름');
+insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level) 
+    values ('a0002', 'a0002', '테스트이름2', '1993', 1, '서울', 'a0002@gmail.com', '01000000000', 1);
+
 insert into restaurant_info (rest_no, rest_name, rest_price, rest_address, rest_opendate)
-values (1, '식당이름', '가격대', '주소', sysdate);
+    values (1, '식당이름', '가격대', '주소', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values('2', '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+    
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-values (1, 'a0001', 5, '테스트 리뷰', 1, sysdate);
+    values (1, 'a0001', 5, '테스트 리뷰', 1, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (2, 'a0002', 5, '테스트 리뷰2', 2, sysdate);
+    insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (3, 'a0001', 5, '테스트 리뷰3', 1, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (4, 'a0002', 5, '테스트 리뷰4', 2, sysdate);
 
 SELECT * FROM user_info;
 SELECT * FROM restaurant_info;
@@ -114,6 +125,9 @@ SELECT * FROM review_info;
 SELECT * FROM reviewimg_info;
 SELECT * FROM tag_info;
 SELECT * FROM rest_tag;
+
+SELECT * FROM review_info where mod(review_no,2)=0;
+SELECT * FROM review_info where mod(review_no,2)=1;
 
 DROP TABLE rest_tag;
 DROP TABLE tag_info;

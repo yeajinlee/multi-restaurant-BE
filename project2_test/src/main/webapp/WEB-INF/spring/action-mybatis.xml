@@ -23,16 +23,16 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" />
-		 <!-- <property name="mapperLocations"
-			value="classpath:mybatis/mappers/*.xml" />  --> 
+		<property name="configLocation" value="classpath:mybatis/models/modelConfig.xml" />
+		 <property name="mapperLocations"
+			value="classpath:mybatis/mappers/*.xml" />
 			
-          <property name="mapperLocations">
+          <!-- <property name="mapperLocations">
 			  <list>
 			    <value>classpath:mybatis/mappers/member.xml</value>
-			    <value>classpath:mybatis/mappers/board_mysql.xml</value>
+			    <value>classpath:mybatis/mappers/detail.xml</value>
 			  </list>
-			</property> 
+			</property> --> 
 	</bean>
 
 	<bean id="sqlSession"

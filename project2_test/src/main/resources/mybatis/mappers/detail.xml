@@ -17,7 +17,7 @@
 	
 	<select id="selectDetailContent" resultMap="detailResult">
 		<![CDATA[
-			select * from Restaurant_Info
+			select * from Restaurant_Info where rest_NO = #{rest_NO}
 		]]>
 	</select>
 </mapper>
