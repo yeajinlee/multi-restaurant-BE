@@ -3,8 +3,8 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="mappers.detail">
-	<resultMap type="detailVO" id="detailResult">
+<mapper namespace="mappers.main">
+	<resultMap type="mainVO" id="mainResult">
 		<result property="rest_NO" column="rest_NO"/>
 		<result property="rest_Name" column="rest_Name"/>
 		<result property="rest_Price" column="rest_Price"/>
@@ -21,14 +21,15 @@
 		<result property="rest_NO" column="rest_NO" />
 	</resultMap>
 	
-	<select id="selectRestDetail" resultMap="detailResult">
+	<select id="selectRestList" resultMap="mainResult">
 		<![CDATA[
-			select * from Restaurant_Info where rest_NO = #{rest_NO}
+			select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info where rownum < 7
 		]]>
 	</select>
-	<select id="selectRestImg" resultMap="imageResult">
+	<select id="selectImgList" resultMap="imageResult">
 		<![CDATA[
-			select image_FileName from reviewimg_info where rest_NO = #{rest_NO}
+			select * from reviewimg_info where rest_NO = #{rest_NO}
 		]]>
+		<!-- rest_NO가 null로 되어서 에러나는데 해결못함  -->
 	</select>
 </mapper>
