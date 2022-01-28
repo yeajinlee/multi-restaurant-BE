@@ -39,7 +39,7 @@ public class MemberControllerImpl implements MemberController{
 		session.setAttribute("member", memberVO);
 		session.setAttribute("isLogOn", true);
 		String action = (String) session.getAttribute("action");
-		session.removeAttribute("action"); //¿Ö °©ÀÚ±â remove ..¹¹¿³Áö ±î¸ÔÀ½
+		session.removeAttribute("action"); //ï¿½ï¿½ ï¿½ï¿½ï¿½Ú±ï¿½ remove ..ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(action!=null) {
 			mav.setViewName("redirect"+action);
 		}else {

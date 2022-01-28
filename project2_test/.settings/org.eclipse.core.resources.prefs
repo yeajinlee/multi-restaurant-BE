@@ -1,2 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=0fa029db33368f3677451bd1aca593781a4861bc
 eclipse.preferences.version=1
+encoding//src/main/java/com/spring/project2_test/member/controller/MemberControllerImpl.java=UTF-8
+encoding//src/main/java/com/spring/project2_test/search/dao/SearchDAOImpl.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/loginForm.jsp=UTF-8
+encoding//src/main/webapp/resources/css/join_css.css=UTF-8

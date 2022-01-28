@@ -24,11 +24,11 @@ CREATE TABLE Restaurant_Info (
         rest_fileName varchar(20),
     rest_OpenDate DATE NOT NULL
 );
- insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName,  rest_OpenDate) values (1,'µ·°¡½º³ª¶ó','10¸¸¿ø','¼º³²','131313',1,1,'hon',sysdate);
+ insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName,  rest_OpenDate) values (1,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','10ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½','131313',1,1,'hon',sysdate);
 insert into restaurant_info (rest_no, rest_name, rest_price, rest_address, rest_opendate)
-    values (3, '½Ä´çÀÌ¸§', '°¡°Ý´ë', 'ÁÖ¼Ò', sysdate);
+    values (3, 'ï¿½Ä´ï¿½ï¿½Ì¸ï¿½', 'ï¿½ï¿½ï¿½Ý´ï¿½', 'ï¿½Ö¼ï¿½', sysdate);
 insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
-    values('2', 'Å×½ºÆ®½Ä´ç2', '0¸¸¿ø´ë', '¼­¿ï½Ã °­³²±¸', '020000000', '5', 'ÀÎ½ºÅ¸±×·¥', sysdate);
+    values('2', 'ï¿½×½ï¿½Æ®ï¿½Ä´ï¿½2', '0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '020000000', '5', 'ï¿½Î½ï¿½Å¸ï¿½×·ï¿½', sysdate);
     
     drop table Restaurant_Info;
     
@@ -50,7 +50,7 @@ GRANT DBA TO MultiRestaurant_DB;
 CREATE TABLE User_Info(
     user_ID VARCHAR2(20) PRIMARY KEY,
     user_PW VARCHAR2(20) NOT NULL,
-    user_Nickname VARCHAR2(20) DEFAULT 'È¸¿ø',
+    user_Nickname VARCHAR2(20) DEFAULT 'È¸ï¿½ï¿½',
     user_Birth INT,
     user_gender INT,
     user_City VARCHAR2(20),
@@ -73,12 +73,12 @@ CREATE TABLE LikeRest_Info (
 
 -- DROP TABLE LikeRest_Info;
 
--- like_NO ¸¦ AI(Auto Increment ÀÚµ¿Áõ°¡) ·Î »ý¼ºÇÏ·Á°í ÇßÀ¸³ª ¿À¶óÅ¬¿£ AI°¡ ¾øÀ¸¹Ç·Î Sequence »ç¿ë
--- start with ½ÃÀÛÇÒ °ª INcrement By Áõ°¡ÇÒ °ª Maxvalue ÃÖÁ¾°ª °ª ¼øÈ¯ ¾ÈÇÔ, cache »ç¿ë ¾ÈÇÔ
+-- like_NO ï¿½ï¿½ AI(Auto Increment ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ AIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ Sequence ï¿½ï¿½ï¿½
+-- start with ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ INcrement By ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Maxvalue ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½, cache ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 CREATE SEQUENCE like_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 
--- ÀÔ·ÂÇÒ ¶§
--- INSERT INTO LikeRest_Info(like_no, user_ID, rest_NO) VALUES(like_seq.NEXTVAL, 'À¯Àú¾ÆÀÌµð°ª' , 'rest_NO°ª');
+-- ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½
+-- INSERT INTO LikeRest_Info(like_no, user_ID, rest_NO) VALUES(like_seq.NEXTVAL, 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½' , 'rest_NOï¿½ï¿½');
 
 CREATE TABLE Review_Info (
     review_NO INT PRIMARY KEY,
@@ -131,19 +131,19 @@ CREATE TABLE Rest_Tag (
 );
 
 
-insert into user_info(user_id, user_pw, user_nickname) values ('a0001', 'a0001', 'Å×½ºÆ® ÀÌ¸§');
+insert into user_info(user_id, user_pw, user_nickname) values ('a0001', 'a0001', 'ï¿½×½ï¿½Æ® ï¿½Ì¸ï¿½');
 insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level) 
-    values ('a0002', 'a0002', 'Å×½ºÆ®ÀÌ¸§2', '1993', 1, '¼­¿ï', 'a0002@gmail.com', '01000000000', 1);
+    values ('a0002', 'a0002', 'ï¿½×½ï¿½Æ®ï¿½Ì¸ï¿½2', '1993', 1, 'ï¿½ï¿½ï¿½ï¿½', 'a0002@gmail.com', '01000000000', 1);
 
     
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (1, 'a0001', 5, 'Å×½ºÆ® ¸®ºä', 1, sysdate);
+    values (1, 'a0001', 5, 'ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½', 1, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (2, 'a0002', 5, 'Å×½ºÆ® ¸®ºä2', 2, sysdate);
+    values (2, 'a0002', 5, 'ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½2', 2, sysdate);
     insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (3, 'a0001', 5, 'Å×½ºÆ® ¸®ºä3', 1, sysdate);
+    values (3, 'a0001', 5, 'ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½3', 1, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (4, 'a0002', 5, 'Å×½ºÆ® ¸®ºä4', 2, sysdate);
+    values (4, 'a0002', 5, 'ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½4', 2, sysdate);
     
 commit;
 
