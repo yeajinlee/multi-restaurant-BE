@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="detail" value="${detailMap.detailVO }"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,14 +33,16 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="resources/css/detail.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/detail.css" type="text/css">
 </head>
 <body>
 	<nav
 		class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
-		<a href="../main/main.html"><img src="resources/image/nav.png"
-			width="80" height="80" alt=""> <a class="navbar-brand"
-			href="../main/main.html"> MULTI <br> RESTAURANT
+		<a href="${contextPath}/main.do">
+			<img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt="">
+		</a>
+		<a class="navbar-brand" href="${contextPath}/main.do">
+			MULTI <br> RESTAURANT
 		</a>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -56,7 +63,7 @@
 						href="../main/reco1.html" style="color: white"><strong>&nbsp;&nbsp;&nbsp;추천
 								메뉴</strong> </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="../reviewList/reviewList.html" style="color: white"><strong>최근
+						href="${pageContext.request.contextPath}/reviewList.do" style="color: white"><strong>최근
 								후기</strong> </a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="../newList/newList.html" style="color: white"><strong>신규
@@ -85,26 +92,18 @@
 	</nav>
 	<section class="top_img">
 		<div class="review_img">
-			<img src="resources/image/sushi.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(1)"> <img
-				src="resources/image/sushi2.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(2)"> <img
-				src="resources/image/sushi3.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(3)"> <img
-				src="resources/image/sushi4.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(4)"> <img
-				src="resources/image/sushi5.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(5)"> <img
-				src="resources/image/sushi6.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(6)"> <img
-				src="resources/image/sushi7.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(7)"> <img
-				src="resources/image/sushi8.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(8)"> <img
-				src="resources/image/sushi9.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(9)"> <img
-				src="resources/image/sushi10.jpg" class="ind_img"
-				onClick="openModal(); currentSlide(10)">
+			<c:choose>
+				<c:when test="${empty detailImg}">
+					<p>등록된 리뷰 사진이 없습니다.</p>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="detailImg" items="${detailImg}">
+						<img
+							src="${pageContext.request.contextPath}/resources/image/${detailImg.img_FileName}"
+							class="ind_img" onClick="openModal(); currentSlide(1)">
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<!-- The Modal/Lightbox -->
@@ -190,7 +189,8 @@
 
 	<section class="r_info">
 		<div class="detail_info">
-			<span class="place_name">${detail.rest_Name }</span> <span class="star_wish">
+			<span class="place_name">${detail.rest_Name }</span>
+			<span class="star_wish">
 				<i class="fas fa-star"></i>&nbsp; <span><b>${detail.rest_Scope} / 5</b></span>&nbsp;&nbsp;&nbsp;
 				<span class="wish_cnt">리뷰 35 찜 12</span>&nbsp; <i
 				class="far fa-heart" id="heart" onclick="setWishList();"></i>
@@ -276,7 +276,7 @@
 			</table>
 		</span>
 
-		<!-- Write Review -->
+		<%-- Write Review --%>
 		<div id="write_modal" class="modal">
 			<span class="close cursor" onclick="closeWriteModal()">&times;</span>
 			<div class="write_content">
@@ -347,10 +347,67 @@
 				</div>
 			</div>
 		</div>
-
-
-
-		<div class="ind_review" onclick="openReviewModal()">
+		
+		<c:forEach var="review" items="${reviewList}">
+			<div class="ind_review">
+				<table>
+					<tr>
+						<td>
+							<c:choose>
+								<c:when test="${empty review.uesr_Profile }">
+									<img src="${contextPath}/resources/image/nav.png" class="profile_img">
+								</c:when>
+								<c:otherwise>
+									<img src="${contextPath}/resources/image/${user_Profile}" class="profile_img">
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<span class="username"><b>${review.user_Nickname }</b></span>
+							<span class="level">&nbsp;Lv. ${review.user_Level } <br></span>
+							<span class="star">
+								<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> ${review.review_Scope }
+							</span>
+							<span class="star_date">&nbsp;${review.review_Date }</span>
+						</td>
+					</tr>
+				</table>
+				<p class="review_contents">${review.review_Text }</p>
+				<p class="re_bottom_img">
+					<c:choose>
+						<c:when test="${empty review.images }">
+							<p>&nbsp;</p>
+						</c:when>
+						<c:otherwise>
+							<c:forTokens var="img" items="${review.images}" delims="/">
+								<img src="${contextPath}/resources/image/${img}">
+							</c:forTokens>
+						</c:otherwise>
+					</c:choose>
+				</p>
+			</div>
+		</c:forEach>
+		
+		
+		<%-- <div class="ind_review">
+			<table>
+				<tr>
+					<td><img src="../images/kimbap.jpg" class="profile_img"></td>
+					<td><span class="username"><b>제이미올리버</b></span> <span
+						class="level">&nbsp;Lv. 4 <br></span> <span class="star">
+							<i class="fas fa-star"></i><i class="fas fa-star"></i><i
+							class="fas fa-star"></i><i class="fas fa-star"></i>
+					</span> <span class="star_date">&nbsp;2021년 11월 4일</span></td>
+				</tr>
+			</table>
+			<p class="review_contents">가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것
+				같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천</p>
+			<p class="re_bottom_img">
+				<img src="../images/sushi.jpg" alt=""><img
+					src="../images/sushi.jpg" alt="">
+			</p>
+		</div>
+		<div class="ind_review">
 			<table>
 				<tr>
 					<td><img src="../images/burger.jpg" class="profile_img"></td>
@@ -370,8 +427,6 @@
 					src="../images/sushi3.jpg" alt="">
 			</p>
 		</div>
-
-
 		<div class="ind_review">
 			<table>
 				<tr>
@@ -408,63 +463,7 @@
 					src="../images/sushi.jpg" alt="">
 			</p>
 		</div>
-		<div class="ind_review">
-			<table>
-				<tr>
-					<td><img src="../images/burger.jpg" class="profile_img"></td>
-					<td><span class="username"><b>미식가</b></span> <span
-						class="level">&nbsp;Lv. 1 <br></span> <span class="star">
-							<i class="fas fa-star"></i><i class="fas fa-star"></i><i
-							class="fas fa-star"></i><i class="fas fa-star"></i><i
-							class="fas fa-star"></i>
-					</span> <span class="star_date">&nbsp;2일 전</span></td>
-				</tr>
-			</table>
-			<p class="review_contents">가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것
-				같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천</p>
-			<p class="re_bottom_img">
-				<img src="../images/sushi.jpg" alt=""><img
-					src="../images/sushi2.jpg" alt=""><img
-					src="../images/sushi3.jpg" alt="">
-			</p>
-		</div>
-		<div class="ind_review">
-			<table>
-				<tr>
-					<td><img src="../images/kbbq.jpg" class="profile_img"></td>
-					<td><span class="username"><b>고든램지</b></span> <span
-						class="level">&nbsp;Lv. 6 <br></span> <span class="star">
-							<i class="fas fa-star"></i><i class="fas fa-star"></i><i
-							class="fas fa-star"></i>
-					</span> <span class="star_date">&nbsp;2021년 12월 11일</span></td>
-				</tr>
-			</table>
-			<p class="review_contents">가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것
-				같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천</p>
-			<p class="re_bottom_img">
-				<img src="../images/sushi4.jpg" alt=""><img
-					src="../images/sushi5.jpg" alt="">
-			</p>
-		</div>
-		<div class="ind_review">
-			<table>
-				<tr>
-					<td><img src="../images/kimbap.jpg" class="profile_img"></td>
-					<td><span class="username"><b>제이미올리버</b></span> <span
-						class="level">&nbsp;Lv. 4 <br></span> <span class="star">
-							<i class="fas fa-star"></i><i class="fas fa-star"></i><i
-							class="fas fa-star"></i><i class="fas fa-star"></i>
-					</span> <span class="star_date">&nbsp;2021년 11월 4일</span></td>
-				</tr>
-			</table>
-			<p class="review_contents">가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것
-				같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천</p>
-			<p class="re_bottom_img">
-				<img src="../images/sushi.jpg" alt=""><img
-					src="../images/sushi.jpg" alt="">
-			</p>
-		</div>
-
+ --%>
 
 
 

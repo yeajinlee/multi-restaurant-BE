@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.project2_test.search.service.SearchService;
+import com.spring.project2_test.search.vo.SearchVO;
+@Controller("searchController")
 
 public class SearchControllerImpl implements SearchController {
 //sidesearch
@@ -27,9 +30,9 @@ public class SearchControllerImpl implements SearchController {
 			HttpServletResponse response) throws Exception {
 
 		String viewName = (String) request.getAttribute("viewName");
-		List restList = searchService.searchRest(searchWord);
+		List<SearchVO> restLists = searchService.searchRest(searchWord);
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("restList", restList);
+		mav.addObject("restLists", restLists);
 
 		return mav;
 	}

@@ -2,6 +2,10 @@ package com.spring.project2_test.search.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+
+@Component("searchVO")
 public class SearchVO {
 	private int rest_NO;
 	private String rest_Name;
@@ -11,11 +15,9 @@ public class SearchVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
+	private String rest_fileName;
+	private String rest_Menu;
 	
-	
-	public SearchVO() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	public int getRest_NO() {
 		return rest_NO;
@@ -65,5 +67,20 @@ public class SearchVO {
 	public void setRest_OpenDate(Date rest_OpenDate) {
 		this.rest_OpenDate = rest_OpenDate;
 	}
-
+	public String getRest_fileName() {
+		return rest_fileName;
+	}
+	public void setRest_fileName(String rest_fileName) {
+		this.rest_fileName = rest_fileName;
+	}
+	public String getRest_Menu() {
+		return rest_Menu;
+	}
+	public void setRest_Menu(String rest_Menu) {
+		this.rest_Menu = rest_Menu;
+	}
+	
+	public SearchVO() {
+		// TODO Auto-generated constructor stub
+	}
 }

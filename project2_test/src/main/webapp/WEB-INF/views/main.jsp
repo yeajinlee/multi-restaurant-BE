@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +11,15 @@
     <title>MULTI RESTAURANT</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/main.css">
 </head>
-
 <body>
 
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
-        <a href="main.html"><img src="${pageContext.request.contextPath}/resources/image/nav.png" width="80" height="80" alt="">
-            <a class="navbar-brand" href="main.html"> MULTI <br> RESTAURANT</a>
+        <a href="${contextPath}/main.do">
+        	<img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt="">
+        </a>
+        <a class="navbar-brand" href="${contextPath}/main.do"> MULTI <br> RESTAURANT</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
@@ -38,10 +40,10 @@
                         <a class="nav-link" href="reco1.html" style="color:white"><strong>추천 메뉴</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
+                        <a class="nav-link" href="${contextPath}/newList.do" style="color:white"><strong>신규 개업</strong> </a>
                     </li>
                 </ul>
             </div>
@@ -51,7 +53,7 @@
                 <li class="nav-item dropdown">
                     <div class="col-lg-6"></div>
                     <a class href="#" id="navbarDropdown"
-                    data-toggle="dropdown"><img src="${pageContext.request.contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
+                    data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="../login_join/login.html">로그인</a>
@@ -69,12 +71,19 @@
                         <div class="text-center text-light">
                             <h1 class="mb-5">내 주변의 숨은 맛집 검색하기</h1>
                             <div class="row">
+                                      
+                            <form name="frmSearch" action="${contextPath}/searchRest.do" >
                                 <div class="col">
-                                    <input class="form-control form-control-lg" id="search"
-                                        placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" />
+                                    <!-- <input class="form-control form-control-lg" id="search"
+                                        placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" /> -->
+                                	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
+                                
                                 </div>
-                                <div class="col-auto"><button class="btn btn-lg btn-outline-light" id="submitButton"
-                                        type="submit">SEARCH</button></div>
+                                <div class="col-auto">
+                            <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
+                                        type="submit">SEARCH</button></div> -->
+                                <input type="submit" name="search" class="btn1"  value="검색" >
+                         </div></form>
                             </div>
                         </div>
                     </div>
@@ -89,9 +98,9 @@
             	<c:forEach var="rest" items="${restList }">
             		<div class="col-lg-6 col-xl-4">
                     <div class="card mb-5 mb-xl-0">
-                        <a href="${pageContext.request.contextPath}/detail.do">
-                        	<img src="${pageContext.request.contextPath}/resources/image/${imageList.img_FileName}" width="327" height="200" alt="">
-                        	<%-- 누가봐도 안될거같이생김... --%>
+                        <a href="${contextPath}/detail.do?rest_NO=${rest.rest_NO}">
+                        	<img src="${contextPath}/resources/image/${rest.img_FileName}" width="327" height="200" alt="">
+                        	<%-- 누가봐도 안될거같이생김...=>됨! --%>
                         </a>
                         <div class="card-body" >
                             <div class="mb-3">
@@ -108,7 +117,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="d-grid"><a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/detail.do">보러가기</a></div>
+                            <div class="d-grid"><a class="btn btn-outline-primary" href="${contextPath}/detail/${rest.rest_NO }.do">보러가기</a></div>
                         </div>
                     </div>
                 </div>
@@ -120,7 +129,7 @@
     <footer>
         <div class="column1">
          
-            <h2 class="text-left1">About Us  <img src="${pageContext.request.contextPath}/resources/image/footer_nav.png" alt=""></h2>
+            <h2 class="text-left1">About Us  <img src="${contextPath}/resources/image/footer_nav.png" alt=""></h2>
             <p>모든 음식점을 위하여</p>
           
         </div>

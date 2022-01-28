@@ -20,6 +20,18 @@
 		<result property="review_NO" column="review_NO"/>
 		<result property="rest_NO" column="rest_NO" />
 	</resultMap>
+	<resultMap type="reviewVO" id="reviewResult">
+		<result property="user_ID" column="user_ID"/>
+		<result property="user_Nickname" column="user_Nickname"/>
+		<result property="user_Level" column="user_Level"/>
+		<result property="user_Profile" column="user_Profile"/>
+		<result property="review_NO" column="review_NO"/>
+		<result property="review_Scope" column="review_Scope"/>
+		<result property="review_Text" column="review_Text"/>
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="review_Date" column="review_Date"/>
+		<result property="images" column="images"/>
+	</resultMap>
 	
 	<select id="selectRestDetail" resultMap="detailResult">
 		<![CDATA[
@@ -28,7 +40,12 @@
 	</select>
 	<select id="selectRestImg" resultMap="imageResult">
 		<![CDATA[
-			select image_FileName from reviewimg_info where rest_NO = #{rest_NO}
+			select img_FileName from reviewimg_info where rest_NO = #{rest_NO}
+		]]>
+	</select>
+	<select id="selectAllReview" resultMap="reviewResult">
+		<![CDATA[
+			select * from profile_review where rest_NO = #{rest_NO}
 		]]>
 	</select>
 </mapper>

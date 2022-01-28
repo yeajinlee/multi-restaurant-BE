@@ -3,10 +3,13 @@ package com.spring.project2_test.search.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.project2_test.search.dao.SearchDAO;
 import com.spring.project2_test.search.vo.SearchVO;
 
+
+@Service("searchService")
 public class SearchServiceImpl implements SearchService {
 
 	@Autowired
@@ -14,8 +17,8 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	public List<SearchVO> searchRest(String searchWord) throws Exception {
-		List searchList=searchDAO.selectBySearchWord(searchWord);
-		return searchList;
+		List restLists=searchDAO.selectBySearchWord(searchWord);
+		return restLists;
 	}
 
 	@Override
