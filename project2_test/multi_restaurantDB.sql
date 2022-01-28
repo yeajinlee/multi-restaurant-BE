@@ -33,6 +33,7 @@ CREATE TABLE Restaurant_Info (
 );
 
 
+
 CREATE TABLE LikeRest_Info (
     like_NO INT PRIMARY KEY,
     user_ID VARCHAR2(20),
@@ -81,7 +82,6 @@ CREATE TABLE ReviewIMG_Info (
 );
 
 CREATE SEQUENCE reviewIMG_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
-insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, pizza.jpg, 1, 1);
 
 
 CREATE TABLE Tag_Info (
@@ -101,25 +101,56 @@ CREATE TABLE Rest_Tag (
     ON DELETE CASCADE
 );
 
-
+-- user_info
 insert into user_info(user_id, user_pw, user_nickname) values ('a0001', 'a0001', '테스트 이름');
 insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level) 
     values ('a0002', 'a0002', '테스트이름2', '1993', 1, '서울', 'a0002@gmail.com', '01000000000', 1);
 
+-- restaurant_info
 insert into restaurant_info (rest_no, rest_name, rest_price, rest_address, rest_opendate)
-    values (1, '식당이름', '가격대', '주소', sysdate);
+    values (1, '테스트식당1', '0만원대', '서울시 강남구', sysdate);
 insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
-    values('2', '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
-    
+    values(2, '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values(3, '테스트식당3', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values(4, '테스트식당4', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values(5, '테스트식당5', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values(6, '테스트식당6', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
+    values(7, '테스트식당7', '0만원대', '경기도', '020000000', '5', '인스타그램', sysdate);
+
+-- review_info
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (1, 'a0001', 5, '테스트 리뷰', 1, sysdate);
+    values (review_seq.nextval, 'a0001', 5, '테스트 리뷰', 1, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (2, 'a0002', 5, '테스트 리뷰2', 2, sysdate);
-    insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (3, 'a0001', 5, '테스트 리뷰3', 1, sysdate);
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰2', 2, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (4, 'a0002', 5, '테스트 리뷰4', 2, sysdate);
-    
+    values (review_seq.nextval, 'a0001', 5, '테스트 리뷰3', 1, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰4', 2, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰5', 3, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰6', 4, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰7', 5, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰8', 6, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 5, '테스트 리뷰9', 7, sysdate);
+
+-- reviewimg_info
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'pizza.jpg', 1, 1);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'sushi.jpg', 2, 2);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'pasta.jpg', 5, 3);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'sushi2.jpg', 6, 4);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'burger.jpg', 7, 5);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'sush3.jpg', 8, 6);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'kimbap.jpg', 9, 7);
+
 commit;
 
 SELECT * FROM user_info;
@@ -140,3 +171,9 @@ DROP TABLE review_info;
 DROP TABLE likerest_info;
 DROP TABLE restaurant_info;
 DROP TABLE user_info;
+
+
+drop SEQUENCE like_seq;
+drop sequence review_seq;
+drop sequence reviewIMG_seq;
+drop sequence tag_seq;
