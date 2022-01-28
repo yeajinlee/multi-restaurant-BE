@@ -1,6 +1,7 @@
 package com.spring.project2_test.detail.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,17 @@ public class DetailServiceImpl implements DetailService{
 		DetailVO detailVO = detailDAO.selectDetailContent(rest_NO);
 		detailMap.put("detailVO", detailVO);
 		return detailMap;
+	}
+	
+	@Override
+	public List detailImage(int rest_NO) throws Exception {
+		List detailImgList = detailDAO.selectAllDetailImg(rest_NO);
+		return detailImgList;
+	}
+	
+	@Override
+	public List reviewList(int rest_NO) throws Exception {
+		List reviewList = detailDAO.selectAllReview(rest_NO);
+		return reviewList;
 	}
 }

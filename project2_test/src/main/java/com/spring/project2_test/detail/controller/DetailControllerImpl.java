@@ -1,10 +1,10 @@
 package com.spring.project2_test.detail.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +28,16 @@ public class DetailControllerImpl implements DetailController {
 	@RequestMapping(value="/detail.do", method = RequestMethod.GET)
 	public ModelAndView detailView(@RequestParam("rest_NO") int rest_NO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		System.out.println(rest_NO);
 //		HttpSession session = request.getSession();
 		Map detailMap = detailService.detailContent(rest_NO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("detailMap", detailMap);
-		DetailVO detailVO = (DetailVO) detailMap.get("detailVO");
+//		DetailVO detailVO = (DetailVO) detailMap.get("detailVO");
+		List detailImg = detailService.detailImage(rest_NO);
+		mav.addObject("detailImg", detailImg);
+		List reviewList = detailService.reviewList(rest_NO);
+		mav.addObject("reviewList",reviewList);
 		return mav;
 	}
 		
