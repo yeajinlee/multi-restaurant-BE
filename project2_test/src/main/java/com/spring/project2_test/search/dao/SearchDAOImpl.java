@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.project2_test.search.vo.SearchVO;
 
@@ -26,7 +27,9 @@ public class SearchDAOImpl implements SearchDAO{
 	@Override
 	public ArrayList<SearchVO> selectBySearchWord(String searchWord) {
 		ArrayList list= (ArrayList)sqlSession.selectList("mapper.search.selectBySearchWord",searchWord);
+		System.out.println("¿©±â¿È ´Ù¿À");
 		 return list;
+		 
 	}
 
 }

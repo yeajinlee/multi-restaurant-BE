@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.spring.project2_test.detail.vo.DetailVO;
+import com.spring.project2_test.detail.vo.ImageVO;
 
 @Repository("detailDAO")
 public class DetailDAOImpl implements DetailDAO{
@@ -16,7 +17,8 @@ public class DetailDAOImpl implements DetailDAO{
 	
 	@Override
 	public DetailVO selectDetailContent(int rest_NO) throws DataAccessException {
-		DetailVO detailVO = (DetailVO) sqlSession.selectOne("mappers.detail.selectDetailContent", rest_NO);
+		DetailVO detailVO = (DetailVO) sqlSession.selectOne("mappers.detail.selectRestDetail", rest_NO);
+		ImageVO image = sqlSession.selectOne("mappers.detail.selectRestImg", rest_NO);
 		return detailVO;
 	}
 }

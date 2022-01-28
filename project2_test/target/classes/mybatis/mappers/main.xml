@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mappers.main">
+	<resultMap type="mainVO" id="mainResult">
+		<result property="rest_NO" column="rest_NO"/>
+		<result property="rest_Name" column="rest_Name"/>
+		<result property="rest_Price" column="rest_Price"/>
+		<result property="rest_Address" column="rest_Address"/>
+		<result property="rest_Phone" column="rest_Phone"/>
+		<result property="rest_Scope" column="rest_Scope"/>
+		<result property="rest_Social" column="rest_Social"/>
+		<result property="rest_OpenDate" column="rest_OpenDate"/>
+	</resultMap>
+	<resultMap type="imageVO" id="imageResult">
+		<result property="img_FileNO" column="img_FileNO"/>
+		<result property="img_FileName" column="img_FileName"/>
+		<result property="review_NO" column="review_NO"/>
+		<result property="rest_NO" column="rest_NO" />
+	</resultMap>
+	
+	<select id="selectRestList" resultMap="mainResult">
+		<![CDATA[
+			select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info where rownum < 7
+		]]>
+	</select>
+<!-- 	<select id="selectImgList" resultMap="imageResult">
+		<![CDATA[
+			select * from reviewimg_info where rest_NO = #{rest_NO}
+		]]>
+		rest_NO가 null로 되어서 에러나는데 해결못함 
+	</select> -->
+</mapper>

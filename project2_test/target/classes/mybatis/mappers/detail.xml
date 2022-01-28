@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+	
 <mapper namespace="mappers.detail">
 	<resultMap type="detailVO" id="detailResult">
 		<result property="rest_NO" column="rest_NO"/>
@@ -14,10 +14,21 @@
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
 	</resultMap>
+	<resultMap type="imageVO" id="imageResult">
+		<result property="img_FileNO" column="img_FileNO"/>
+		<result property="img_FileName" column="img_FileName"/>
+		<result property="review_NO" column="review_NO"/>
+		<result property="rest_NO" column="rest_NO" />
+	</resultMap>
 	
-	<select id="selectDetailContent" resultMap="detailResult">
+	<select id="selectRestDetail" resultMap="detailResult">
 		<![CDATA[
 			select * from Restaurant_Info where rest_NO = #{rest_NO}
+		]]>
+	</select>
+	<select id="selectRestImg" resultMap="imageResult">
+		<![CDATA[
+			select image_FileName from reviewimg_info where rest_NO = #{rest_NO}
 		]]>
 	</select>
 </mapper>

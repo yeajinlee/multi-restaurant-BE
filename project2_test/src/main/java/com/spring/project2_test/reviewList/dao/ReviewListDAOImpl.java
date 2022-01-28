@@ -21,7 +21,7 @@ public class ReviewListDAOImpl implements ReviewListDAO {
 	}
 
 	@Override
-		public List selectAllReviewEven() throws DataAccessException {
+	public List selectAllReviewEven() throws DataAccessException {
 		List<ReviewListVO> reviewList = sqlSession.selectList("mappers.review.selectAllReviewEven");
 		return reviewList;
 		}

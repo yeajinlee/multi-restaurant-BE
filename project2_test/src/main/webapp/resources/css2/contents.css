@@ -71,7 +71,9 @@ main {
 .main {
   grid-area: main;
   justify-content: center;
- 
+  align-items: center;
+ width: 70%;
+ margin: auto;
 }
 .row1  {
   display: flex ;
@@ -80,7 +82,7 @@ main {
   justify-content: center;
   align-items: center;
   font-size: larger;
-  
+  flex-wrap: wrap;
 
 }
 .bottom-left3 {
