@@ -56,7 +56,7 @@
                     data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="../login_join/login.html">로그인</a>
+                    <a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
                     <a class="dropdown-item" href="../login_join/join.html">회원가입</a>
                 </div>
             </div>

@@ -217,20 +217,23 @@ SELECT * FROM rest_tag;
 SELECT * FROM review_info where mod(review_no,2)=0;
 SELECT * FROM review_info where mod(review_no,2)=1;
 
+
 -- 뷰 생성: 프로필정보+리뷰정보 매치 (디테일페이지 리뷰영역)
 create view profile_review as
 select
-user_info.USER_ID,
-user_info.USER_NICKNAME,
-user_info.USER_LEVEL,
-user_info.USER_PROFILE,
-review_content_img.REVIEW_NO,
-review_content_img.REVIEW_SCOPE,
-review_content_img.REVIEW_TEXT,
-review_content_img.REST_NO,
-review_content_img.REVIEW_DATE,
-review_content_img.IMAGES from user_info right outer join review_content_img on user_info.user_id = review_content_img.user_id;
+user_info.USER_ID as user_ID,
+user_info.USER_NICKNAME as user_Nickname,
+user_info.USER_LEVEL as user_Level,
+user_info.USER_PROFILE as user_Profile,
+review_content_img.REVIEW_NO as review_No,
+review_content_img.REVIEW_SCOPE as review_Scope,
+review_content_img.REVIEW_TEXT as review_Text,
+review_content_img.REST_NO as rest_NO,
+review_content_img.REVIEW_DATE as review_Date,
+review_content_img.IMAGES as images from user_info right outer join review_content_img on user_info.user_id = review_content_img.user_id;
 select * from profile_review;
+
+drop view profile_review;
 
 -- 뷰 생성: 리뷰정보+해당 리뷰이미지
 CREATE view review_content_img as
@@ -266,3 +269,8 @@ drop SEQUENCE like_seq;
 drop sequence review_seq;
 drop sequence reviewIMG_seq;
 drop sequence tag_seq;
+
+
+
+
+

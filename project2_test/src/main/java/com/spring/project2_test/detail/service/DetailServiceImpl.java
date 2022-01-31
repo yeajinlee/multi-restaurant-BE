@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.project2_test.detail.dao.DetailDAO;
 import com.spring.project2_test.detail.vo.DetailVO;
+import com.spring.project2_test.detail.vo.ReviewVO;
 
 @Service("detailService")
 public class DetailServiceImpl implements DetailService{
@@ -30,8 +31,8 @@ public class DetailServiceImpl implements DetailService{
 	}
 	
 	@Override
-	public List reviewList(int rest_NO) throws Exception {
-		List reviewList = detailDAO.selectAllReview(rest_NO);
-		return reviewList;
+	public List<ReviewVO> reviewList(int rest_NO) throws Exception {
+		List<ReviewVO> detailReviewList= detailDAO.selectAllReview(rest_NO);
+		return detailReviewList;
 	}
 }

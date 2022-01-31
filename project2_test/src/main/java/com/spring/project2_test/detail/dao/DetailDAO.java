@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.spring.project2_test.detail.vo.DetailVO;
+import com.spring.project2_test.detail.vo.ReviewVO;
 
 public interface DetailDAO {
 
