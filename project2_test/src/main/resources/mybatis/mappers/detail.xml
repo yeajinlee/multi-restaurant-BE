@@ -20,7 +20,7 @@
 		<result property="review_NO" column="review_NO"/>
 		<result property="rest_NO" column="rest_NO" />
 	</resultMap>
-	<resultMap type="reviewVO" id="reviewResult">
+	<resultMap type="reviewVO" id="detailReviewResult">
 		<result property="user_ID" column="user_ID"/>
 		<result property="user_Nickname" column="user_Nickname"/>
 		<result property="user_Level" column="user_Level"/>
@@ -32,7 +32,6 @@
 		<result property="review_Date" column="review_Date"/>
 		<result property="images" column="images"/>
 	</resultMap>
-	
 	<select id="selectRestDetail" resultMap="detailResult">
 		<![CDATA[
 			select * from Restaurant_Info where rest_NO = #{rest_NO}
@@ -43,7 +42,7 @@
 			select img_FileName from reviewimg_info where rest_NO = #{rest_NO}
 		]]>
 	</select>
-	<select id="selectAllReview" resultMap="reviewResult">
+	<select id="selectAllReview" resultMap="detailReviewResult">
 		<![CDATA[
 			select * from profile_review where rest_NO = #{rest_NO}
 		]]>

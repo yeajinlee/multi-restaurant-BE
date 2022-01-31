@@ -36,8 +36,8 @@ public class DetailControllerImpl implements DetailController {
 //		DetailVO detailVO = (DetailVO) detailMap.get("detailVO");
 		List detailImg = detailService.detailImage(rest_NO);
 		mav.addObject("detailImg", detailImg);
-		List reviewList = detailService.reviewList(rest_NO);
-		mav.addObject("reviewList",reviewList);
+		List detailReviewList = detailService.reviewList(rest_NO);
+		mav.addObject("detailReviewList", detailReviewList);
 		return mav;
 	}
 		

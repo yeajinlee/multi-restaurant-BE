@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.spring.project2_test.detail.vo.DetailVO;
+import com.spring.project2_test.detail.vo.ReviewVO;
 
 
 @Repository("detailDAO")
@@ -29,7 +30,7 @@ public class DetailDAOImpl implements DetailDAO{
 	
 	@Override
 	public List selectAllReview(int rest_NO) throws DataAccessException {
-		List reviewList = sqlSession.selectList("mappers.detail.selectAllReview", rest_NO);
-		return reviewList;
+		List detailReviewList = sqlSession.selectList("mappers.detail.selectAllReview", rest_NO);
+		return detailReviewList;
 	}
 }
