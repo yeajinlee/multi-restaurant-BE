@@ -23,10 +23,10 @@ public class ReviewListControllerImpl implements ReviewListController {
 	@RequestMapping(value="/reviewList.do", method=RequestMethod.GET)
 	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List reviewListOdd = reviewListService.reviewListOdd();
-		List reviewListEven = reviewListService.reviewListEven();
 		ModelAndView mav = new ModelAndView(viewName);
+		List reviewListOdd = reviewListService.reviewListOdd();
 		mav.addObject("reviewListlOdd", reviewListOdd);
+		List reviewListEven = reviewListService.reviewListEven();
 		mav.addObject("reviewListlEven", reviewListEven);
 		return mav;
 	}

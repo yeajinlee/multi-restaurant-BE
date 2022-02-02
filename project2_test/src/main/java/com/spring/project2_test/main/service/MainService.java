@@ -6,6 +6,6 @@ public interface MainService {
 
 	public List restList() throws Exception;
 
-	public List imageList() throws Exception;
+
 
 }

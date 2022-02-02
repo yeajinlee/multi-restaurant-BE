@@ -20,13 +20,13 @@ public class SearchDAOImpl implements SearchDAO{
 
 	@Override
 	public List<String> selectKeywordSearch(String keyword) throws DataAccessException {
-		List<String> list = (ArrayList)sqlSession.selectList("mapper.search.selectKeywordSearch",keyword);
+		List<String> list = (ArrayList)sqlSession.selectList("mappers.search.selectKeywordSearch",keyword);
 		return list;
 	}
 
 	@Override
 	public ArrayList<SearchVO> selectBySearchWord(String searchWord) {
-		ArrayList list= (ArrayList)sqlSession.selectList("mapper.search.selectBySearchWord",searchWord);
+		ArrayList list= (ArrayList)sqlSession.selectList("mappers.search.selectBySearchWord",searchWord);
 		System.out.println("����� �ٿ�");
 		 return list;
 		 

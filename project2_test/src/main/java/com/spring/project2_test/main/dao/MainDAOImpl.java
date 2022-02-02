@@ -21,9 +21,5 @@ public class MainDAOImpl implements MainDAO {
 		return restList;
 	}
 	
-	@Override
-	public List selectImgList() throws DataAccessException {
-		List imageList = sqlSession.selectList("mappers.main.selectImgList");
-		return imageList;
-	}
+	
 }

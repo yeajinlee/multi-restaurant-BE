@@ -18,9 +18,4 @@ public class MainServiceImpl implements MainService {
 		List restList = mainDAO.selectRestList();
 		return restList;
 	}
-	@Override
-	public List imageList() throws Exception {
-		List imageList = mainDAO.selectImgList();
-		return imageList;
-	}
 }

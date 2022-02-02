@@ -6,11 +6,13 @@
   <typeAliases>
     <typeAlias type="com.spring.project2_test.member.vo.MemberVO" alias="memberVO" />
     <typeAlias type="com.spring.project2_test.detail.vo.DetailVO" alias="detailVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.ImageVO" alias="imageVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.ReviewVO" alias="reviewVO" />
     <typeAlias type="com.spring.project2_test.reviewList.vo.ReviewListVO" alias="reviewListVO" />
     <typeAlias type="com.spring.project2_test.search.vo.SearchVO" alias="searchVO" />
     <typeAlias type="com.spring.project2_test.search.vo.ImageFileVO" alias="imageFileVO" />
     <typeAlias type="com.spring.project2_test.main.vo.MainVO" alias="mainVO" />
-    <typeAlias type="com.spring.project2_test.main.vo.ImageVO" alias="imageVO" />
+
 <!-- typeAliases on vo -->
 
     
