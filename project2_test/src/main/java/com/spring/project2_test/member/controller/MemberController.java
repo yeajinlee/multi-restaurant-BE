@@ -15,9 +15,14 @@ import com.spring.project2_test.member.vo.MemberVO;
 
 
 public interface MemberController {
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView joinForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
             RedirectAttributes rAttr,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView login(@ModelAttribute("member") MemberVO member,
+//            RedirectAttributes rAttr,
+//            HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

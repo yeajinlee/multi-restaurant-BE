@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,hight=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,hight=device-hight, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="resources/css/login_join.css" type="text/css">
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -40,7 +40,7 @@
 <body>
     <!-- header -->
     <div id="header">
-        <a href="../main/main.html" target="_self" title="메인 페이지로"><img src="resources/image/logo.png" id="logo"></a>
+        <a href="${pageContext.request.contextPath}/main.do" target="_self" title="메인 페이지로"><img src="resources/image/logo_to_main.png" id="logo"></a>
     </div>
 
 	<form name="form1" method="post">
@@ -94,7 +94,7 @@
             <!-- JOIN TEXT -->
             <hr>
             <div id="loginBack">
-                <a href="join.html"><h4>회원가입</h4></a>
+                <a href="${pageContext.request.contextPath}/joinForm.do" target="_self"><h4>회원가입</h4></a>
 
             </div>
         </form>

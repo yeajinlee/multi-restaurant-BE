@@ -16,7 +16,7 @@ public class MemberDAOImpl implements MemberDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {
+	public MemberVO login(MemberVO memberVO) throws DataAccessException {
 	MemberVO vo= sqlSession.selectOne("mapper.member.loginById",memberVO);
 		return vo;
 	}
@@ -26,5 +26,6 @@ public class MemberDAOImpl implements MemberDAO{
 	int result = sqlSession.insert("mapper.member.imsertMember",memberVO);
 		return result;
 	}
+
 
 }

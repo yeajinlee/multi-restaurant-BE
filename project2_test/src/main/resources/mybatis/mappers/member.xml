@@ -25,6 +25,7 @@
 			 and user_PW=#{user_PW}			
 		]]>
 	</select>
+	
 
 
 	<insert id="insertNewMember" parameterType="memberVO">
@@ -40,4 +41,7 @@
                                     #{user_Profile})
    ]]>
 	</insert>
+
+	
+
 </mapper>

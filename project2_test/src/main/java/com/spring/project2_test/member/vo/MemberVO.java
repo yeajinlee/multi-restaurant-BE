@@ -95,6 +95,9 @@ public void setUser_Profile(String user_Profile) {
 	this.user_Profile = user_Profile;
 }
 
-
+@Override
+public String toString() {
+return "MemberVO [user_ID=" + user_ID + ", user_PW=" + user_PW + ", user_Nickname=" + user_Nickname + ", user_Email=" + user_Email + "]";
+ }
 
 }
