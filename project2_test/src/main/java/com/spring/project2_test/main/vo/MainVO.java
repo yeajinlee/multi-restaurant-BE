@@ -10,8 +10,15 @@ public class MainVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
+	private String img_FileName;
 	
 	
+	public String getImg_FileName() {
+		return img_FileName;
+	}
+	public void setImg_FileName(String img_FileName) {
+		this.img_FileName = img_FileName;
+	}
 	public int getRest_NO() {
 		return rest_NO;
 	}
