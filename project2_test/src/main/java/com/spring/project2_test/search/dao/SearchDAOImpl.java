@@ -26,7 +26,11 @@ public class SearchDAOImpl implements SearchDAO{
 
 	@Override
 	public ArrayList<SearchVO> selectBySearchWord(String searchWord) {
+<<<<<<< HEAD
 		ArrayList restLists= (ArrayList)sqlSession.selectList("mappers.search.selectBySearchWord",searchWord);
+=======
+		ArrayList list= (ArrayList)sqlSession.selectList("mappers.search.selectBySearchWord",searchWord);
+>>>>>>> a12ea4eb81f67def2e28cd75ad9c75306c2e53b2
 		System.out.println("¿©±â¿È ´Ù¿À");
 		 return restLists;
 		 

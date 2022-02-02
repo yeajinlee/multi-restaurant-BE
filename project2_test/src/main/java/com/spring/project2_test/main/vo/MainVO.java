@@ -10,6 +10,7 @@ public class MainVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
+<<<<<<< HEAD
 	private String rest_Phone;
 	private String rest_FileName;
 	
@@ -26,6 +27,16 @@ public class MainVO {
 	}
 	public void setRest_Phone(String rest_Phone) {
 		this.rest_Phone = rest_Phone;
+=======
+	private String img_FileName;
+	
+	
+	public String getImg_FileName() {
+		return img_FileName;
+	}
+	public void setImg_FileName(String img_FileName) {
+		this.img_FileName = img_FileName;
+>>>>>>> a12ea4eb81f67def2e28cd75ad9c75306c2e53b2
 	}
 	public int getRest_NO() {
 		return rest_NO;

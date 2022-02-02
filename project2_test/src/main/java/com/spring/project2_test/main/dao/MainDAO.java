@@ -8,6 +8,6 @@ public interface MainDAO {
 
 	public List selectRestList() throws DataAccessException;
 
-	public List selectImgList() throws DataAccessException;
+
 
 }

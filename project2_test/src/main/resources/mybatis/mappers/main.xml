@@ -13,17 +13,20 @@
 		<result property="rest_Scope" column="rest_Scope"/>
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
+<<<<<<< HEAD
 			<result property="rest_FileName" column="rest_FileName"/>
 	</resultMap>
 	<resultMap type="imageVO" id="imageResult">
 		<result property="img_FileNO" column="img_FileNO"/>
+=======
+>>>>>>> a12ea4eb81f67def2e28cd75ad9c75306c2e53b2
 		<result property="img_FileName" column="img_FileName"/>
-		<result property="review_NO" column="review_NO"/>
-		<result property="rest_NO" column="rest_NO" />
 	</resultMap>
+	
 	
 	<select id="selectRestList" resultMap="mainResult">
 		<![CDATA[
+<<<<<<< HEAD
 			
 		
 		
@@ -50,4 +53,10 @@
 		]]>
 		rest_NO가 null로 되어서 에러나는데 해결못함 
 	</select> -->
+=======
+			select * from (select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info) a left outer join reviewimg_info b on a.rest_NO = b.rest_NO where rownum < 7
+		]]>
+	</select>
+	
+>>>>>>> a12ea4eb81f67def2e28cd75ad9c75306c2e53b2
 </mapper>

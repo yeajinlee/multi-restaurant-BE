@@ -103,28 +103,28 @@
 		<c:otherwise>
 			<div class="row">
 				<div class="col1">
-					<c:forEach var="review" items="${reviewListlOdd}">
+					<c:forEach var="reviewO" items="${reviewListlOdd}">
 						<div class="ind_review">
 						<table>
 							<tr>
 								<td><img src="../images/burger.jpg" class="profile_img"></td>
 								<td>
-									<span class="username"><a href="../detail/detail.html"><b>${review.rest_Name}</b></a></span><br>
-									<span class="username">${review.user_ID}</span>
+									<span class="username"><a href="../detail/detail.html"><b>${reviewO.rest_Name}</b></a></span><br>
+									<span class="username">${reviewO.user_ID}</span>
 									<span class="level">&nbsp;Lv.1 <br></span>
 									<span class="star">
-										${review.review_Scope}
+										${reviewO.review_Scope}
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 									</span>
-									<span class="star_date">&nbsp; ${review.review_Date}</span>
+									<span class="star_date">&nbsp; ${reviewO.review_Date}</span>
 								</td>
 							</tr>
 						</table>
-						<div class="review_contents">${review.review_Text }</div>
+						<div class="review_contents">${reviewO.review_Text }</div>
 						<p class="re_bottom_img">
 							<img src="resources/image/sushi.jpg" alt="">
 							<img src="resources/image/sushi2.jpg" alt="">
@@ -134,28 +134,28 @@
 					</c:forEach>
 				</div>
 				<div class="col2">
-					<c:forEach var="review" items="${reviewListlEven }">
+					<c:forEach var="reviewE" items="${reviewListlEven }">
 						<div class="ind_review">
 						<table>
 							<tr>
 								<td><img src="../images/burger.jpg" class="profile_img"></td>
 								<td>
-									<span class="username"><a href="../detail/detail.html"><b>${review.rest_Name}</b></a></span><br>
-									<span class="username">${review.user_ID}</span>
+									<span class="username"><a href="../detail/detail.html"><b>${reviewE.rest_Name}</b></a></span><br>
+									<span class="username">${reviewE.user_ID}</span>
 									<span class="level">&nbsp;Lv.1 <br></span>
 									<span class="star">
-										${review.review_Scope}
+										${reviewE.review_Scope}
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 										<i class="fas fa-star"></i>
 									</span>
-									<span class="star_date">&nbsp; ${review.review_Date}</span>
+									<span class="star_date">&nbsp; ${reviewE.review_Date}</span>
 								</td>
 							</tr>
 						</table>
-						<div class="review_contents">${review.review_Text }</div>
+						<div class="review_contents">${reviewE.review_Text }</div>
 						<p class="re_bottom_img">
 							<img src="resources/image/sushi.jpg" alt="">
 							<img src="resources/image/sushi2.jpg" alt="">
