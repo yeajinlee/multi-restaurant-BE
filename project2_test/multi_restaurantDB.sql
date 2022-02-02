@@ -1,16 +1,27 @@
 CREATE TABLE rest_Image 
-   (	IMAGE_ID int primary key, 
+(IMAGE_ID int primary key, 
 	rest_NO int, 
 	FILENAME VARCHAR2(50), 
 	REG_ID VARCHAR2(30), 
-	FILETYPE VARCHAR2(40)	
-   ) ;
-   
-Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (2,3,'1.jpg','admin','main_image');
-Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (1,1,'hon','admin','main_image');
+	FILETYPE VARCHAR2(40)) ;
+    
+    
+         Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (7,10,'non.jpg','admin','main_image');
+     Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (6,9,'non.jpg','admin','main_image');
+ Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (4,5,'non.jpg','admin','main_image');
+ Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (3,4,'don.jpg','admin','sub_image');
+ Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (2,3,'1.jpg','admin','main_image');
+ Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (1,1,'hon.png','admin','main_image');
+Insert into rest_Image (IMAGE_ID,rest_NO,FileName,REG_ID,FILETYPE) values (5,6,'non.jpg','admin','theme_image');
+
 drop table rest_image;
+
+SELECT DISTINCT rest_theme from Restaurant_Info;		
+
 SELECT * FROM restaurant_info;
 SELECT * FROM rest_image;
+select rest_Address from Restaurant_Info;
+select rest_NO, rest_Name, rest_Address from Restaurant_Info;
 
 
 CREATE TABLE Restaurant_Info (
@@ -20,23 +31,50 @@ CREATE TABLE Restaurant_Info (
     rest_Address VARCHAR2(100) NOT NULL,
     rest_Phone varchar2(30),
     rest_Scope INT,
-        rest_Social VARCHAR2(50),
-        rest_fileName varchar(20),
+    rest_Social VARCHAR2(50),
+    rest_fileName varchar(20),
+    rest_Theme varchar(20),
     rest_OpenDate DATE NOT NULL
 );
- insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName,  rest_OpenDate) values (1,'돈가스나라','10만원','성남','131313',1,1,'hon',sysdate);
+insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName, rest_theme, rest_OpenDate) 
+                     values (10,'돈가스만남','10만원','성남','131313',1,1,'non.jpg','icecream', sysdate);
+
+insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName, rest_theme, rest_OpenDate) 
+                     values (5,'돈가스천국','10만원','성남','131313',1,1,'non.jpg','icecream', sysdate);
+
+insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName, rest_theme,  rest_OpenDate) 
+                     values (6,'돈가스나라','10만원','성남','131313',1,1,'hon.png','icecream', sysdate);
+                  insert into Restaurant_Info (rest_NO, rest_Name, rest_Price , rest_Address , rest_Phone , rest_Scope , rest_Social, rest_fileName, rest_theme,  rest_OpenDate) 
+                     values (9,'돈가스환영','10만원','성남','131313',1,1,'non.jpg','icecream', sysdate);   
+                     
 insert into restaurant_info (rest_no, rest_name, rest_price, rest_address, rest_opendate)
-    values (3, '식당이름', '가격대', '주소', sysdate);
-insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social, rest_OpenDate)
-    values('2', '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램', sysdate);
+                     values (3, '식당이름', '가격대', '주소', sysdate);
+                     
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme, rest_OpenDate)
+                      values(2, '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램','coffee', sysdate);
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme, rest_OpenDate)
+                      values(7, '테스트식당3', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램','coffee', sysdate);    
+                         
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme, rest_OpenDate)
+                      values(4, '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램','zoffee', sysdate);
+                      
+insert into restaurant_info (rest_NO, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme, rest_OpenDate)
+                      values(1, '테스트식당2', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램','apple', sysdate);
+           insert into restaurant_info (rest_NO, rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme, rest_OpenDate)
+                      values(8,'coffee.jpg', '테스트식당4', '0만원대', '서울시 강남구', '020000000', '5', '인스타그램','coffee', sysdate);           
+    commit;
+    	select rest_theme from Restaurant_Info;
     
     drop table Restaurant_Info;
     
     select ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
      ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
      and ri.rest_Name like '#{searchWord}%';
-    
-    
+     
+select ri.rest_no, ri.rest_name, ri.rest_fileName, rw.review_text, ri.rest_theme 
+from Restaurant_Info ri, Review_Info rw 
+where ri.rest_no=rw.rest_no and ri.rest_theme='icecream';
+
 CREATE USER MultiRestaurant_DB
 IDENTIFIED BY m1234
 DEFAULT TABLESPACE USERS
@@ -85,19 +123,17 @@ CREATE TABLE Review_Info (
     user_ID VARCHAR(20) NOT NULL,
     review_Scope INT NOT NULL,
     review_Text VARCHAR(200) NOT NULL,
-    rest_NO INT NOT NULL,
-    review_Date DATE DEFAULT SYSDATE,
-    CONSTRAINT FK_reviewID FOREIGN KEY (user_ID)
-    REFERENCES User_Info (user_ID)
-    ON DELETE CASCADE,
-    CONSTRAINT FK_reviewRest FOREIGN KEY (rest_NO)
-    REFERENCES Restaurant_Info (rest_NO)
-    ON DELETE CASCADE
+    rest_NO INT NOT NULL
 );
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO)
+    values (1, 'a0001', 5, '테스트 리뷰', 1);
+    insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO)
+    values (2, 'a0001', 5, '테스트 리뷰2', 2);
+drop table Review_info;
 
 CREATE SEQUENCE review_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 
-
+select ri.rest_no, ri.rest_name, ri.rest_fileName, rw.review_text, ri.rest_theme from Restaurant_Info ri, Review_Info rw where ri.rest_no=rw.rest_no;
 
 CREATE TABLE ReviewIMG_Info (
     img_FileNO INT PRIMARY KEY,
@@ -145,7 +181,7 @@ insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, 
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
     values (4, 'a0002', 5, '테스트 리뷰4', 2, sysdate);
     
-commit;
+
 
 SELECT * FROM user_info;
 

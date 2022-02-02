@@ -68,13 +68,7 @@ main {
   margin: 1em;
 }
 /* ------------------------------------------- */
-.main {
-  grid-area: main;
-  justify-content: center;
-  align-items: center;
- width: 70%;
- margin: auto;
-}
+
 .row1  {
   display: flex ;
   grid-template-columns: auto auto;

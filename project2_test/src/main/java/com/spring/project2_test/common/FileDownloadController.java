@@ -19,10 +19,11 @@ public class FileDownloadController {
 	
 	@RequestMapping("/download")
 	protected void download(@RequestParam("fileName") String fileName,
-							@RequestParam("restNO") String restNO,	
+							
 			                 HttpServletResponse response)throws Exception {
+		System.out.println(fileName);
 		OutputStream out = response.getOutputStream();
-		String downFile = IMAGE_REPO + "\\" +restNO+"\\"+ fileName;
+		String downFile = IMAGE_REPO + "\\"+ fileName;
 		File file = new File(downFile);
 
 		response.setHeader("Cache-Control", "no-cache");

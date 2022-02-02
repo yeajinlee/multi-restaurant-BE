@@ -35,7 +35,7 @@
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reco1.html" style="color:white"><strong>추천 메뉴</strong> </a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/reconList.do" style="color:white"><strong>추천 메뉴</strong> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
@@ -54,7 +54,7 @@
                     data-toggle="dropdown"><img src="${pageContext.request.contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="../login_join/login.html">로그인</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/loginForm.do">로그인</a>
                     <a class="dropdown-item" href="../login_join/join.html">회원가입</a>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                                 <div class="col">
                                     <!-- <input class="form-control form-control-lg" id="search"
                                         placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" /> -->
-                                	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
+                                	<input name="searchWord" class="main_input" type="text" > 
                                 
                                 </div>
                                 <div class="col-auto">
@@ -93,11 +93,13 @@
     <section class>
         <div class="container px-5 my-5">
             <div class="row gx-5 justify-content-center">
-            	<c:forEach var="rest" items="${restList }">
+            	<c:forEach var="rest" items="${restList}">
             		<div class="col-lg-6 col-xl-4">
                     <div class="card mb-5 mb-xl-0">
                         <a href="${pageContext.request.contextPath}/detail.do">
-                        	<img src="${pageContext.request.contextPath}/resources/image/${imageList.img_FileName}" width="327" height="200" alt="">
+                        															  
+                        	<img src="${pageContext.request.contextPath}/download?fileName=${rest.rest_FileName}" width="327" height="200" alt=""> 
+                        	
                         	<%-- 누가봐도 안될거같이생김... --%>
                         </a>
                         <div class="card-body" >

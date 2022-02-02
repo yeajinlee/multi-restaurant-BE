@@ -15,10 +15,16 @@ public class SearchVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
+	private String rest_FileName;
 	private String rest_fileName;
+	public String getRest_fileName() {
+		return rest_fileName;
+	}
+	public void setRest_fileName(String rest_fileName) {
+		this.rest_fileName = rest_fileName;
+	}
+
 	private String rest_Menu;
-	
-	
 	public int getRest_NO() {
 		return rest_NO;
 	}
@@ -67,11 +73,11 @@ public class SearchVO {
 	public void setRest_OpenDate(Date rest_OpenDate) {
 		this.rest_OpenDate = rest_OpenDate;
 	}
-	public String getRest_fileName() {
-		return rest_fileName;
+	public String getRest_FileName() {
+		return rest_FileName;
 	}
-	public void setRest_fileName(String rest_fileName) {
-		this.rest_fileName = rest_fileName;
+	public void setRest_FileName(String rest_FileName) {
+		this.rest_FileName = rest_FileName;
 	}
 	public String getRest_Menu() {
 		return rest_Menu;
@@ -80,7 +86,8 @@ public class SearchVO {
 		this.rest_Menu = rest_Menu;
 	}
 	
-	public SearchVO() {
-		// TODO Auto-generated constructor stub
-	}
+public SearchVO() {
+	// TODO Auto-generated constructor stub
+}	
+
 }

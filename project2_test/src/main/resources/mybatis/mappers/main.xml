@@ -13,6 +13,7 @@
 		<result property="rest_Scope" column="rest_Scope"/>
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
+			<result property="rest_FileName" column="rest_FileName"/>
 	</resultMap>
 	<resultMap type="imageVO" id="imageResult">
 		<result property="img_FileNO" column="img_FileNO"/>
@@ -23,9 +24,26 @@
 	
 	<select id="selectRestList" resultMap="mainResult">
 		<![CDATA[
-			select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info where rownum < 7
+			
+		
+		
+	select ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
+     ri.rest_NO=rm.rest_NO and rm.filetype='sub_image' and
+     rownum < 7
+		
+		
+		
+		
+		
+		
+		
 		]]>
 	</select>
+	<!-- select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info where rownum < 7 -->
+	
+	
+	
+	
 <!-- 	<select id="selectImgList" resultMap="imageResult">
 		<![CDATA[
 			select * from reviewimg_info where rest_NO = #{rest_NO}

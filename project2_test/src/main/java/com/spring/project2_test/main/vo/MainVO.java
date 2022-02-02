@@ -10,8 +10,23 @@ public class MainVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
+	private String rest_Phone;
+	private String rest_FileName;
 	
 	
+	
+	public String getRest_FileName() {
+		return rest_FileName;
+	}
+	public void setRest_FileName(String rest_FileName) {
+		this.rest_FileName = rest_FileName;
+	}
+	public String getRest_Phone() {
+		return rest_Phone;
+	}
+	public void setRest_Phone(String rest_Phone) {
+		this.rest_Phone = rest_Phone;
+	}
 	public int getRest_NO() {
 		return rest_NO;
 	}
