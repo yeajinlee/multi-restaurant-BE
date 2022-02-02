@@ -4,11 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="mappers.search">
-<<<<<<< HEAD
-	<resultMap id="searchResult" type="SearchVO">
-=======
 	<resultMap id="searchResult" type="searchVO">
->>>>>>> a12ea4eb81f67def2e28cd75ad9c75306c2e53b2
 		<result property="rest_NO" column="rest_NO"/>
 		<result property="rest_Name" column="rest_Name"/>
 		<result property="rest_Price" column="rest_Price"/>
@@ -18,13 +14,13 @@
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
 	
-	<result property="rest_FileName" column="rest_FileName"/>
+	<result property="rest_fileName" column="rest_fileName"/>
 	<result property="rest_Menu" column="rest_Menu"/>
 	</resultMap>
 	
 	<resultMap id="imageResult" type="ImageFileVO">
 	   <result property="rest_NO" column="rest_NO" />
-	   <result property="fileName" column="fileName" />
+	   <result property="imageFileName" column="imageFileName" />
 	   <result property="reg_id" column="reg_id" />
 	   <result property="image_id" column="image_id" />
 	   <result property="fileType" column="fileType" />
@@ -34,26 +30,12 @@
 	  <select id="selectBySearchWord" resultMap="searchResult"   parameterType="String">
     <![CDATA[
     
-  	SELECT ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
-     ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
-       and ri.rest_Address||ri.rest_name like '%'|| #{searchWord} || '%'
-     
+          select rest_NO, rest_Name, rest_Address from Restaurant_Info
 
-     ]]><!-- 아니면 rest_Scope desc -->      
+     ]]><!-- 아니면 rest_Scope desc -->      <!-- select ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
+     ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
+     and ri.rest_Name like '%'|| #{searchWord} || '%' -->
   </select>
-  <!--   <select id="countBySearchWord" resultMap="searchResult"   parameterType="int">
-    <![CDATA[
-    
-  	  SELECT COUNT(*) from (select ri.*, rm.fileName from Restaurant_Info ri, rest_Image rm where
-     ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
-       and ri.rest_Name like '%'|| #{searchWord} || '%')
-     
-
-     ]]></select> -->
-    </mapper>
-  
-  
-  
   <!--      요것도 추가?  rf.rest_address like '%'|| #{searchWord} || '%'
     요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%' -->
   	<!-- <select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
@@ -74,5 +56,6 @@
     요것도?      rf.rest_Menu like '%'|| #{searchWord} || '%'
      order by 어떤가게 논의 desc
 		]]>
-	 -->
+	</select> -->
   
+  </mapper>

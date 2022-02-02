@@ -17,8 +17,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override
 	public List<SearchVO> searchRest(String searchWord) throws Exception {
-		List<SearchVO> restLists=searchDAO.selectBySearchWord(searchWord);
-		System.out.println("여기옴 서비스");
+		List restLists=searchDAO.selectBySearchWord(searchWord);
 		return restLists;
 	}
 
