@@ -115,68 +115,7 @@
 			</c:choose>
 		</div>
 
-		<%-- The Modal/Lightbox --%>
-		<%-- <c:forEach var="detailImg" items="${detailImg}" varStatus="cnt">
-			<div id="top_modal" class="modal">
-				<span class="close cursor" onclick="closeTopModal()">&times;</span>
-				<div class="modal-content">
-					<div class="top_modal_slides">
-						<div class="numbertext">${cnt.count} / 10</div>
-						<img src="${contextPath}/resources/image/${detailImg.img_FileName}" height="100%">
-					</div>
-					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-					<a class="next" onclick="plusSlides(1)">&#10095;</a>
-				</div>
-			</div>
-		</c:forEach> --%>
 		
-
-				<%-- <div class="top_modal_slides">
-					<div class="numbertext">2 / 10</div>
-					<img src="${contextPath}/resources/image/sushi2.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">3 / 10</div>
-					<img src="${contextPath}/resources/image/sushi3.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">4 / 10</div>
-					<img src="${contextPath}/resources/image/sushi4.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">5 / 10</div>
-					<img src="${contextPath}/resources/image/sushi5.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">6 / 10</div>
-					<img src="../images/sushi6.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">7 / 10</div>
-					<img src="../images/sushi7.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">8 / 10</div>
-					<img src="../images/sushi8.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">9 / 10</div>
-					<img src="../images/sushi9.jpg" height="100%">
-				</div>
-
-				<div class="top_modal_slides">
-					<div class="numbertext">10 / 10</div>
-					<img src="../images/sushi10.jpg" height="100%">
-				</div> --%>
-
-				<%-- Next/previous controls --%>
 				
 	</section>
 

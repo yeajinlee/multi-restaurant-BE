@@ -211,6 +211,7 @@ commit;
 
 SELECT * FROM user_info;
 SELECT * FROM likerest_info;
+select * from restaurant_info;
 SELECT * FROM review_info;
 SELECT * FROM reviewimg_info;
 SELECT * FROM tag_info;
@@ -218,6 +219,11 @@ SELECT * FROM rest_tag;
 
 SELECT * FROM review_info where mod(review_no,2)=0;
 SELECT * FROM review_info where mod(review_no,2)=1;
+
+select c.review_no, c.user_id, c.review_text, c.review_scope, c.review_date, c.user_nickname, c.user_profile, d.img_filename 
+from (SELECT a.review_no, a.user_id, a.review_text, a.review_scope, a.review_date, a.rest_no, b.user_nickname, b.user_level, b.user_profile FROM review_info a left outer join user_info b on a.user_id = b.user_id where mod(review_no,1)=0) c left outer join reviewimg_info d on c.review_no = d.review_no;
+
+select c.review_no, c.user_id, c.review_text, c.review_scope, c.review_date, c.user_nickname, c.user_profile, d.img_filename from (SELECT a.review_no, a.user_id, a.review_text, a.review_scope, a.review_date, a.rest_no, b.user_nickname, b.user_level, b.user_profile FROM review_info a left outer join user_info b on a.user_id = b.user_id where mod(review_no,2)=0) c left outer join reviewimg_info d on c.review_no = d.review_no;
 
 
 -- 뷰 생성: 프로필정보+리뷰정보 매치 (디테일페이지 리뷰영역)
@@ -255,8 +261,9 @@ select review_no, listagg(img_filename, '/') within group(order by img_filename)
 select * from review_img;
 
 -- 메인용 식당정보+이미지
-select * from (select rest_NO, rest_Name, rest_Price, rest_Address from Restaurant_Info) a left outer join 
-reviewimg_info b on a.rest_NO = b.rest_NO where rownum < 7;
+select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
+from (select row_number() over(partition by rest_no order by img_fileno) as rnum, reviewimg_info.* from reviewimg_info) a 
+left outer join restaurant_info b on a.rest_no = b.rest_no where rnum = 1 and rownum < 7;
 
 DROP TABLE rest_tag;
 DROP TABLE tag_info;
