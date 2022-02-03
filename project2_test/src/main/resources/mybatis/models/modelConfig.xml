@@ -13,6 +13,9 @@
     <typeAlias type="com.spring.project2_test.search.vo.ImageFileVO" alias="imageFileVO" />
     <typeAlias type="com.spring.project2_test.main.vo.MainVO" alias="mainVO" />
 
+    <typeAlias type="com.spring.project2_test.reconList.vo.ReconListVO" alias="reconListVO" />
+    <typeAlias type="com.spring.project2_test.specList.vo.SpecListVO" alias="specListVO" />
+    
 <!-- typeAliases on vo -->
 
     

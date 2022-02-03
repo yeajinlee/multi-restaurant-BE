@@ -26,14 +26,19 @@ public class SearchControllerImpl implements SearchController {
 
 	@Override
 	@RequestMapping(value="/searchRest.do", method = RequestMethod.GET)
-	public ModelAndView searchRest(@RequestParam("searchWord") String searchWord, HttpServletRequest request,
+	public ModelAndView searchRest(@RequestParam("searchWord") String searchWord,
+			HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		String viewName = (String) request.getAttribute("viewName");
 		List<SearchVO> restLists = searchService.searchRest(searchWord);
+		List<SearchVO> sideLists = searchService.sideRest(searchWord);
+		searchService.searchCount(searchWord);
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		mav.addObject("sideLists",sideLists);
+		mav.addObject("searchWord",searchWord);
 		mav.addObject("restLists", restLists);
-
 		return mav;
 	}
 
