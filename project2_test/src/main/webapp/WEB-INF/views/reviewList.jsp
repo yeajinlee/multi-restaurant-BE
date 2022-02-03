@@ -93,7 +93,7 @@
 		</div>
 	</div>
 	
-	<c:choose>
+	<%-- <c:choose>
 		<c:when test="${empty reviewListOdd && empty reviewListEven}">
 			<div>
 				<p align="center">등록된 후기가 없습니다.</p>
@@ -165,132 +165,71 @@
 				</div>
 			</div>
 		</c:otherwise>
-	</c:choose>
-	<%-- <div class="row">
-		<div class="col1">
-			<div class="ind_review">
-				<table>
-					<tr>
-						<td><img src="../images/burger.jpg" class="profile_img"></td>
-						<td><span class="username"><a
-								href="../detail/detail.html"><b>일조초밥</b></a></span><br> <span
-							class="username">미식가</span> <span class="level">&nbsp;Lv.
-								1 <br>
-						</span> <span class="star"> <i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i>
-						</span> <span class="star_date">&nbsp;2일 전</span></td>
-					</tr>
-				</table>
-				<div class="review_contents">가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을
-					것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천</div>
-				<p class="re_bottom_img">
-					<img src="resources/image/sushi.jpg" alt=""><img
-						src="resources/image/sushi2.jpg" alt=""><img
-						src="resources/image/sushi3.jpg" alt="">
-				</p>
-			</div>
-			<div class="ind_review">
-				<table>
-					<tr>
-						<td><img src="../images/kbbq.jpg" class="profile_img"></td>
-						<td><span class="username"><a
-								href="../detail/detail.html"><b>파파존스</b></a><br></span> <span
-							class="username">고든램지</span> <span class="level">&nbsp;Lv.
-								6 <br>
-						</span> <span class="star"> <i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i>
-						</span> <span class="star_date">&nbsp;2021년 12월 11일</span></td>
-					</tr>
-				</table>
-				<div class="review_contents">
-					가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요
-					을지로맛집 추천<br> 가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서
-					먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천<br> 가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도
-					좋을 것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천
+	</c:choose> --%>
+	<div class="row">
+				<div class="col1">
+					<c:forEach var="reviewO" items="${reviewListlOdd}">
+						<div class="ind_review">
+						<table>
+							<tr>
+								<td><img src="../images/burger.jpg" class="profile_img"></td>
+								<td>
+									<span class="username"><a href="../detail/detail.html"><b>식당이름</b></a></span><br>
+									<span class="username">${reviewO.user_ID}</span>
+									<span class="level">&nbsp;Lv.1 <br></span>
+									<span class="star">
+										${reviewO.review_Scope}
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+									</span>
+									<span class="star_date">&nbsp; ${reviewO.review_Date}</span>
+								</td>
+							</tr>
+						</table>
+						<div class="review_contents">${reviewO.review_Text }</div>
+						<p class="re_bottom_img">
+							<img src="resources/image/sushi.jpg" alt="">
+							<img src="resources/image/sushi2.jpg" alt="">
+							<img src="resources/image/sushi3.jpg" alt="">
+						</p>
+					</div>
+					</c:forEach>
 				</div>
-				<p class="re_bottom_img">
-					<img src="../images/pizza.jpg" alt=""><img
-						src="../images/pasta.jpg" alt="">
-				</p>
-			</div>
-			<div class="ind_review">
-				<table>
-					<tr>
-						<td><img src="../images/kimbap.jpg" class="profile_img"></td>
-						<td><span class="username"><b>버거킹</b><br></span> <span
-							class="username">제이미올리버</span> <span class="level">&nbsp;Lv.
-								4 <br>
-						</span> <span class="star"> <i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i><i
-								class="fas fa-star"></i>
-						</span> <span class="star_date">&nbsp;2021년 11월 4일</span></td>
-					</tr>
-				</table>
-				<div class="review_contents">
-					가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요
-					을지로맛집 추천<br> 가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서
-					먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천
+				<div class="col2">
+					<c:forEach var="reviewE" items="${reviewListlEven }">
+						<div class="ind_review">
+						<table>
+							<tr>
+								<td><img src="../images/burger.jpg" class="profile_img"></td>
+								<td>
+									<span class="username"><a href="../detail/detail.html"><b>식당이름</b></a></span><br>
+									<span class="username">${reviewE.user_ID}</span>
+									<span class="level">&nbsp;Lv.1 <br></span>
+									<span class="star">
+										${reviewE.review_Scope}
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+									</span>
+									<span class="star_date">&nbsp; ${reviewE.review_Date}</span>
+								</td>
+							</tr>
+						</table>
+						<div class="review_contents">${reviewE.review_Text }</div>
+						<p class="re_bottom_img">
+							<img src="resources/image/sushi.jpg" alt="">
+							<img src="resources/image/sushi2.jpg" alt="">
+							<img src="resources/image/sushi3.jpg" alt="">
+						</p>
+					</div>
+					</c:forEach>
 				</div>
-				<p class="re_bottom_img">
-					<img src="../images/burger.jpg" alt=""><img
-						src="../images/burger.jpg" alt="">
-				</p>
 			</div>
-		</div>
-		
-		<div class="col2">
-			<div class="ind_review">
-				<table>
-					<tr>
-						<td><img src="../images/kimbap.jpg" class="profile_img"></td>
-						<td><span class="username"><a
-								href="../detail/detail.html"><b>김밥천국</b></a><br></span> <span
-							class="username">제이미올리버</span> <span class="level">&nbsp;Lv.
-								4 <br>
-						</span> <span class="star"> <i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i><i
-								class="fas fa-star"></i>
-						</span> <span class="star_date">&nbsp;1일 전</span></td>
-					</tr>
-				</table>
-				<div class="review_contents">
-					가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요
-					을지로맛집 추천<br> 가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서
-					먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천
-				</div>
-				<p class="re_bottom_img">
-					<img src="../images/kimbap.jpg" alt=""><img
-						src="../images/sushi10.jpg" alt="">
-				</p>
-			</div>
-			<div class="ind_review">
-				<table>
-					<tr>
-						<td><img src="../images/burger.jpg" class="profile_img"></td>
-						<td><span class="username"><b>갓덴스시</b><br></span> <span
-							class="username">미식가</span> <span class="level">&nbsp;Lv.
-								1 <br>
-						</span> <span class="star"> <i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i><i
-								class="fas fa-star"></i><i class="fas fa-star"></i>
-						</span> <span class="star_date">&nbsp;2021년 12월 1일</span></td>
-					</tr>
-				</table>
-				<div class="review_contents">
-					가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요
-					을지로맛집 추천<br> 가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도 좋을 것 같네요 종로 주변에서
-					먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천<br> 가격도 적당하고 맛있었어요 조용해서 데이트코스에 넣어도
-					좋을 것 같네요 종로 주변에서 먹어본 초밥집중에 제일 괜찮았어요 을지로맛집 추천
-				</div>
-				<p class="re_bottom_img">
-					<img src="../images/sushi4.jpg" alt=""><img
-						src="../images/sushi5.jpg" alt=""><img
-						src="../images/sushi6.jpg" alt="">
-				</p>
-			</div>
-		</div>
-	</div> --%>
 
 	<footer>
 		<div class="column1">
