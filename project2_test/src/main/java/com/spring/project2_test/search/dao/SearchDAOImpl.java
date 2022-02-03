@@ -25,11 +25,21 @@ public class SearchDAOImpl implements SearchDAO{
 	}
 
 	@Override
-	public ArrayList<SearchVO> selectBySearchWord(String searchWord) {
-		ArrayList list= (ArrayList)sqlSession.selectList("mappers.search.selectBySearchWord",searchWord);
+	public ArrayList<SearchVO> selectBySearchWord(String searchWord) throws DataAccessException{
+		ArrayList restLists= (ArrayList)sqlSession.selectList("mappers.search.selectBySearchWord",searchWord);
 		System.out.println("¿©±â¿È ´Ù¿À");
-		 return list;
+		 return restLists;
 		 
 	}
+ public void countBy(String searchWord) throws DataAccessException {
+ sqlSession.update("mappers.search.countBy", searchWord);
+ 
+}
 
+@Override
+public List<SearchVO> sideBySearchWord(String searchWord) throws DataAccessException {
+	ArrayList sideLists= (ArrayList)sqlSession.selectList("mappers.search.sideBySearchWord",searchWord);
+	System.out.println("¿©±â¿È ´Ù¿À");
+	 return sideLists;
+}
 }

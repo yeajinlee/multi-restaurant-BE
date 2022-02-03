@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface SearchController {
-
 	public ModelAndView searchRest(@RequestParam("searchWord") String searchWord, HttpServletRequest request, HttpServletResponse
 			response) throws Exception;
-
 	public @ResponseBody String keywordSearch(@RequestParam("keyword") String keyword,HttpServletRequest request, HttpServletResponse response) throws Exception;
-
 }
