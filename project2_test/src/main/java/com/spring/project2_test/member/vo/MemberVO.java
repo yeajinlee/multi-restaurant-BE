@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class MemberVO {
 private String user_ID;
 private String user_PW;
-private Integer user_Nickname;
+private String user_Nickname;
 private String user_Birth;
 private Integer user_Gender;
 private String user_City;
@@ -19,7 +19,7 @@ private String user_Profile;
 public MemberVO() {
 	// TODO Auto-generated constructor stub
 }
-public MemberVO(String user_ID, String user_PW, Integer user_Nickname, String user_Birth, Integer user_Gender,
+public MemberVO(String user_ID, String user_PW, String user_Nickname, String user_Birth, Integer user_Gender,
 		String user_City, String user_Email, Integer user_Phone, Integer user_Level, String user_Profile) {
 	super();
 	this.user_ID = user_ID;
@@ -46,10 +46,10 @@ public String getUser_PW() {
 public void setUser_PW(String user_PW) {
 	this.user_PW = user_PW;
 }
-public Integer getUser_Nickname() {
+public String getUser_Nickname() {
 	return user_Nickname;
 }
-public void setUser_Nickname(Integer user_Nickname) {
+public void setUser_Nickname(String user_Nickname) {
 	this.user_Nickname = user_Nickname;
 }
 public String getUser_Birth() {

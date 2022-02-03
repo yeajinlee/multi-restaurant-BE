@@ -1,5 +1,7 @@
 package com.spring.project2_test.member.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.dao.DataAccessException;
 
 import com.spring.project2_test.member.vo.MemberVO;
