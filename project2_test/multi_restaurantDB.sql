@@ -204,6 +204,8 @@ insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values
 insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'sushi3.jpg', 6, 6);
 insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'kimbap.jpg', 7, 7);
 insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'sushi4.jpg', 9, 2);
+insert into reviewimg_info (img_fileno, img_filename, review_no, rest_no) values (reviewimg_seq.nextval, 'sushi5.jpg', 2, 2);
+
 
 commit;
 
