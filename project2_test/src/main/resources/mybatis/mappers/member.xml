@@ -20,24 +20,26 @@
 	<select id="loginById" resultType="memberVO"
 		parameterType="java.util.Map">
 	    <![CDATA[
-			select * from User_Info
+			select user_ID, user_PW from User_Info
 			 where user_ID=#{user_ID}
 			 and user_PW=#{user_PW}			
 		]]>
 	</select>
+	
 
 
-	<insert id="insertNewMember" parameterType="memberVO">
+	<insert id="insertMember" parameterType="memberVO">
   <![CDATA[
     	insert into User_Info(user_ID,user_PW,user_Nickname,
                               user_Birth,user_Gender,user_City,
-                              user_Email,user_Phone,user_Level,
-                                     user_Profile)
+                              user_Email,user_Phone)
                                     
 	   				   values(#{user_ID},#{user_PW},#{user_Nickname},
                               #{user_Birth},#{user_Gender},#{user_City},
-                              #{user_Email},#{user_Phone},#{user_Level},
-                                    #{user_Profile})
+                              #{user_Email},#{user_Phone})
    ]]>
 	</insert>
+
+	
+
 </mapper>

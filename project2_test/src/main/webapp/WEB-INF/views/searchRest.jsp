@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -87,8 +88,10 @@
 	<nav class="heading">
 		<nav
 			class="navbar navbar-default navbar-expand-lg navbar-dark fixedtop">
-			<a href="../main/main.html"><img src="./nav.png" width="80"
-				height="80" alt=""> <a class="navbar-brand"
+			<a href="../main/main.html">
+			<img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt="">
+			</a>
+			<a class="navbar-brand"
 				href="../main/main.html"> MULTI <br> RESTAURANT
 			</a>
 
@@ -128,8 +131,7 @@
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown">
 						<div class="col-lg-6"></div> <a class href="#" id="navbarDropdown"
-						data-toggle="dropdown"><img src="./login.png" alt="Menu"
-							width="80" height="80" /></a>
+						data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
 						</div>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="../login_join/login.html">로그인</a>
