@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 
 <html lang="UTF-8">
@@ -19,7 +20,7 @@
 
 <body>
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
-        <a href="main.html"><img src="../images/nav.png" width="80" height="80" alt="">
+        <a href="main.html"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
             <a class="navbar-brand" href="main.html"> MULTI <br> RESTAURANT</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,7 +39,7 @@
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 메뉴</strong> </a>
+                        <a class="nav-link" href="reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 테마</strong> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>최근 후기</strong> </a>
@@ -62,7 +63,7 @@
                 <li class="nav-item dropdown">
                     <div class="col-lg-2"></div>
                     <a class href="#" id="navbarDropdown"
-                    data-toggle="dropdown"><img src="../images/login.png" alt="Menu" width="80" height="80" /></a>
+                    data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="../login_join/login.html">로그인</a>

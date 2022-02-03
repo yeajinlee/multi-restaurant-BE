@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +61,7 @@ width:200px;
 <body>
 
   <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixedtop" >
-    <a href="../main/main.html"><img src="./nav.png" width="80" height="80" alt="">
+    <a href="../main/main.html"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
         <a class="navbar-brand" href="../main/main.html"> MULTI <br> RESTAURANT</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -99,7 +100,8 @@ width:200px;
             <li class="nav-item dropdown">
                 <div class="col-lg-6"></div>
                 <a class href="#" id="navbarDropdown"
-                data-toggle="dropdown"><img src="./login.png" alt="Menu" width="80" height="80" /></a>
+                data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png"
+						alt="Menu" width="80" height="80" /></a>
             </div>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="../login_join/login.html">로그인</a>
@@ -128,10 +130,10 @@ width:200px;
             </div>
      
             <div class="content">
-              <h3><a class="title" href="../detail/detail.html"><c:set var="i" value="${i + 1}"/>${i}.${spec.rest_name}</a></h3>
+              <h3><a class="title" href="${pageContext.request.contextPath}/reviewList.do?rest_NO=${spec.rest_No}"><c:set var="i" value="${i + 1}"/>${i}.${spec.rest_name}</a></h3>
                 <p class="sub">${spec.review_text}</p>
                 <br><br>
-                               <a href="../detail/detail.html" class="Nbtn"> <i class="boxy wordy">GO${spec.rest_name}</i></a>
+                               <a href="${pageContext.request.contextPath}/detail.do?rest_NO=${spec.rest_No}" class="Nbtn"> <i class="boxy wordy">GO${spec.rest_name}</i></a>
             </div>
 
         </div>

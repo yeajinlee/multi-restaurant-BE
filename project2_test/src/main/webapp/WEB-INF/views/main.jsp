@@ -12,6 +12,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="${contextPath}/resources/css/main.css">
+   <style>
+    .btn1{
+	  background-color: rgb(255, 176, 167);
+padding: 5px 20px;
+font-weight:800;
+color: white;
+
+}
+.col{
+left:150px;
+
+}
+
+.main_input{
+padding: 5px;
+
+}
+   </style>
 </head>
 <body>
 
@@ -37,7 +55,7 @@
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reco1.html" style="color:white"><strong>추천 메뉴</strong> </a>
+                             <a class="nav-link" href="${pageContext.request.contextPath}/reconList.do" style="color:white"><strong>추천 테마</strong> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
@@ -78,12 +96,11 @@
                                         placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" /> -->
                                 	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
                                 
-                                </div>
-                                <div class="col-auto">
-                            <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
+                               
+                               <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
                                         type="submit">SEARCH</button></div> -->
-                                <input type="submit" name="search" class="btn1"  value="검색" >
-                         </div></form>
+                                <input type="submit" name="search" class="btn1"  value="SEARCH" >
+                        </div></form>
                             </div>
                         </div>
                     </div>
