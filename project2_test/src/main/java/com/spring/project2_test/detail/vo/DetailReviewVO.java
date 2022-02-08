@@ -2,48 +2,25 @@ package com.spring.project2_test.detail.vo;
 
 import java.sql.Date;
 
-public class ReviewVO {
-	private String user_ID;
-	private String user_Nickname;
-	private int user_Level;
-	private String user_Profile;
+public class DetailReviewVO {
 	private int review_NO;
+	private String user_ID;
 	private int review_Scope;
 	private String review_Text;
 	private int rest_NO;
 	private Date review_Date;
-	private String images;
 	
-	
-	public String getUser_ID() {
-		return user_ID;
-	}
-	public void setUser_ID(String user_ID) {
-		this.user_ID = user_ID;
-	}
-	public String getUser_Nickname() {
-		return user_Nickname;
-	}
-	public void setUser_Nickname(String user_Nickname) {
-		this.user_Nickname = user_Nickname;
-	}
-	public int getUser_Level() {
-		return user_Level;
-	}
-	public void setUser_Level(int user_Level) {
-		this.user_Level = user_Level;
-	}
-	public String getUser_Profile() {
-		return user_Profile;
-	}
-	public void setUser_Profile(String user_Profile) {
-		this.user_Profile = user_Profile;
-	}
 	public int getReview_NO() {
 		return review_NO;
 	}
 	public void setReview_NO(int review_NO) {
 		this.review_NO = review_NO;
+	}
+	public String getUser_ID() {
+		return user_ID;
+	}
+	public void setUser_ID(String user_ID) {
+		this.user_ID = user_ID;
 	}
 	public int getReview_Scope() {
 		return review_Scope;
@@ -69,13 +46,6 @@ public class ReviewVO {
 	public void setReview_Date(Date review_Date) {
 		this.review_Date = review_Date;
 	}
-	public String getImages() {
-		return images;
-	}
-	public void setImages(String images) {
-		this.images = images;
-	}
-	
 	
 	
 }

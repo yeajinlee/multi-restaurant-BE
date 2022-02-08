@@ -117,7 +117,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="d-grid"><a class="btn btn-outline-primary" href="${contextPath}/detail/${rest.rest_NO }.do">보러가기</a></div>
+                            <div class="d-grid"><a class="btn btn-outline-primary" href="${contextPath}/detail.do?rest_NO=${rest.rest_NO}">보러가기</a></div>
                         </div>
                     </div>
                 </div>

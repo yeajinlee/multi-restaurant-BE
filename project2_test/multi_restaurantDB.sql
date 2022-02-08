@@ -220,10 +220,13 @@ SELECT * FROM rest_tag;
 SELECT * FROM review_info where mod(review_no,2)=0;
 SELECT * FROM review_info where mod(review_no,2)=1;
 
-select c.review_no, c.user_id, c.review_text, c.review_scope, c.review_date, c.user_nickname, c.user_profile, d.img_filename 
-from (SELECT a.review_no, a.user_id, a.review_text, a.review_scope, a.review_date, a.rest_no, b.user_nickname, b.user_level, b.user_profile FROM review_info a left outer join user_info b on a.user_id = b.user_id where mod(review_no,1)=0) c left outer join reviewimg_info d on c.review_no = d.review_no;
 
-select c.review_no, c.user_id, c.review_text, c.review_scope, c.review_date, c.user_nickname, c.user_profile, d.img_filename from (SELECT a.review_no, a.user_id, a.review_text, a.review_scope, a.review_date, a.rest_no, b.user_nickname, b.user_level, b.user_profile FROM review_info a left outer join user_info b on a.user_id = b.user_id where mod(review_no,2)=0) c left outer join reviewimg_info d on c.review_no = d.review_no;
+-- 리뷰페이지 Odd
+select a.rest_name, b.* from restaurant_info a right outer join profile_review b on b.rest_no = a.rest_no where mod(review_no,2)=1 order by review_no desc;
+-- 리뷰페이지 Even
+select a.rest_name, b.* from restaurant_info a right outer join profile_review b on b.rest_no = a.rest_no where mod(review_no,2)=0 order by review_no desc;
+
+
 
 
 -- 뷰 생성: 프로필정보+리뷰정보 매치 (디테일페이지 리뷰영역)
@@ -262,8 +265,25 @@ select * from review_img;
 
 -- 메인용 식당정보+이미지
 select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
-from (select row_number() over(partition by rest_no order by img_fileno) as rnum, reviewimg_info.* from reviewimg_info) a 
-left outer join restaurant_info b on a.rest_no = b.rest_no where rnum = 1 and rownum < 7;
+from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1 and rownum < 7;
+
+
+-- 디테일페이지 사이드바 리스트 무작위로 레코드 5개 추출
+select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
+from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+left outer join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6;
+
+-- 신규개업 페이지
+
+
+select * from restaurant_info a left outer join (select rest_NO, count(*) as review_cnt from review_info group by rest_NO) b on a.rest_no = b.rest_no;
+
+select * from restaurant_info order by rest_opendate desc;
+
+
+
+
 
 DROP TABLE rest_tag;
 DROP TABLE tag_info;
@@ -280,6 +300,17 @@ drop sequence reviewIMG_seq;
 drop sequence tag_seq;
 
 
+delete from reviewimg_info where rest_no = 0;
+commit;
+
+select nvl(max(review_NO),0) + 1 from review_info;
+select img_FileName from reviewimg_info where rest_NO = 1;
+
+select rest_NO from review_info where review_no = (select max(review_NO) from review_info);
+select img_FileName from reviewimg_info where rest_NO = 1;
+
+select count(*) from review_info where rest_NO = 3;
 
 
-
+select * from restaurant_info;
+select * from reviewimg_info;

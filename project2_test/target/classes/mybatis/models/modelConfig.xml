@@ -8,6 +8,7 @@
     <typeAlias type="com.spring.project2_test.detail.vo.DetailVO" alias="detailVO" />
     <typeAlias type="com.spring.project2_test.detail.vo.ImageVO" alias="imageVO" />
     <typeAlias type="com.spring.project2_test.detail.vo.ReviewVO" alias="reviewVO" />
+    <typeAlias type="com.spring.project2_test.detail.vo.DetailReviewVO" alias="detailReviewVO" />
     <typeAlias type="com.spring.project2_test.reviewList.vo.ReviewListVO" alias="reviewListVO" />
     <typeAlias type="com.spring.project2_test.search.vo.SearchVO" alias="searchVO" />
     <typeAlias type="com.spring.project2_test.search.vo.ImageFileVO" alias="imageFileVO" />
