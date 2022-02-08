@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.project2_test.detail.service.DetailService;
+import com.spring.project2_test.detail.vo.DetailReviewVO;
 import com.spring.project2_test.detail.vo.DetailVO;
 import com.spring.project2_test.detail.vo.ImageVO;
 import com.spring.project2_test.member.vo.MemberVO;
@@ -75,62 +76,59 @@ public class DetailControllerImpl implements DetailController {
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		String img_FileName = null;
+		
 		
 		Map<String, Object> reviewMap = new HashMap<String, Object>();
+		
 		Enumeration en = multipartRequest.getParameterNames();
 		while(en.hasMoreElements()) {
 			String key = (String) en.nextElement();
 			String value = multipartRequest.getParameter(key);
 			reviewMap.put(key, value);
 		}
+		String img_FileName = addImages(multipartRequest);
 		
 //		HttpSession sess = multipartRequest.getSession();
 //		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
 //		String user_ID = memberVO.getUser_ID();
 //		reviewMap.put("user_ID", user_ID);
+		reviewMap.put("img_FileName", img_FileName);
 		
 		
-		List<String> imgNameList = addImages(multipartRequest);
-		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
-		if(imgNameList != null && imgNameList.size() != 0) {
-			for (String imgName : imgNameList) {
-				ImageVO imageVO = new ImageVO();
-				imageVO.setImg_FileName(imgName);
-				imgFileList.add(imageVO);
-			}
-			reviewMap.put("imgFileList", imgFileList);
-		}
+//		List<String> imgNameList = addImages(multipartRequest);
+//		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
+//		if(imgNameList != null && imgNameList.size() != 0) {
+//			for (String imgName : imgNameList) {
+//				ImageVO imageVO = new ImageVO();
+//				imageVO.setImg_FileName(imgName);
+//				imgFileList.add(imageVO);
+//			}
+//			reviewMap.put("imgFileList", imgFileList);
+//		}
 		
 //		int rest_NO = detailService.selectRestNO();
 		try {
 			int review_NO = detailService.writeReview(reviewMap);
-			if(imgFileList != null && imgFileList.size() != 0) {
-				for(ImageVO imageVO : imgFileList) {
-					img_FileName = imageVO.getImg_FileName();
-					File srcFile = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
-					File desDir = new File(REVIEW_IMG_REPO);
-					FileUtils.moveToDirectory(srcFile, desDir, true);
-				}
+			if(img_FileName != null && img_FileName.length() != 0) {
+				File scrFile = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
+				File destDir = new File(REVIEW_IMG_REPO + "\\" + review_NO);
+				FileUtils.moveFileToDirectory(scrFile, destDir, false);
 			}
 			msg = "<script>";
 			msg += "alert('리뷰 작성 완료');";
-//			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
-			msg += "history.go(-1)";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() + "';";
+//			msg += "history.go(-1)";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			if(imgFileList != null && imgFileList.size() != 0) {
-				for(ImageVO imageVO : imgFileList) {
-					img_FileName = imageVO.getImg_FileName();
-					File src = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
-					src.delete();
-				} 
-			}
+	
+			File srcFile = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
+			srcFile.delete();
+				
 			msg = "<script>";
 			msg += "alert('서버 점검중입니다.')";
-//			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
-			msg += "history.go(-1)";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() + "';";
+//			msg += "history.go(-1)";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -140,9 +138,27 @@ public class DetailControllerImpl implements DetailController {
 		
 		
 	}
+		
+	private String addImages(MultipartHttpServletRequest multipartRequest) throws Exception {
+		String img_FileName = null;
+		Iterator<String> imgNames = multipartRequest.getFileNames();
+		while (imgNames.hasNext()) {
+			String imgName = imgNames.next();
+			MultipartFile mpf = multipartRequest.getFile(imgName);
+			img_FileName = mpf.getOriginalFilename();
+			File file = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
+			if (mpf.getSize() != 0) {
+				if(!file.exists()) {
+					mpf.transferTo(new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName));
+				}
+			}
+		}
+		return img_FileName;
+	}
 
 
-	private List<String> addImages(MultipartHttpServletRequest multipartRequest) throws Exception{
+/*
+	private List addImages(MultipartHttpServletRequest multipartRequest) throws Exception{
 		List<String> imgFileList = new ArrayList<String>();
 		Iterator<String> imgFileNames = multipartRequest.getFileNames();
 		while (imgFileNames.hasNext()) {
@@ -160,7 +176,10 @@ public class DetailControllerImpl implements DetailController {
 		}
 		return imgFileList;
 	}
-
+*/
+	
+	
+	
 	@Override
 	@RequestMapping(value="/deleteReview.do", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
@@ -173,17 +192,18 @@ public class DetailControllerImpl implements DetailController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			detailService.deleteReview(review_NO);
-//			File destDir = new File(REVIEW_IMG_REPO + "\\" + imgFileName);
+			File destDir = new File(REVIEW_IMG_REPO + "\\" + review_NO);
+			FileUtils.deleteDirectory(destDir);
 			
 			msg = "<script>";
 			msg += "alert('글 삭제');";
-			msg += "location.href='" + request.getContextPath() + "/main.do';";
+			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() + "';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			msg = "<script>";
 			msg += "alert('다시 시도하세요');";
-			msg += "location.href='" + request.getContextPath() + "/main.do';";
+			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() + "';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -195,11 +215,10 @@ public class DetailControllerImpl implements DetailController {
 	@RequestMapping(value="/updateReview.do", method={RequestMethod.POST, RequestMethod.GET})
 	public ResponseEntity updateReview(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
-		String msg;
-		String img_FileName = null;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		String msg;
 		Map<String, Object> reviewMap = new HashMap<String, Object>();
 		Enumeration en = multipartRequest.getParameterNames();
 		while(en.hasMoreElements()) {
@@ -208,43 +227,30 @@ public class DetailControllerImpl implements DetailController {
 			reviewMap.put(name, value);
 		}
 		
-		List<String> imgNameList = addImages(multipartRequest);
-		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
-		if(imgNameList != null && imgNameList.size() != 0) {
-			for (String imgName : imgNameList) {
-				ImageVO imageVO = new ImageVO();
-				imageVO.setImg_FileName(imgName);
-				imgFileList.add(imageVO);
-			}
-			reviewMap.put("imgFileList", imgFileList);
-		}
+		String img_FileName = addImages(multipartRequest);
+		reviewMap.put("img_FileName", img_FileName);
+		int review_NO = (Integer) reviewMap.get("review_NO");
 		
 		try {
 			detailService.updateReview(reviewMap);
-			if(imgFileList != null && imgFileList.size() != 0) {
-				for(ImageVO imageVO : imgFileList) {
-					img_FileName = imageVO.getImg_FileName();
-					File srcFile = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
-					File desDir = new File(REVIEW_IMG_REPO + "\\" + img_FileName);
-					FileUtils.moveToDirectory(srcFile, desDir, true);
-				}
+			if(img_FileName != null && img_FileName.length() != 0) {
+				File srcFile = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
+				File destDir = new File(REVIEW_IMG_REPO + "\\" + review_NO);
+				FileUtils.moveToDirectory(srcFile, destDir, true);
+				
 			}
 			msg = "<script>";
 			msg += "alert('수정 완료');";
-			msg += "location.href='" + multipartRequest.getContextPath() + "/main.do';";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() + "';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			if(imgFileList != null && imgFileList.size() != 0) {
-				for(ImageVO imageVO : imgFileList) {
-					img_FileName = imageVO.getImg_FileName();
-					File src = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
-					src.delete();
-				} 
-			}
+			File src = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
+			src.delete();
+				
 			msg = "<script>";
 			msg += "alert('서버 점검중입니다.')";
-			msg += "location.href='" + multipartRequest.getContextPath() + "/main.do';";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() + "';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
