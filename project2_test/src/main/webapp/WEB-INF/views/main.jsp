@@ -13,6 +13,24 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="${contextPath}/resources/css/main.css">
 </head>
+<style>
+    .btn1{
+	  background-color: rgb(255, 176, 167);
+padding: 5px 20px;
+font-weight:800;
+color: white;
+
+}
+.col{
+left:150px;
+
+}
+
+.main_input{
+padding: 5px;
+
+}
+   </style>
 <body>
 
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
@@ -37,7 +55,7 @@
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reco1.html" style="color:white"><strong>추천 메뉴</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reconList.do" style="color:white"><strong>추천 메뉴</strong> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
@@ -56,8 +74,16 @@
                     data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
-                    <a class="dropdown-item" href="../login_join/join.html">회원가입</a>
+                
+                    <c:if test="${member == null}">
+                    	<a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
+                    	<a class="dropdown-item" href="${contextPath}/joinForm.do">회원가입</a>
+                    </c:if>
+                    
+                    <c:if test="${member != null}">
+                    	<a class="dropdown-item" href="${contextPath}/logout.do">로그아웃</a>
+                    	<a class="dropdown-item" href="${contextPath}/mypage.do">마이페이지</a>
+                    </c:if>
                 </div>
             </div>
             </ul>
@@ -78,8 +104,8 @@
                                         placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" /> -->
                                 	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
                                 
-                                </div>
-                                <div class="col-auto">
+                               
+            
                             <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
                                         type="submit">SEARCH</button></div> -->
                                 <input type="submit" name="search" class="btn1"  value="검색" >

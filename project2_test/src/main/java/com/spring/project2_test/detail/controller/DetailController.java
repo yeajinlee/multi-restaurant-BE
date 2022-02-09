@@ -22,4 +22,5 @@ public interface DetailController {
 	public ResponseEntity deleteReview(@RequestParam("rest_NO") int rest_NO, DetailReviewVO detailReviewVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity updateReview(DetailReviewVO detailReviewVO, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
 }

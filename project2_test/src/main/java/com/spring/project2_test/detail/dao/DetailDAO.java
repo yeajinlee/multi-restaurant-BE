@@ -22,17 +22,14 @@ public interface DetailDAO {
 
 	public List selectSideList() throws DataAccessException;
 
-//	public int insertNewReview(Map reviewMap) throws DataAccessException;
-
 	public void insertNewImage(Map reviewMap) throws DataAccessException;
-
-//	public int selectRestNO() throws DataAccessException;
 
 	public void deleteReview(DetailReviewVO detailReviewVO) throws DataAccessException;
 
 	public void updateReview(DetailReviewVO detailReviewVO) throws DataAccessException;
 
 	public void insertNewReview(DetailReviewVO detailReviewVO) throws DataAccessException;
+
 
 	
 

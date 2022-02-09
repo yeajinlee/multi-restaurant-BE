@@ -34,7 +34,9 @@ import com.spring.project2_test.member.vo.MemberVO;
 
 @Controller("detailController")
 public class DetailControllerImpl implements DetailController {
+
 	private static final String REVIEW_IMG_REPO = "C:\\project\\multi_restaurant\\multi_restaurant\\project2_test\\src\\main\\webapp\\resources\\image";
+
 	
 	@Autowired
 	private DetailService detailService;
@@ -67,6 +69,7 @@ public class DetailControllerImpl implements DetailController {
 	@RequestMapping(value="/addNewReview.do", method= {RequestMethod.POST, RequestMethod.GET}, headers = ("content-type=multipart/*"))
 	@ResponseBody
 	public ResponseEntity writeReview(DetailReviewVO detailReviewVO, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -78,13 +81,16 @@ public class DetailControllerImpl implements DetailController {
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		String img_FileName = null;
 		
+
 		detailReviewVO.setUser_ID("a0001");
+
 //		HttpSession sess = multipartRequest.getSession();
 //		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
 //		String user_ID = memberVO.getUser_ID();
 //		reviewMap.put("user_ID", user_ID);
 		
 		
+
 //		List<String> imgNameList = addImages(multipartRequest);
 //		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
 //		if(imgNameList != null && imgNameList.size() != 0) {
@@ -125,6 +131,7 @@ public class DetailControllerImpl implements DetailController {
 			msg = "<script>";
 			msg += "alert('서버 점검중입니다.')";
 			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailReviewVO.getRest_NO() +"';";
+
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -158,6 +165,7 @@ public class DetailControllerImpl implements DetailController {
 	@Override
 	@RequestMapping(value="/deleteReview.do", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
+
 	public ResponseEntity deleteReview(@RequestParam("rest_NO") int rest_NO, DetailReviewVO detailReviewVO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
@@ -165,7 +173,6 @@ public class DetailControllerImpl implements DetailController {
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		
 		try {
 			
 			detailService.deleteReview(detailReviewVO);
@@ -174,6 +181,7 @@ public class DetailControllerImpl implements DetailController {
 			msg = "<script>";
 			msg += "alert('리뷰 삭제 완료');";
 			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
+
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -237,6 +245,7 @@ public class DetailControllerImpl implements DetailController {
 			msg = "<script>";
 			msg += "alert('서버 점검중입니다.')";
 			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailReviewVO.getRest_NO() +"';";
+
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

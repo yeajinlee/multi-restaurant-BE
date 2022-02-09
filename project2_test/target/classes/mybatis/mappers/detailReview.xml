@@ -44,6 +44,7 @@
 			]]>
 		</select>
 		<delete id="deleteReview" parameterType="detailReviewVO">
+
 			<![CDATA[
 				delete from review_info where review_NO = #{review_NO}
 			]]>

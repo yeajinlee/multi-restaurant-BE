@@ -212,7 +212,7 @@ commit;
 SELECT * FROM user_info;
 SELECT * FROM likerest_info;
 select * from restaurant_info;
-SELECT * FROM review_info;
+SELECT * FROM review_info order by review_no desc;
 SELECT * FROM reviewimg_info;
 SELECT * FROM tag_info;
 SELECT * FROM rest_tag;

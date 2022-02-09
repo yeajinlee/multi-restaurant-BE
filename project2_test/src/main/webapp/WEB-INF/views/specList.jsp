@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,6 +21,9 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=091ccaf6ebd3685465c663c2218360f5"></script>
+  <link rel="stylesheet"  href="${contextPath}/resources/css2/style.css"
+	type="text/css">
   <script>
 	$(function() {
 		$(".about").slice(0, 2).show();
@@ -33,7 +38,14 @@
 		});
 	});
 </script>
+	
 <style>
+
+.content p{
+margin-buttom:120px;
+ font-weight: bolder;
+}
+
 .about {
 	display: none;
 }
@@ -54,13 +66,12 @@ width:200px;
 }
 </style>
     <title>Document</title>
-    <link rel="stylesheet" href="resources/css2/style.css"
-	type="text/css">
+  
 </head>
 <body>
 
   <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixedtop" >
-    <a href="../main/main.html"><img src="./nav.png" width="80" height="80" alt="">
+    <a href="../main/main.html"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
         <a class="navbar-brand" href="../main/main.html"> MULTI <br> RESTAURANT</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -99,7 +110,8 @@ width:200px;
             <li class="nav-item dropdown">
                 <div class="col-lg-6"></div>
                 <a class href="#" id="navbarDropdown"
-                data-toggle="dropdown"><img src="./login.png" alt="Menu" width="80" height="80" /></a>
+                data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png"
+						alt="Menu" width="80" height="80" /></a>
             </div>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="../login_join/login.html">로그인</a>
@@ -124,14 +136,15 @@ width:200px;
   
             <div class="image">
                 <a href="../detail/detail.html">
-                <img src="${pageContext.request.contextPath}/download?fileName=${spec.rest_fileName}" alt="이미지">   </a>
+              <img src="${contextPath}/resources/image/${spec.rest_fileName}" alt="이미지">   </a>
             </div>
      
             <div class="content">
-              <h3><a class="title" href="../detail/detail.html"><c:set var="i" value="${i + 1}"/>${i}.${spec.rest_name}</a></h3>
+              <h4><a class="title" href="${pageContext.request.contextPath}/reviewList.do?rest_NO=${spec.rest_No}"><c:set var="i" value="${i + 1}"/>${i}.${spec.rest_name}</a></h4>
+                <p>${spec.rest_Address}</p>
                 <p class="sub">${spec.review_text}</p>
                 <br><br>
-                               <a href="../detail/detail.html" class="Nbtn"> <i class="boxy wordy">GO${spec.rest_name}</i></a>
+                               <a href="${pageContext.request.contextPath}/detail.do?rest_NO=${spec.rest_No}" class="Nbtn"> <i class="boxy wordy">GO${spec.rest_name}</i></a>
             </div>
 
         </div>
@@ -141,13 +154,11 @@ width:200px;
          
     		<div id="loadMore" style="">
 				<a href="#">Load More</a>
-			</div>
+			</div><br>
 
 
-          <div class="map"> <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.390980157256!2d126.98338321450412!3d37.569410079797336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2e8bd68ec11%3A0x6ee78e54814af2d9!2z6rCT64207Iqk7Iuc!5e0!3m2!1sko!2skr!4v1641207292048!5m2!1sko!2skr"
-            width="950" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><br>
-         
+          <div id="map" style="width:750px;height:300px;"></div><br>
+        
          
             <footer>
               <div class="column1">
@@ -182,4 +193,58 @@ width:200px;
               </div>
           </footer>       
 </body>
+<script>
+var coffee = "coffee";
+var meat = "meat";
+
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.514215606406374, 127.06727845927539), // 지도의 중심좌표
+        level: 6 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 title 객체 배열입니다 
+
+var positions = [
+    {
+        title: '카카오', 
+        latlng: new kakao.maps.LatLng(37.514215106406374, 127.06727845927539)
+    },
+    {
+        title: '생태연못', 
+        latlng: new kakao.maps.LatLng(37.514215606406344, 127.06727845927539)
+    },
+    {
+        title: '텃밭', 
+        latlng: new kakao.maps.LatLng(37.514215606406344, 127.06722645927539)
+    },
+    {
+        title: '근린공원',
+        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+    }
+];
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
+</script>
 </html>

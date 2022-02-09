@@ -70,6 +70,7 @@ public class DetailDAOImpl implements DetailDAO{
 	public void insertNewReview(DetailReviewVO detailReviewVO) throws DataAccessException {
 		sqlSession.insert("mappers.detailReview.addNewReview", detailReviewVO);
 		
+
 	}
 	
 	private int selectNewReviewNO() {
@@ -92,14 +93,18 @@ public class DetailDAOImpl implements DetailDAO{
 //	}
 	
 	@Override
+
 	public void deleteReview(DetailReviewVO detailReviewVO) throws DataAccessException {
 		sqlSession.delete("mappers.detailReview.deleteReview", detailReviewVO);
+
 		
 	}
 	
 	@Override
+
 	public void updateReview(DetailReviewVO detailReviewVO) throws DataAccessException {
 		sqlSession.update("mappers.detailReview.updateReview", detailReviewVO);
+
 		
 	}
 }
