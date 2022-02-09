@@ -98,7 +98,7 @@
 					<p>등록된 리뷰 사진이 없습니다.</p>
 				</c:when>
 				<c:otherwise>
-					<c:forEach var="detailImg" items="${detailImg}" varStatus="cnt">
+					<c:forEach var="detailImg" items="${detailImg}">
 						<span>
 							<img
 							src="${pageContext.request.contextPath}/resources/image/${detailImg.img_FileName}"
@@ -213,11 +213,11 @@
                         <tr>
                         	<td>
                         		<p id="write_title"> <span id="rest_name">${detail.rest_Name }</span> 어떠셨나요?</p>
-                        		<input type="text" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO">
+                        		<input type="number" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO">
                         		<div  id="form_review_NO"></div>
                         	</td>
                         </tr>
-                        <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr>
+                        <%-- <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr> --%>
                         <tr><td><p id="write_star">
                             <i class="fas fa-star" id="star1" onclick="clickStar(this.id)"></i>
                             <i class="fas fa-star" id="star2" onclick="clickStar(this.id)"></i>
@@ -280,8 +280,8 @@
 					</div>
 
 					<div class="modal" id="review_${review.review_NO }">
-						<input type="text" id="review_NO" name="review_NO" style="display: none" value="${review.review_NO }">
-						<input type="text" id="review_rest_NO" name="rest_NO" style="display: none" value="${review.rest_NO }">
+						<input type="number" id="review_NO" name="review_NO" style="display: none" value="${review.review_NO }">
+						<input type="number" id="review_rest_NO" name="rest_NO" style="display: none" value="${review.rest_NO }">
 						<span class="close cursor"
 							onclick="closeReviewModal('review_${review.review_NO }')">&times;</span>
 						<div class="review_modal_content">
@@ -466,7 +466,8 @@
         
         function delete_review() {
         	var review_NO = document.getElementById('review_NO').value;
-        	location.href="${contextPath}/deleteReview.do?review_NO="+review_NO;
+        	var rest_NO = document.getElementById('review_rest_NO').value;
+        	location.href="${contextPath}/deleteReview.do?review_NO=" + review_NO + "&rest_NO=" + rest_NO;
         }
         
         function update_review_form(n) {
@@ -474,7 +475,7 @@
         	document.getElementById("write_modal").style.display = "block";
         	document.getElementById("add_review").style.display = "none";
         	document.getElementById("update_review").style.display = "block";
-        	document.getElementById("form_review_NO").innerHTML += '<input type="text" name="review_NO" value="'+ n + '">';
+        	document.getElementById("form_review_NO").innerHTML += '<input type="number" name="review_NO" value="'+ n + '">';
         	document.detailReviewForm.action = "${contextPath}/updateReview.do";
         	var review_contents = document.getElementById("review_contents").innerText;
         	document.getElementById("wrtie_review").innerText = review_contents;

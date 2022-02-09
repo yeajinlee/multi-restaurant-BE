@@ -43,16 +43,16 @@
 				select rest_NO from review_info where review_no = (select max(review_NO) from review_info)
 			]]>
 		</select>
-		<delete id="deleteReview" parameterType="int">
+		<delete id="deleteReview" parameterType="detailReviewVO">
 			<![CDATA[
 				delete from review_info where review_NO = #{review_NO}
 			]]>
 		</delete>
 		<update id="updateReview" parameterType="java.util.Map">
 			update review_info set review_Scope=#{review_Scope}, review_Text = #{review_Text}
-			<if test="imgFileName != '' and imgFileList != null">
+			<!-- <if test="imgFileName != '' and imgFileList != null">
 				, imgFileName = #{imgFileName}
-			</if>
+			</if> -->
 			where review_NO = #{review_NO}
 		</update>
 	</mapper>

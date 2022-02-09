@@ -50,13 +50,20 @@ public class DetailServiceImpl implements DetailService{
 		return detailSideList;
 	}
 	
+//	@Override
+//	public int writeReview(Map reviewMap) throws Exception {
+//		int review_NO = detailDAO.insertNewReview(reviewMap);
+//		reviewMap.put("review_NO", review_NO);
+//		detailDAO.insertNewImage(reviewMap);
+//		return review_NO;
+//	}
+	
 	@Override
-	public int writeReview(Map reviewMap) throws Exception {
-		int review_NO = detailDAO.insertNewReview(reviewMap);
-		reviewMap.put("review_NO", review_NO);
-		detailDAO.insertNewImage(reviewMap);
-		return review_NO;
+	public void addNewReview(DetailReviewVO detailReviewVO) throws Exception {
+		detailDAO.insertNewReview(detailReviewVO);
 	}
+	
+	
 	
 //	@Override
 //	public int selectRestNO() throws Exception {
@@ -65,14 +72,14 @@ public class DetailServiceImpl implements DetailService{
 //	}
 	
 	@Override
-	public void deleteReview(int review_NO) throws Exception {
-		detailDAO.deleteReview(review_NO);
+	public void deleteReview(DetailReviewVO detailReviewVO) throws Exception {
+		detailDAO.deleteReview(detailReviewVO);
 		
 	}
 	
 	@Override
-	public void updateReview(Map reviewMap) throws Exception {
-		detailDAO.updateReview(reviewMap);
+	public void updateReview(DetailReviewVO detailReviewVO) throws Exception {
+		detailDAO.updateReview(detailReviewVO);
 		
 	}
 	
