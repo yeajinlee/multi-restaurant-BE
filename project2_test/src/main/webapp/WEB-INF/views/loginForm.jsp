@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lnag="en">
 
@@ -9,30 +10,31 @@
     <meta name="viewport" content="width=device-width,hight=device-hight, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="resources/css/login_join.css" type="text/css">
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="resources/js/jquery-3.6.0.min.js"></script>
 
-<!-- <script>
+<script>
 	$(function() {
 		$("#btnLogin").click(function() {
-			userid = $("#userid").val();
-			var passwd = $("#passwd").val();
+			userid = $("#user_ID").val();
+			var passwd = $("#user_PW").val();
 			if (userid == "") {
 				alert("아이디를 입력하세요");
-				$("#userid").focus(); //입력포커스 이동
+				/* history.back(); */
+				$("#user_ID").focus(); //입력포커스 이동
 
 				return; //함수 종료
 			}
 			if (passwd == "") {
 				alert("비밀번호를 입력하세요");
-				$("#passwd").focus();
+				$("#user_PW").focus();
 				return;
 			}
 			//폼 내부의 데이터를 전송할 주소
-			document.form1.action = "${path}/member/login.do";
-			document.form1.submit(); //제출
+			document.form.action = "${path}/member/login.do";
+			document.form.submit(); //제출
 		});
 	});
-</script> -->
+</script>
 
 
 </head>
@@ -49,7 +51,6 @@
 
         <!-- content-->
         <div id="content">
-        <form>
             <!-- ID -->
             <div>
                 <br>
@@ -81,15 +82,15 @@
                     <span>로그인</span>
                 </button>
                 <c:if test="${msg == false}">
-					<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
+					<p style="color: red;">아이디 또는 비밀번호가 일치하지 않습니다.</p>
 				</c:if>
-                <c:if test="${message == 'error'}">
+                <%--<c:if test="${message == 'error'}">
                                 <div style="color:red;"> 아이디 또는 비밀번호가 일치하지 않습니다.
                                 </div>
                 </c:if>
                 <c:if test="${!empty LOGIN_EXCEPTION}">
     				<p>${LOGIN_EXCEPTION}</p>
-				</c:if>
+				</c:if> --%>
             </div>
             
 
@@ -99,14 +100,13 @@
                 <a href="${pageContext.request.contextPath}/joinForm.do" target="_self"><h4>회원가입</h4></a>
 
             </div>
-        </form>
         </div>
         <!-- content-->
 
     </div>
     <!-- wrapper -->
     </form>
-    <script src="join_js.js"></script>
+    <script src="resources/js/join_js.js"></script>
     
 </body>
 

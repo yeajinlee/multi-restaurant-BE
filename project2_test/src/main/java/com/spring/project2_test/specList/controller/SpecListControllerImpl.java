@@ -31,7 +31,9 @@ public class SpecListControllerImpl implements SpecListController{
 	public ModelAndView specList(@RequestParam("rest_theme")String rest_theme, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println(rest_theme);
+		
 		String viewName= (String) request.getAttribute("viewName");
+		System.out.println(viewName);
 		List<SpecListVO> specList = specListService.specRest(rest_theme);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("specList",specList);

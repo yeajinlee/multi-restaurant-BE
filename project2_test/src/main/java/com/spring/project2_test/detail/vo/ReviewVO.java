@@ -14,6 +14,7 @@ public class ReviewVO {
 	private Date review_Date;
 	private String images;
 	
+	
 	public String getUser_ID() {
 		return user_ID;
 	}
@@ -74,6 +75,7 @@ public class ReviewVO {
 	public void setImages(String images) {
 		this.images = images;
 	}
+	
 	
 	
 }

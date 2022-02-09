@@ -60,13 +60,13 @@
 							</div>
 					</li>
 					<li class="nav-item"><a class="nav-link"
-						href="../main/reco1.html" style="color: white"><strong>&nbsp;&nbsp;&nbsp;추천
+						href="${contextPath}/reconList.do" style="color: white"><strong>&nbsp;&nbsp;&nbsp;추천
 								메뉴</strong> </a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${contextPath}/reviewList.do" style="color: white"><strong>최근
 								후기</strong> </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="../newList/newList.html" style="color: white"><strong>신규
+						href="${contextPath}/newList.do" style="color: white"><strong>신규
 								개업</strong> </a></li>
 				</ul>
 				<form class="d-flex">
@@ -79,7 +79,8 @@
 
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
-					<div class="col-lg-6"></div> <a class href="#" id="navbarDropdown"
+					<div class="col-lg-6"></div>
+					<a class href="#" id="navbarDropdown"
 					data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png"
 						alt="Menu" width="80" height="80" /></a>
 					</div>
@@ -179,39 +180,20 @@
 		<div class="recomm">
 			<table>
 				<th>주변 추천</th>
-				<tr>
-					<td><a href="../detail/detail.html"><img
-							src="${contextPath}/resources/image/pizza.jpg" alt=""></a></td>
-					<td><a href="../detail/detail.html">파파존스</a><br>피자, 파스타<br>을지로<br>0만원~0만원대</td>
-					<td><i class="fas fa-star"></i>&nbsp;&nbsp;4.0/5</td>
-				</tr>
-				<tr>
-					<td><img src="${contextPath}/resources/image/kimbap.jpg" alt=""></td>
-					<td><a href="#">김밥천국</a><br>분식<br>광희동<br>0천원~0만원대</td>
-					<td><i class="fas fa-star"></i>&nbsp;&nbsp;3.5/5</td>
-				</tr>
-				<tr>
-					<td><img src="${contextPath}/resources/image/kbbq.jpg" alt=""></td>
-					<td><a href="#">솥뚜껑</a><br>삼겹살<br>종로5가<br>0만원~0만원대</td>
-					<td><i class="fas fa-star"></i>&nbsp;&nbsp;4.7/5</td>
-				</tr>
-				<tr>
-					<td><img src="${contextPath}/resources/image/pasta.jpg" alt=""></td>
-					<td><a href="#">매드포갈릭</a><br>피자, 파스타<br>을지로<br>0만원~0만원대</td>
-					<td><i class="fas fa-star"></i>&nbsp;&nbsp;4.3/5</td>
-				</tr>
-				<tr>
-					<td><img src="${contextPath}/resources/image/burger.jpg" alt=""></td>
-					<td><a href="#">버거킹</a><br>햄버거<br>광희동<br>0만원~0만원대</td>
-					<td><i class="fas fa-star"></i>&nbsp;&nbsp;3.7/5</td>
-				</tr>
+				<c:forEach var="side" items="${detailSideList }">
+					<tr>
+						<td><a href="${contextPath}/detail.do?rest_NO=${side.rest_NO}"><img src="${contextPath}/resources/image/${side.img_Filename}" alt=""></a></td>
+						<td><a href="${contextPath}/detail.do?rest_NO=${side.rest_NO}">${side.rest_Name }</a><br>(theme)<br>${side.rest_Address }<br>0만원~0만원대</td>
+						<td><i class="fas fa-star"></i>&nbsp;&nbsp;${side.rest_Scope}/5</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</aside>
 
 	<section class="review">
 		<div>
-			<span class="review_cnt"><b>리뷰 (35)</b></span>
+			<span class="review_cnt"><b>리뷰 (${reviewCnt})</b></span>
 			<span class="write">
 				<table onclick="openWriteModal()">
 					<tr>
@@ -222,99 +204,127 @@
 			</span>
 		</div>
 		
+		<%-- write review form --%>
 		<div id="write_modal" class="modal">
             <span class="close cursor" onclick="closeWriteModal()">&times;</span>
             <div class="write_content">
-                <form action="#">
+                <form action="${contextPath}/addNewReview.do" enctype="multipart/form-data" method="post" name="detailReviewForm">
                     <table class="write_form">
-                        <tr><td><p id="write_title"> <span id="res_name">${detail.rest_Name }</span> 어떠셨나요?</p></td></tr>
+                        <tr>
+                        	<td>
+                        		<p id="write_title"> <span id="rest_name">${detail.rest_Name }</span> 어떠셨나요?</p>
+                        		<input type="text" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO">
+                        		<div  id="form_review_NO"></div>
+                        	</td>
+                        </tr>
+                        <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr>
                         <tr><td><p id="write_star">
-                            <i class="fas fa-star" id="star1" onclick="clickStar(this.id)"><i class="fas fa-star" id="star2" onclick="clickStar(this.id)"><i class="fas fa-star" id="star3" onclick="clickStar(this.id)"><i class="fas fa-star" id="star4" onclick="clickStar(this.id)"><i class="fas fa-star" id="star5" onclick="clickStar(this.id)">
+                            <i class="fas fa-star" id="star1" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star2" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star3" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star4" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star5" onclick="clickStar(this.id)"></i>
+                           	<input type="text" id="scope" name="review_Scope" style="display:none">
                         </p></td></tr>
-                        <tr><td><textarea name="wrtie_review" id="wrtie_review" placeholder="리뷰를 남겨주세요."></textarea></td></tr>
-                        <tr><td><input type="file" id="add_file"><p id="add_file_btn" onclick="add_file()"><i class="fas fa-plus"></i></p></td></tr>
-                        <tr><td><p id="add_review"><input type="submit" value="리뷰 등록" id="add_review_btn"></p></td></tr>
+                        <tr><td><textarea name="review_Text" id="wrtie_review" placeholder="리뷰를 남겨주세요."></textarea></td></tr>
+                        <%-- <tr><td><input type="file" id="add_file"><p id="add_file_btn" onclick="add_file()"><i class="fas fa-plus"></i></p></td></tr> --%>
+                        <tr><td><input type="file" id="add_file" name="img_FileName"></td></tr>
+                        <tr>
+                        	<td>
+                        		<p id="add_review"><input type="submit" value="리뷰 등록" id="add_review_btn"></p>
+                        		<p id="update_review" style="display: none"><input type="button" value="수정 완료" id="update_review_btn" onclick="update_review()"></p>
+                        	</td>
+                        </tr>
                     </table>
                 </form>
-                
             </div>
         </div>
 		
+		<c:choose>
+			<c:when test="${empty detailReviewList }">
+				<h5 style="margin: 15px;">등록된 리뷰가 없습니다.</h5>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="review" items="${detailReviewList }">
+					<div class="ind_review" id="${review.review_NO }"
+						onclick="openReviewModal(this.id)">
+						<table>
+							<tr>
+								<td><c:choose>
+										<c:when test="${empty review.user_Profile }">
+											<img src="${contextPath}/resources/image/nav.png"
+												class="profile_img">
+										</c:when>
+										<c:otherwise>
+											<img
+												src="${contextPath}/resources/image/${review.user_Profile }"
+												class="profile_img">
+										</c:otherwise>
+									</c:choose></td>
+								<td><span> <span class="username"><b>${review.user_Nickname }</b></span>&nbsp;
+										<span class="level">Lv. ${review.user_Level }</span><br>
+										<span class="star"> <c:forEach begin="1"
+												end="${review.review_Scope }">
+												<i class="fas fa-star"></i>
+											</c:forEach>
+									</span> &nbsp;<span class="star_date">${review.review_Date }</span>
+								</span></td>
+							</tr>
+						</table>
+						<p class="review_contents">${review.review_Text }</p>
+						<p class="re_bottom_img">
+							<c:forTokens items="${review.images }" delims="/" var="img">
+								<img src="${contextPath}/resources/image/${img}" alt="">
+							</c:forTokens>
+						</p>
+					</div>
+
+					<div class="modal" id="review_${review.review_NO }">
+						<input type="text" id="review_NO" name="review_NO" style="display: none" value="${review.review_NO }">
+						<input type="text" id="review_rest_NO" name="rest_NO" style="display: none" value="${review.rest_NO }">
+						<span class="close cursor"
+							onclick="closeReviewModal('review_${review.review_NO }')">&times;</span>
+						<div class="review_modal_content">
+							<div id="modal_profile_img">
+								<c:choose>
+									<c:when test="${empty review.user_Profile }">
+										<img src="${contextPath}/resources/image/nav.png"
+											class="profile_img">
+									</c:when>
+									<c:otherwise>
+										<img
+											src="${contextPath}/resources/image/${review.user_Profile }"
+											class="profile_img">
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div id="modal_profile">
+								<span class="username"><b>${review.user_Nickname }</b></span>
+								<input type="text" style="display:none" id="modal_user_ID" value="${review.user_ID}">
+								<span class="level">&nbsp;Lv. ${review.review_Scope } <br></span>
+								<span class="star"> <c:forEach begin="1"
+										end="${review.review_Scope }">
+										<i class="fas fa-star"></i>
+									</c:forEach>
+								</span> <span class="star_date">&nbsp;${review.review_Date }</span>
+							</div>
+							<div class="review_modal_btn">
+								<input type="button" value="수정" id="review_edit" onclick="update_review_form('${review.review_NO }')">
+								<input type="button" value="삭제" id="review_delete" onclick="check_delete(); delete_review()">
+							</div>
+							<br>
+							<div class="review_contents" id="review_contents">${review.review_Text }</div>
+							<div class="review_modal_img">
+								<c:forTokens items="${review.images }" delims="/" var="img">
+									<img src="${contextPath}/resources/image/${img}" alt="">
+								</c:forTokens>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 		
-		<c:forEach var="review" items="${detailReviewList }">
-			<div class="ind_review" id="${review.review_NO }"onclick="openReviewModal(this.id)">
-				<table>
-					<tr>
-						<td>
-							<c:choose>
-								<c:when test="${empty review.user_Profile }">
-									<img src="${contextPath}/resources/image/nav.png" class="profile_img">
-								</c:when>
-								<c:otherwise>
-									<img src="${contextPath}/resources/image/${review.user_Profile }" class="profile_img">
-								</c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<span>
-								<span class="username"><b>${review.user_Nickname }</b></span>&nbsp;
-								<span class="level">Lv. ${review.user_Level }</span><br>
-									<span  class="star">
-										<c:forEach begin="1" end="${review.review_Scope }">
-											<i class="fas fa-star"></i>
-										</c:forEach>
-									</span>
-								&nbsp;<span class="star_date">${review.review_Date }</span>
-							</span>
-						</td>
-					</tr>
-				</table>
-				<p class="review_contents">${review.review_Text }</p>
-				<p class="re_bottom_img">
-					<c:forTokens items="${review.images }" delims="/" var="img">
-						<img src="${contextPath}/resources/image/${img}" alt="">
-					</c:forTokens>
-				</p>	
-			</div>
-			
-			<div class="modal" id="review_${review.review_NO }">
-            	<span class="close cursor" onclick="closeReviewModal('review_${review.review_NO }')">&times;</span>
-            	<div class="review_modal_content">
-                	<div id="modal_profile_img">
-                		<c:choose>
-							<c:when test="${empty review.user_Profile }">
-								<img src="${contextPath}/resources/image/nav.png" class="profile_img">
-							</c:when>
-							<c:otherwise>
-								<img src="${contextPath}/resources/image/${review.user_Profile }" class="profile_img">
-							</c:otherwise>
-						</c:choose>
-                	</div>
-                	<div id="modal_profile">
-                    	<span class="username"><b>${review.user_Nickname }</b></span>
-                    	<span class="level">&nbsp;Lv. ${review.review_Scope } <br></span>
-                    	<span class="star">
-                        	<c:forEach begin="1" end="${review.review_Scope }">
-								<i class="fas fa-star"></i>
-							</c:forEach>
-                    	</span>
-                    	<span class="star_date">&nbsp;${review.review_Date }</span>
-                	</div>
-                	<div class="review_modal_btn">
-                		<input type="button" value="수정" id="review_edit"><input type="button" value="삭제" id="review_delete" onclick="check_delete()">
-                	</div>
-                	<br>
-                	<div class="review_contents">
-                    	${review.review_Text }
-                	</div>
-               		<div class="review_modal_img">
-                    	<c:forTokens items="${review.images }" delims="/" var="img">
-							<img src="${contextPath}/resources/image/${img}" alt="">
-						</c:forTokens>
-                	</div>
-            	</div>
-        	</div>
-		</c:forEach>
 	</section>
 
 	<footer>
@@ -358,6 +368,7 @@
         // Open the Modal
         function openTopModal(n) {
           document.getElementById("top_modal_"+n).style.display = "block";
+          
         }
         
         // Close the Modal
@@ -365,28 +376,6 @@
           document.getElementById(n).style.display = "none";
         }
         
-        // var slideIndex = 1;
-        // showSlides(slideIndex);
-        
-        // Next/previous controls
-        /* function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
-        
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-          var slides = document.getElementsByClassName("top_modal_slides");
-        
-          if (n > slides.length) {slideIndex = 1} //마지막 슬라이드에서 1번 슬라이드로
-          if (n < 1) {slideIndex = slides.length} //1번 슬라이드에서 마지막 슬라이드로
-          for (var i = 0; i < slides.length; i++) { //다음 슬라이드로 넘어가면 앞 슬라이드의 사진이 안보이도록
-            slides[i].style.display = "none";
-          }
-          slides[slideIndex-1].style.display = "block"; //다음 슬라이드를 띄움
-        } */
         
         function setWishList() {
             if (document.getElementById('heart').className == 'far fa-heart') {
@@ -399,6 +388,7 @@
         }
         function openReviewModal(n) {
             document.getElementById("review_"+n).style.display = "block";
+            
         }
         function closeReviewModal(review_NO) {
             document.getElementById(review_NO).style.display = "none";
@@ -406,6 +396,7 @@
 
         function openWriteModal() {
           document.getElementById("write_modal").style.display = "block";
+          
         }
         
         // Close the Modal
@@ -428,33 +419,72 @@
 
         function clickStar(clicked_id) {
             var id = clicked_id;
+            var scope = 0;
             if (id == 'star1' ) {
-                document.getElementById('star1').style.color="salmon";
+                document.getElementById('star1').style="color:salmon";
+                document.getElementById('star2').style="color:lightgrey";
+                document.getElementById('star3').style="color:lightgrey";
+                document.getElementById('star4').style="color:lightgrey";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 1;
             } else if (id == 'star2') {
                 document.getElementById('star1').style="color:salmon";
                 document.getElementById('star2').style="color:salmon";
+                document.getElementById('star3').style="color:lightgrey";
+                document.getElementById('star4').style="color:lightgrey";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 2;
             } else if (id == 'star3') {
                 document.getElementById('star1').style="color:salmon";
                 document.getElementById('star2').style="color:salmon";
                 document.getElementById('star3').style="color:salmon";
+                document.getElementById('star4').style="color:lightgrey";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 3;
             } else if (id == 'star4') {
                 document.getElementById('star1').style="color:salmon";
                 document.getElementById('star2').style="color:salmon";
                 document.getElementById('star3').style="color:salmon";
                 document.getElementById('star4').style="color:salmon";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 4;
             } else if (id == 'star5') {
                 document.getElementById('star1').style="color:salmon";
                 document.getElementById('star2').style="color:salmon";
                 document.getElementById('star3').style="color:salmon";
                 document.getElementById('star4').style="color:salmon";
                 document.getElementById('star5').style="color:salmon";
-            }            
+                scope = 5;
+            }  
+            
+            document.getElementById('scope').value = scope;
         }
 
         function check_delete() {
             
         }
-
+        
+        function delete_review() {
+        	var review_NO = document.getElementById('review_NO').value;
+        	location.href="${contextPath}/deleteReview.do?review_NO="+review_NO;
+        }
+        
+        function update_review_form(n) {
+        	document.getElementById("review_"+n).style.display = "none";
+        	document.getElementById("write_modal").style.display = "block";
+        	document.getElementById("add_review").style.display = "none";
+        	document.getElementById("update_review").style.display = "block";
+        	document.getElementById("form_review_NO").innerHTML += '<input type="text" name="review_NO" value="'+ n + '">';
+        	document.detailReviewForm.action = "${contextPath}/updateReview.do";
+        	var review_contents = document.getElementById("review_contents").innerText;
+        	document.getElementById("wrtie_review").innerText = review_contents;
+        	var user_ID = document.getElementById("modal_user_ID").value;
+        	document.getElementById("form_user_ID").value = user_ID;
+        }
+		
+        function update_review() {
+        	document.detailReviewForm.submit();
+        }
     </script>
 </body>
 </html>

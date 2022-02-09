@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lnag="en">
 
@@ -9,8 +8,33 @@
     <meta name="viewport" content="width=device-width,hight=device-hight, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" href="resources/css/login_join.css" type="text/css">
-    <script src="js/jquery-3.3.1.min.js"></script>
-
+    <script src="resources/js/jquery-3.6.0.min.js"></script>
+	<!-- <script type="text/javascript">
+		$(document).ready(function(){
+			
+		
+			$("#submit").on("click", function(){
+				if($("#userId").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#user_ID").focus();
+					return false;
+				}
+				if($("#userPass").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#user_PW").focus();
+					return false;
+				}
+				if($("#userName").val()==""){
+					alert("성명을 입력해주세요.");
+					$("#user_Nickname").focus();
+					return false;
+				}
+			});
+			
+				
+			
+		})
+	</script> -->
 
 </head>
 
@@ -115,7 +139,7 @@
                 <h3 class="join_title"><label for="gender">성별</label></h3>
                 <span class="box gender_code">
                     <select name="user_Gender" id="gender" = class="sel">
-                        <option>성별</option>
+                        <option value="0">성별</option>
                         <option value="1">남자</option>
                         <option value="2">여자</option>
                     </select>
@@ -188,7 +212,7 @@
 
     </div>
     <!-- wrapper -->
-    <script src="join_js.js"></script>
+    <script src="resources/js/join_js.js"></script>
 
 </body>
 

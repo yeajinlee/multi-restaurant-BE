@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,10 +27,13 @@ public class MainControllerImpl implements MainController{
 	
 	@RequestMapping(value="/main.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session= request.getSession();
 		List restList = mainService.restList();
-
+System.out.println(viewName);
 		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println(viewName);
 		mav.addObject("restList", restList);
 
 		return mav;

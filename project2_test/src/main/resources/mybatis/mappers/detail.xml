@@ -13,6 +13,7 @@
 		<result property="rest_Scope" column="rest_Scope"/>
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
+		<result property="img_Filename" column="img_Filename"/>
 	</resultMap>
 	<resultMap type="imageVO" id="imageResult">
 		<result property="img_FileNO" column="img_FileNO"/>
@@ -44,7 +45,32 @@
 	</select>
 	<select id="selectAllReview" resultMap="detailReviewResult">
 		<![CDATA[
-			select * from profile_review where rest_NO = #{rest_NO}
+			select * from profile_review where rest_NO = #{rest_NO} order by review_no desc
+		]]>
+	</select>
+	<select id="selectSideList" resultMap="detailResult">
+		<![CDATA[
+			select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
+			from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+			inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6
+		]]>
+	</select>
+	<!-- <insert id="addNewReview" parameterType="reveiwVO">
+		<![CDATA[
+			insert into review_info(review_NO, user_ID, review_Scope, review_Text, rest_NO, reveiw_Date)
+			values(review_seq, #{user_ID}, #{review_Scope}, #{review_Text}, #{rest_NO}, sysdate)
+		]]>
+	</insert>
+	<insert id="addNewReviewImg" parameterType="reveiwVO">
+		<foreach collection="list" item="item" open="insert all" separator=" " close="select * from dual">
+			into reviewimg_info (img_FileNO, img_FileName, review_NO, rest_NO)
+			values (reviewIMG_seq, #{item.img_FileName, #{item.review_NO}, #{item.rest_NO})
+		</foreach>
+	</insert> -->
+	
+	<select id="countReview" resultType="int">
+		<![CDATA[
+			select count(*) from review_info where rest_NO = #{rest_NO}
 		]]>
 	</select>
 </mapper>

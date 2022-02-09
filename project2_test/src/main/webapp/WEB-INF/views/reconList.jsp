@@ -20,8 +20,8 @@
 
 <body>
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
-        <a href="main.html"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
-            <a class="navbar-brand" href="main.html"> MULTI <br> RESTAURANT</a>
+        <a href="${contextPath}/main.do"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
+        <a class="navbar-brand" href="${contextPath}/main.do"> MULTI <br> RESTAURANT</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
@@ -39,13 +39,13 @@
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 테마</strong> </a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/reconList.do" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 테마</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>최근 후기</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
+                        <a class="nav-link" href="${contextPath}/newList.do" style="color:white"><strong>신규 개업</strong> </a>
                     </li>
                 </ul>
             </div>
@@ -69,6 +69,7 @@
                     <a class="dropdown-item" href="../login_join/login.html">로그인</a>
                     <a class="dropdown-item" href="../login_join/join.html">회원가입</a>
                 </div>
+                
             </div>
             </ul>
     </nav>
@@ -96,7 +97,7 @@
                       
                         </div>
                       
-                       <img	class="img-fluid" width=507 src="${pageContext.request.contextPath}/download?fileName=${item.rest_theme}.jpg"
+                       <img	class="img-fluid" width=507 src="${contextPath}/resources/image/${item.rest_theme}.jpg"
 									alt=""/>
                     </a>
       
