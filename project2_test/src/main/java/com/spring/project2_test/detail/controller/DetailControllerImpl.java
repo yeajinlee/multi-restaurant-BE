@@ -85,6 +85,7 @@ public class DetailControllerImpl implements DetailController {
 			reviewMap.put(key, value);
 		}
 		
+		
 //		HttpSession sess = multipartRequest.getSession();
 //		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
 //		String user_ID = memberVO.getUser_ID();
@@ -109,14 +110,14 @@ public class DetailControllerImpl implements DetailController {
 				for(ImageVO imageVO : imgFileList) {
 					img_FileName = imageVO.getImg_FileName();
 					File srcFile = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + img_FileName);
-					File desDir = new File(REVIEW_IMG_REPO);
+					File desDir = new File(REVIEW_IMG_REPO + "\\" + review_NO);
 					FileUtils.moveToDirectory(srcFile, desDir, true);
 				}
 			}
 			msg = "<script>";
 			msg += "alert('리뷰 작성 완료');";
-//			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
-			msg += "history.go(-1)";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() +"';";
+//			msg += "history.go(-1)";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -129,8 +130,8 @@ public class DetailControllerImpl implements DetailController {
 			}
 			msg = "<script>";
 			msg += "alert('서버 점검중입니다.')";
-//			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
-			msg += "history.go(-1)";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() +"';";
+//			msg += "history.go(-1)";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -153,7 +154,7 @@ public class DetailControllerImpl implements DetailController {
 			File file = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + imgFileName);
 			if(mpf.getSize() != 0 ) {
 				if(!file.exists()) {
-					mpf.transferTo(new File(REVIEW_IMG_REPO + "\\" + imgFileName));
+					mpf.transferTo(new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + imgFileName));
 				}
 				
 			}
@@ -177,13 +178,13 @@ public class DetailControllerImpl implements DetailController {
 			
 			msg = "<script>";
 			msg += "alert('글 삭제');";
-			msg += "location.href='" + request.getContextPath() + "/main.do';";
+			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() +"';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			msg = "<script>";
 			msg += "alert('다시 시도하세요');";
-			msg += "location.href='" + request.getContextPath() + "/main.do';";
+			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + detailVO.getRest_NO() +"';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

@@ -242,7 +242,7 @@ review_content_img.REVIEW_TEXT as review_Text,
 review_content_img.REST_NO as rest_NO,
 review_content_img.REVIEW_DATE as review_Date,
 review_content_img.IMAGES as images from user_info right outer join review_content_img on user_info.user_id = review_content_img.user_id;
-select * from profile_review;
+select * from profile_review order by review_no desc;
 
 drop view profile_review;
 
@@ -264,15 +264,15 @@ select review_no, listagg(img_filename, '/') within group(order by img_filename)
 select * from review_img;
 
 -- 메인용 식당정보+이미지
-select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
+select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
 from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
-inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1 and rownum < 7;
+inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7;
 
 
 -- 디테일페이지 사이드바 리스트 무작위로 레코드 5개 추출
 select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
 from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
-left outer join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6;
+inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6;
 
 -- 신규개업 페이지
 
@@ -304,7 +304,7 @@ delete from reviewimg_info where rest_no = 0;
 commit;
 
 select nvl(max(review_NO),0) + 1 from review_info;
-select img_FileName from reviewimg_info where rest_NO = 1;
+select * from reviewimg_info where rest_NO = 1;
 
 select rest_NO from review_info where review_no = (select max(review_NO) from review_info);
 select img_FileName from reviewimg_info where rest_NO = 1;
