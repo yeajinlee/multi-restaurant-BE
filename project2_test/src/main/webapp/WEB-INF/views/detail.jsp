@@ -214,7 +214,7 @@
                         	<td>
                         		<p id="write_title"> <span id="rest_name">${detail.rest_Name }</span> 어떠셨나요?</p>
                         		<input type="number" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO">
-                        		<div  id="form_review_NO"></div>
+                        		<div id="form_review_NO" style="display: none"></div>
                         	</td>
                         </tr>
                         <%-- <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr> --%>

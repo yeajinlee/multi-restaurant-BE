@@ -73,23 +73,20 @@ public class DetailControllerImpl implements DetailController {
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-//		int rest_NO = detailReviewVO.getRest_NO();
-//		System.out.println(rest_NO);
+
 		String msg = null;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		String img_FileName = null;
+
 		
 
-		detailReviewVO.setUser_ID("a0001");
-
-//		HttpSession sess = multipartRequest.getSession();
-//		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
-//		String user_ID = memberVO.getUser_ID();
-//		reviewMap.put("user_ID", user_ID);
-		
-		
+		HttpSession sess = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
+		String user_ID = memberVO.getUser_ID();
+		detailReviewVO.setUser_ID(user_ID);
+//		System.out.println(user_ID);
 
 //		List<String> imgNameList = addImages(multipartRequest);
 //		List<ImageVO> imgFileList = new ArrayList<ImageVO>();

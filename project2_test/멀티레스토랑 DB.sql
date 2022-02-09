@@ -260,8 +260,10 @@ DROP TABLE likerest_info;
 DROP TABLE restaurant_info;
 DROP TABLE user_info;
 
-DROP SEQUENCE like_seq;
-DROP SEQUENCE 
-DROP SEQUENCE
-DROP SEQUENCE
-DROP SEQUENCE
+drop sequence reviewIMG_seq;
+drop sequence like_seq;
+
+select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
+from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7;
+

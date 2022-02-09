@@ -31,7 +31,7 @@ public class MainControllerImpl implements MainController{
 		String viewName = (String) request.getAttribute("viewName");
 		HttpSession session= request.getSession();
 		List restList = mainService.restList();
-System.out.println(viewName);
+		System.out.println(viewName);
 		ModelAndView mav = new ModelAndView(viewName);
 		System.out.println(viewName);
 		mav.addObject("restList", restList);
