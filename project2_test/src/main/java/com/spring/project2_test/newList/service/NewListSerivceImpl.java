@@ -1,0 +1,26 @@
+package com.spring.project2_test.newList.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.project2_test.newList.dao.NewListDAO;
+import com.spring.project2_test.newList.vo.NewListVO;
+@Service("newListService")
+public class NewListSerivceImpl implements NewListService{
+
+	@Autowired
+	private NewListDAO newListDAO;
+	
+	@Override
+	public List<NewListVO> newRest() throws Exception {
+	List<NewListVO> newList= newListDAO.selectNewList();
+		return newList;
+	}
+	@Override
+	public List<NewListVO> newDef() throws Exception {
+	List<NewListVO> defaultList= newListDAO.defaultNewList();
+		return defaultList;
+	}
+}

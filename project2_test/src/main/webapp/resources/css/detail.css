@@ -293,7 +293,7 @@ section.review {
 #write_title {
     font-size: 35px;
 }
-#res_name {
+#rest_name {
     color: salmon;
 }
 #write_star {
@@ -314,25 +314,25 @@ textarea {
     margin-bottom: 10px;
 }
 #add_file {
-    display: none;
+    /* display: none; */
 }
 #add_file_btn {
     border: 1px solid grey;
     width: 70px;
     height: 70px;
-    font-size: 40px;
+    font-size: 35px;
     margin-left: 0;
     text-align: center;
-    line-height: 75px;
+    line-height: 70px;
     cursor: pointer;
 }
-#add_review {
+#add_review, #update_review {
     /* background-color: lightgreen; */
     text-align: right;
     margin-top: 30px;
     margin-bottom: 0;
 }
-#add_review_btn {
+#add_review_btn, #update_review_btn {
     border-style: none;
     border-radius: 5px;
     background-color: salmon;

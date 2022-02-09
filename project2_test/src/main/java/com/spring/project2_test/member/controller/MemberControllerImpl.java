@@ -2,6 +2,7 @@ package com.spring.project2_test.member.controller;
 
 
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +34,8 @@ public class MemberControllerImpl implements MemberController{
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
+
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	//로그인 창
 	@Override
@@ -55,6 +59,23 @@ public class MemberControllerImpl implements MemberController{
 
 		return mav;
 	}
+	
+	//마이페이지 창
+	@Override
+	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
+	public ModelAndView mypage(MemberVO vo, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		session = request.getSession();
+		session.setAttribute("member", memberVO);
+		
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+
+		return mav;
+	}
+	
+	
+	
 	
 //	@Override
 //	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -80,8 +101,7 @@ public class MemberControllerImpl implements MemberController{
 //		return mav;
 //	}
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
+	//로그인 호출 메소드
 	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public ModelAndView login(MemberVO vo, RedirectAttributes rAttr, HttpServletRequest request,
@@ -90,6 +110,7 @@ public class MemberControllerImpl implements MemberController{
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = memberService.login(vo);
+		this.memberVO = vo;
 		ModelAndView mav = new ModelAndView ();
 		if(memberVO == null) {
 			session.setAttribute("member", null);
@@ -97,7 +118,8 @@ public class MemberControllerImpl implements MemberController{
 			mav.setViewName("redirect:/loginForm.do");
 			
 		}else {
-			session.setAttribute("member", memberVO);
+			session.setAttribute("member", vo);
+			rAttr.addFlashAttribute("msg",true);
 			mav.setViewName("redirect:/main.do");
 		}
 		return mav;
@@ -120,13 +142,16 @@ public class MemberControllerImpl implements MemberController{
 
 	@Override
 	@RequestMapping(value="/addMember.do" ,method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView addMember(@ModelAttribute("member") MemberVO vo, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		logger.info("get register");
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		int result=0;
-		result = memberService.addMember(member);
+		result = memberService.addMember(vo);
 		ModelAndView mav= new ModelAndView("redirect:/loginForm.do");
+		
 			
 		return mav;
 	}
@@ -144,6 +169,8 @@ public class MemberControllerImpl implements MemberController{
 		mav.setViewName(viewName);
 		return mav;
 	}
+
+	
 
 
 

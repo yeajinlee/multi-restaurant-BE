@@ -111,13 +111,13 @@
 								</div>
 						</li>
 						<li class="nav-item"><a class="nav-link"
-							href="../main/reco1.html" style="color: white"><strong>&nbsp;&nbsp;&nbsp;추천
+							href="${pageContext.request.contextPath}/reconList.do" style="color: white"><strong>&nbsp;&nbsp;&nbsp;추천
 									메뉴</strong> </a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="../reviewList/reviewList.html" style="color: white"><strong>최근
+							href="${contextPath}/reviewList.do" style="color: white"><strong>최근
 									후기</strong> </a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="../newList/newList.html" style="color: white"><strong>신규
+							href="${contextPath}/newList.do" style="color: white"><strong>신규
 									개업</strong> </a></li>
 					</ul>
 					<form class="d-flex">
@@ -164,7 +164,7 @@
 				<h5>관련맛집</h5>
 			</div>
 			<div>	<c:forEach var="items" items="${sideLists}">
-				<a href="items.html"><img src="${pageContext.request.contextPath}/download?fileName=${items.rest_FileName}" alt="">
+				<a href="items.html"><img src="${contextPath}/resources/image/${items.img_fileName}" alt="">
 				
 					<div class="sidepic">${items.rest_Name}</div></a> 
 					</c:forEach>
@@ -180,7 +180,7 @@
 							href="${pageContext.request.contextPath}/detail.do?rest_NO=${item.rest_NO}">
 							<div class="bottom-left3">
 								<img
-									src="${pageContext.request.contextPath}/download?fileName=${item.rest_FileName}"
+									src="${contextPath}/resources/image/${item.img_fileName}"
 									alt="">
 								<div class="bottom-left2">
 									<h4>${item.rest_Name}</h4>

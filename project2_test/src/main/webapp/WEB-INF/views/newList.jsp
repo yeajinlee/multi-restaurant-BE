@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +23,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="resources/css/newList.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/newList.css" type="text/css">
 </head>
 <body>
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
@@ -46,7 +49,7 @@
                         <a class="nav-link" href="../main/reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 메뉴</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>최근 후기</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reviewList.do/" style="color:white"><strong>최근 후기</strong> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
@@ -90,53 +93,35 @@
             </div>
             <div class="content">
                 <!-- <span class="l_map"><img src="../images/placeholder.png" alt="지도 부분"></span> -->
-                <div class="l_map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.390980157256!2d126.98338321450412!3d37.569410079797336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2e8bd68ec11%3A0x6ee78e54814af2d9!2z6rCT64207Iqk7Iuc!5e0!3m2!1sko!2skr!4v1641207292048!5m2!1sko!2skr" width="550" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+                <div class="map" id="map" style="width:100%;height:350px;"> </div> <span id="centerAddr"></span>
                 <span class="r_list">
                     <table>
                         <th>을지로</th>
+                
+        <c:forEach var="item" items="${newList}">
                         <tr>
                             <td><a href="../detail/detail.html"><img src="resources/image/sushi.jpg" alt=""></a></td>
-                            <td><a href="../detail/detail.html">일조초밥 2호점</a><br>회, 초밥<br>을지로<br>0만원~0만원대</td>
+                            <td><a href="../detail/detail.html">${item.rest_Name}</a><br>${item.rest_Name}<br>을지로<br>0만원~0만원대</td>
                             <td>
                                 <b>후기 0개</b>
                                 <p class="open_date">개업: 2021.12.23</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td><img src="resources/image/burger.jpg" alt=""></td>
-                            <td><a href="#">버거킹</a><br>햄버거<br>광희동<br>0만원~0만원대</td>
+               </c:forEach>
+		 <c:forEach var="itemS" items="${defaultList}">
+                   <tr>
+                            <td><a href="../detail/detail.html"><img src="resources/image/sushi.jpg" alt=""></a></td>
+                            <td><a href="../detail/detail.html">${itemS.rest_Name}</a><br>${itemS.rest_Name}<br>을지로<br>0만원~0만원대</td>
                             <td>
-                                 후기 7개
-                                <p class="open_date">개업: 2021.11.24</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="resources/image/kimbap.jpg" alt=""></td>
-                            <td><a href="#">김밥천국</a><br>분식<br>광희동<br>0천원~0만원대</td>
-                            <td>
-                                 후기 6개
-                                <p class="open_date">개업: 2021.11.5</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="resources/image/pasta.jpg" alt=""></td>
-                            <td><a href="#">빕스</a><br>피자, 파스타<br>을지로<br>0만원~0만원대</td>
-                            <td>
-                                 <b>후기 0개</b>
+                                <b>후기 0개</b>
                                 <p class="open_date">개업: 2021.12.23</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td><img src="resources/image/pizza.jpg" alt=""></td>
-                            <td><a href="#">파파존스</a><br>피자, 파스타<br>종로5가<br>0만원~0만원대</td>
-                            <td>
-                                 <b>후기 0개</b>
-                                <p class="open_date">개업: 2021.12.23</p>
-                            </td>
-                        </tr>
-                       
+               </c:forEach>
+
+                    
+      
+                      
                     </table>
                 </span>
             </div>
@@ -181,6 +166,86 @@
           popup.classList.toggle("show");
         }
         </script>
+         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=091ccaf6ebd3685465c663c2218360f5&libraries=services"></script>
+         
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨 
+    }; 
 
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+if (navigator.geolocation) {
+    
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function(position) {
+        
+        var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+            
+            console.log(lat,lon);
+            
+            var geocoder = new kakao.maps.services.Geocoder();
+
+            var coord = new kakao.maps.LatLng(lat, lon);
+            var callback = function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                  console.log(result[0].address_name);
+                  var rest=(result[0].address_name)
+                  document.getElementById("centerAddr").innerHTML=rest;
+                }
+            };
+            geocoder.coord2RegionCode(coord.getLng(), coord.getLat(), callback);
+          
+            
+          
+
+                   
+        
+        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+        
+        // 마커와 인포윈도우를 표시합니다
+        displayMarker(locPosition, message);
+            
+      });
+    
+} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+    
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+        message = 'geolocation을 사용할수 없어요..'
+        
+    displayMarker(locPosition, message);
+}
+
+// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({  
+        map: map, 
+        position: locPosition
+    }); 
+
+    var iwContent = message, // 인포윈도우에 표시할 내용
+        iwRemoveable = true;
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content : iwContent,
+        removable : iwRemoveable
+    });
+    
+    // 인포윈도우를 마커위에 표시합니다 
+    infowindow.open(map, marker);
+    
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);      
+}    
+
+</script>
 </body>
 </html>

@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="${contextPath}/resources/css/main.css">
-   <style>
+</head>
+<style>
     .btn1{
 	  background-color: rgb(255, 176, 167);
 padding: 5px 20px;
@@ -30,7 +31,6 @@ padding: 5px;
 
 }
    </style>
-</head>
 <body>
 
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
@@ -55,7 +55,7 @@ padding: 5px;
                             </div>
                     </li>
                     <li class="nav-item">
-                             <a class="nav-link" href="${pageContext.request.contextPath}/reconList.do" style="color:white"><strong>추천 테마</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reconList.do" style="color:white"><strong>추천 메뉴</strong> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
@@ -74,8 +74,16 @@ padding: 5px;
                     data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
-                    <a class="dropdown-item" href="../login_join/join.html">회원가입</a>
+                
+                    <c:if test="${member == null}">
+                    	<a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
+                    	<a class="dropdown-item" href="${contextPath}/joinForm.do">회원가입</a>
+                    </c:if>
+                    
+                    <c:if test="${member != null}">
+                    	<a class="dropdown-item" href="${contextPath}/logout.do">로그아웃</a>
+                    	<a class="dropdown-item" href="${contextPath}/mypage.do">마이페이지</a>
+                    </c:if>
                 </div>
             </div>
             </ul>
@@ -97,10 +105,11 @@ padding: 5px;
                                 	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
                                 
                                
-                               <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
+            
+                            <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
                                         type="submit">SEARCH</button></div> -->
-                                <input type="submit" name="search" class="btn1"  value="SEARCH" >
-                        </div></form>
+                                <input type="submit" name="search" class="btn1"  value="검색" >
+                         </div></form>
                             </div>
                         </div>
                     </div>

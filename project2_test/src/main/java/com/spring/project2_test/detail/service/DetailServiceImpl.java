@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.project2_test.detail.dao.DetailDAO;
+import com.spring.project2_test.detail.vo.DetailReviewVO;
 import com.spring.project2_test.detail.vo.DetailVO;
+import com.spring.project2_test.detail.vo.ImageVO;
 import com.spring.project2_test.detail.vo.ReviewVO;
 
 @Service("detailService")
@@ -35,4 +37,43 @@ public class DetailServiceImpl implements DetailService{
 		List<ReviewVO> detailReviewList= detailDAO.selectAllReview(rest_NO);
 		return detailReviewList;
 	}
+	
+	@Override
+	public int reviewCount(int rest_NO) throws Exception {
+		int reviewCnt = detailDAO.countReview(rest_NO);
+		return reviewCnt;
+	}
+	
+	@Override
+	public List detailSideList() throws Exception {
+		List detailSideList = detailDAO.selectSideList();
+		return detailSideList;
+	}
+	
+	@Override
+	public int writeReview(Map reviewMap) throws Exception {
+		int review_NO = detailDAO.insertNewReview(reviewMap);
+		reviewMap.put("review_NO", review_NO);
+		detailDAO.insertNewImage(reviewMap);
+		return review_NO;
+	}
+	
+//	@Override
+//	public int selectRestNO() throws Exception {
+//		int rest_NO = detailDAO.selectRestNO();
+//		return rest_NO;
+//	}
+	
+	@Override
+	public void deleteReview(int review_NO) throws Exception {
+		detailDAO.deleteReview(review_NO);
+		
+	}
+	
+	@Override
+	public void updateReview(Map reviewMap) throws Exception {
+		detailDAO.updateReview(reviewMap);
+		
+	}
+	
 }

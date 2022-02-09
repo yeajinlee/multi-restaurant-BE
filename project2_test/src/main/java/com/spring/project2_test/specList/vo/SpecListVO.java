@@ -9,7 +9,15 @@ private String rest_name;
 private String rest_fileName;
 private String review_text;
 private String rest_theme;
+private String rest_Address;
 private int rest_No;
+
+public String getRest_Address() {
+	return rest_Address;
+}
+public void setRest_Address(String rest_Address) {
+	this.rest_Address = rest_Address;
+}
 public String getRest_name() {
 	return rest_name;
 }
