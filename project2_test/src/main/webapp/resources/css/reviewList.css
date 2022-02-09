@@ -187,7 +187,7 @@ div.ind_review:hover {
     width: 100%;
     padding-bottom: 10px;
 }
-.modal .review_contents {
+.modal #review_contents_o, #review_contents_e {
     width: 60%;
     margin-left: 10px;
     margin-top: 30px;
@@ -247,6 +247,82 @@ div.ind_review:hover {
     height: 100px;
     margin: 5px;
     margin-bottom: 30px;
+}
+
+.write {
+    display: inline;
+    text-align: center;
+    float: right;
+    color: gray;
+    cursor: pointer;
+}
+.review #write_btn {
+    font-size: 50px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.write_content {
+    width: 700px;
+    height: 95%;
+    background-color: white;
+    border-radius: 3px;
+    padding-top: 30px;
+}
+.write_form {
+    /* border: solid black; */
+    width: 90%;
+    height: 100%;
+}
+#write_title {
+    font-size: 35px;
+}
+#rest_name {
+    color: salmon;
+}
+#write_star {
+    font-size: 30px;
+    margin-bottom: 0;
+}
+#write_star i {
+    margin-left: 3px;
+    color: lightgray;
+    cursor: pointer;
+}
+textarea {
+    width: 100%;
+    height: 250px;
+    resize: none;
+    font-size: 15px;
+    padding:3px;
+    margin-bottom: 10px;
+}
+#add_file {
+    /* display: none; */
+}
+#add_file_btn {
+    border: 1px solid grey;
+    width: 70px;
+    height: 70px;
+    font-size: 35px;
+    margin-left: 0;
+    text-align: center;
+    line-height: 70px;
+    cursor: pointer;
+}
+#update_review {
+    /* background-color: lightgreen; */
+    text-align: right;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+#update_review_btn {
+    border-style: none;
+    border-radius: 5px;
+    background-color: salmon;
+    padding: 7px 12px;
+    color: white;
+    font-size: 18px;
 }
 
 footer{

@@ -27,8 +27,8 @@
 </head>
 <body>
     <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
-        <a href="../main/main.html"><img src="resources/image/nav.png" width="80" height="80" alt="">
-            <a class="navbar-brand" href="../main/main.html"> MULTI <br> RESTAURANT</a>
+        <a href="${contextPath}/main.do"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt="">
+            <a class="navbar-brand" href="${contextPath}/main.do"> MULTI <br> RESTAURANT</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
@@ -46,13 +46,13 @@
                             </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../main/reco1.html" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 메뉴</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reconList.do" style="color:white"><strong>&nbsp;&nbsp;&nbsp;추천 메뉴</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${contextPath}/reviewList.do/" style="color:white"><strong>최근 후기</strong> </a>
+                        <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
+                        <a class="nav-link" href="${contextPath}/newList.do" style="color:white"><strong>신규 개업</strong> </a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -66,11 +66,18 @@
                 <li class="nav-item dropdown">
                     <div class="col-lg-6"></div>
                     <a class href="#" id="navbarDropdown"
-                    data-toggle="dropdown"><img src="resources/image/login.png" alt="Menu" width="80" height="80" /></a>
+                    data-toggle="dropdown"><img src="${contextPath}/resources/image/login.png" alt="Menu" width="80" height="80" /></a>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="../login_join/login.html">로그인</a>
-                    <a class="dropdown-item" href="../login_join/join.html">회원가입</a>
+                    <c:if test="${member == null}">
+                        <a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
+                        <a class="dropdown-item" href="${contextPath}/joinForm.do">회원가입</a>
+                    </c:if>
+
+                    <c:if test="${member != null}">
+                        <a class="dropdown-item" href="${contextPath}/logout.do">로그아웃</a>
+                        <a class="dropdown-item" href="${contextPath}/mypage.do">마이페이지</a>
+                    </c:if>
                 </div>
             </div>
             </ul>
@@ -131,7 +138,7 @@
     <footer>
         <div class="column1">
          
-            <h2 class="text-left1">About Us  <img src="../추천/footer_nav.png" alt=""></h2>
+            <h2 class="text-left1">About Us  <img src="${contextPath}/resources/image/footer_nav.png" alt=""></h2>
             <p>모든 음식점을 위하여</p>
           
         </div>

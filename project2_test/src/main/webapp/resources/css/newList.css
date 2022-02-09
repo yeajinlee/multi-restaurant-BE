@@ -125,22 +125,25 @@ div.l_map {
     margin-top: 30px;
 }
 span.r_list {
-    float: right;
-    width: 400px;
+    /* float: right; */
+    width: 800px;
     margin-bottom: 50px;
     /* border: solid black; */
 }
 .r_list table {
-    width: 370px;
+    width: 450px;
 }
 .r_list table th {
     font-size: 17px;
     padding-left: 5px;
 }
+.r_list table td {
+	border-top: 0.5px solid lightgrey;
+}
 span.r_list img {
     width: 100px;
     height: 100px;
-    margin: 10px 0px 10px 10px;
+    margin: 15px 0px 15px 10px;
 }
 .open_date {
     margin-top: 3px;

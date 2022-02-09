@@ -162,7 +162,6 @@ public class DetailControllerImpl implements DetailController {
 	@Override
 	@RequestMapping(value="/deleteReview.do", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-
 	public ResponseEntity deleteReview(@RequestParam("rest_NO") int rest_NO, DetailReviewVO detailReviewVO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
@@ -178,7 +177,6 @@ public class DetailControllerImpl implements DetailController {
 			msg = "<script>";
 			msg += "alert('리뷰 삭제 완료');";
 			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
-
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
