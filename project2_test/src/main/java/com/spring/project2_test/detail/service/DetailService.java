@@ -18,15 +18,14 @@ public interface DetailService {
 	public int reviewCount(int rest_NO) throws Exception;
 
 	public List detailSideList() throws Exception;
-	
 
-	public int writeReview(Map reviewMap) throws Exception;
 
-//	public int selectRestNO() throws Exception;
+	public void deleteReview(DetailReviewVO detailReviewVO) throws Exception;
 
-	public void deleteReview(int review_NO) throws Exception;
+	public void updateReview(DetailReviewVO detailReviewVO) throws Exception;
 
-	public void updateReview(Map reviewMap) throws Exception;
+	public void addNewReview(DetailReviewVO detailReviewVO) throws Exception;
+
 
 	
 

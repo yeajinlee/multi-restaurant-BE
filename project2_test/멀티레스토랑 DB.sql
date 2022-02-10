@@ -83,7 +83,8 @@ CREATE TABLE Review_Info (
     REFERENCES Restaurant_Info (rest_NO)
     ON DELETE CASCADE
 );
-
+drop table Review_Info;
+drop table Review_Info cascade constraints;
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
     values (1, 'a0001', 5, 'Å×½ºÆ® ¸®ºä', 1 , sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
@@ -91,10 +92,36 @@ insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, 
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
     values (3, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 3, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (4, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 4, sysdate);
+    values (4, 'a0001', 4, 'Å×½ºÆ® ¸®ºä2', 4, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
     values (5, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 5, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (6, 'a0001', 6, 'Å×½ºÆ® ¸®ºä2', 6, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (7, 'a0001', 7, 'Å×½ºÆ® ¸®ºä2', 7, sysdate);
     
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä1', 1, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 4, 'Å×½ºÆ® ¸®ºä2', 2, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0003', 3, 'Å×½ºÆ® ¸®ºä3', 3, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0004', 2, 'Å×½ºÆ® ¸®ºä4', 4, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0001', 1, 'Å×½ºÆ® ¸®ºä5', 5, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0002', 2, 'Å×½ºÆ® ¸®ºä6', 6, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0003', 3, 'Å×½ºÆ® ¸®ºä7', 1, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0004', 4, 'Å×½ºÆ® ¸®ºä8', 2, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0005', 5, 'Å×½ºÆ® ¸®ºä9', 3, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
+    values (review_seq.nextval, 'a0006', 5, 'Å×½ºÆ® ¸®ºä10', 4, sysdate);    
+    
+    drop SEQUENCE review_seq;
 CREATE SEQUENCE review_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 
 CREATE TABLE ReviewIMG_Info (
@@ -112,7 +139,7 @@ SELECT ri.rest_NO, ri.rest_Name, rm.img_fileName from Restaurant_Info ri, Review
   select ri.rest_no, ri.rest_name, ri.rest_fileName, rw.review_text, ri.rest_theme , ri.rest_Address
 from Restaurant_Info ri, Review_Info rw where ri.rest_No=rw.rest_No;   
      
-     
+     commit;
 CREATE SEQUENCE reviewIMG_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 drop sequence reviewIMG_seq;
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO) 

@@ -85,8 +85,15 @@
 						alt="Menu" width="80" height="80" /></a>
 					</div>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a> <a
-							class="dropdown-item" href="../login_join/join.html">회원가입</a>
+						<c:if test="${member == null}">
+                        <a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
+                        <a class="dropdown-item" href="${contextPath}/joinForm.do">회원가입</a>
+                    </c:if>
+
+                    <c:if test="${member != null}">
+                        <a class="dropdown-item" href="${contextPath}/logout.do">로그아웃</a>
+                        <a class="dropdown-item" href="${contextPath}/mypage.do">마이페이지</a>
+                    </c:if>
 					</div>
 					</div>
 			</ul>
@@ -98,7 +105,7 @@
 					<p>등록된 리뷰 사진이 없습니다.</p>
 				</c:when>
 				<c:otherwise>
-					<c:forEach var="detailImg" items="${detailImg}" varStatus="cnt">
+					<c:forEach var="detailImg" items="${detailImg}">
 						<span>
 							<img
 							src="${pageContext.request.contextPath}/resources/image/${detailImg.img_FileName}"
@@ -137,9 +144,10 @@
 	<section class="r_info">
 		<div class="detail_info">
 			<span class="place_name">${detail.rest_Name }</span>
+			<span class="theme">${detail.rest_Theme }</span>
 			<span class="star_wish">
 				<i class="fas fa-star"></i>&nbsp; <span><b>${detail.rest_Scope} / 5</b></span>&nbsp;&nbsp;&nbsp;
-				<span class="wish_cnt">리뷰 35 찜 12</span>&nbsp; 
+				<span class="wish_cnt">리뷰 ${reviewCnt} 찜 12</span>&nbsp; 
 				<i class="far fa-heart" id="heart" onclick="setWishList();"></i>
 			</span>
 			<table>
@@ -183,7 +191,7 @@
 				<c:forEach var="side" items="${detailSideList }">
 					<tr>
 						<td><a href="${contextPath}/detail.do?rest_NO=${side.rest_NO}"><img src="${contextPath}/resources/image/${side.img_Filename}" alt=""></a></td>
-						<td><a href="${contextPath}/detail.do?rest_NO=${side.rest_NO}">${side.rest_Name }</a><br>(theme)<br>${side.rest_Address }<br>0만원~0만원대</td>
+						<td><a href="${contextPath}/detail.do?rest_NO=${side.rest_NO}">${side.rest_Name }</a><br>${side.rest_Theme}<br>${side.rest_Address }<br>${side.rest_Price }</td>
 						<td><i class="fas fa-star"></i>&nbsp;&nbsp;${side.rest_Scope}/5</td>
 					</tr>
 				</c:forEach>
@@ -195,7 +203,12 @@
 		<div>
 			<span class="review_cnt"><b>리뷰 (${reviewCnt})</b></span>
 			<span class="write">
-				<table onclick="openWriteModal()">
+				<c:if test="${member != null}">
+					<table onclick="openWriteModal()">
+				</c:if>
+				<c:if test="${member == null}">
+					<table onclick="login_check()">
+				</c:if>
 					<tr>
 						<td>&nbsp;<i class="far fa-edit" id="write_btn"></i></td>
 					</tr>
@@ -213,11 +226,11 @@
                         <tr>
                         	<td>
                         		<p id="write_title"> <span id="rest_name">${detail.rest_Name }</span> 어떠셨나요?</p>
-                        		<input type="text" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO">
-                        		<div  id="form_review_NO"></div>
+                        		<input type="number" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO">
+                        		<div id="form_review_NO" style="display: none"></div>
                         	</td>
                         </tr>
-                        <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr>
+                        <%-- <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr> --%>
                         <tr><td><p id="write_star">
                             <i class="fas fa-star" id="star1" onclick="clickStar(this.id)"></i>
                             <i class="fas fa-star" id="star2" onclick="clickStar(this.id)"></i>
@@ -226,7 +239,7 @@
                             <i class="fas fa-star" id="star5" onclick="clickStar(this.id)"></i>
                            	<input type="text" id="scope" name="review_Scope" style="display:none">
                         </p></td></tr>
-                        <tr><td><textarea name="review_Text" id="wrtie_review" placeholder="리뷰를 남겨주세요."></textarea></td></tr>
+                        <tr><td><textarea name="review_Text" id="write_review" placeholder="리뷰를 남겨주세요."></textarea></td></tr>
                         <%-- <tr><td><input type="file" id="add_file"><p id="add_file_btn" onclick="add_file()"><i class="fas fa-plus"></i></p></td></tr> --%>
                         <tr><td><input type="file" id="add_file" name="img_FileName"></td></tr>
                         <tr>
@@ -280,8 +293,8 @@
 					</div>
 
 					<div class="modal" id="review_${review.review_NO }">
-						<input type="text" id="review_NO" name="review_NO" style="display: none" value="${review.review_NO }">
-						<input type="text" id="review_rest_NO" name="rest_NO" style="display: none" value="${review.rest_NO }">
+						<input type="number" id="review_NO" name="review_NO" style="display: none" value="${review.review_NO }">
+						<input type="number" id="review_rest_NO" name="rest_NO" style="display: none" value="${review.rest_NO }">
 						<span class="close cursor"
 							onclick="closeReviewModal('review_${review.review_NO }')">&times;</span>
 						<div class="review_modal_content">
@@ -309,8 +322,10 @@
 								</span> <span class="star_date">&nbsp;${review.review_Date }</span>
 							</div>
 							<div class="review_modal_btn">
+								<c:if test="${member.user_ID == review.user_ID}">
 								<input type="button" value="수정" id="review_edit" onclick="update_review_form('${review.review_NO }')">
-								<input type="button" value="삭제" id="review_delete" onclick="check_delete(); delete_review()">
+								<input type="button" value="삭제" id="review_delete" onclick="delete_review();">
+								</c:if>
 							</div>
 							<br>
 							<div class="review_contents" id="review_contents">${review.review_Text }</div>
@@ -395,27 +410,33 @@
         }
 
         function openWriteModal() {
-          document.getElementById("write_modal").style.display = "block";
-          
+       
+       		document.getElementById("write_modal").style.display = "block";
+       		document.getElementById('star1').style="color:lightgrey"
+       		document.getElementById('star2').style="color:lightgrey"
+       		document.getElementById('star3').style="color:lightgrey"
+       		document.getElementById('star4').style="color:lightgrey"
+       		document.getElementById('star5').style="color:lightgrey"
         }
+        
+        function login_check() {
+        	if(confirm("후기 작성을 위해 로그인이 필요합니다. 로그인화면으로 이동할까요?") == true) {
+        		location.href="${contextPath}/loginForm.do";
+        	}
+        }
+        	
         
         // Close the Modal
         function closeWriteModal() {
           document.getElementById("write_modal").style.display = "none";
-          document.getElementById('star1').style.color="lightgray";
-          document.getElementById('star2').style.color="lightgray";
-          document.getElementById('star3').style.color="lightgray";
-          document.getElementById('star4').style.color="lightgray";
-          document.getElementById('star5').style.color="lightgray";
+       
         }
 
         function add_file() {
             document.getElementById('add_file').click();
         }
 
-        function clickStar1() {
-            document.getElementById('star1').style="color:salmon";
-        }
+       
 
         function clickStar(clicked_id) {
             var id = clicked_id;
@@ -460,13 +481,12 @@
             document.getElementById('scope').value = scope;
         }
 
-        function check_delete() {
-            
-        }
+       
         
         function delete_review() {
         	var review_NO = document.getElementById('review_NO').value;
-        	location.href="${contextPath}/deleteReview.do?review_NO="+review_NO;
+        	var rest_NO = document.getElementById('review_rest_NO').value;
+        	location.href="${contextPath}/deleteReview.do?review_NO=" + review_NO + "&rest_NO=" + rest_NO;
         }
         
         function update_review_form(n) {
@@ -474,10 +494,10 @@
         	document.getElementById("write_modal").style.display = "block";
         	document.getElementById("add_review").style.display = "none";
         	document.getElementById("update_review").style.display = "block";
-        	document.getElementById("form_review_NO").innerHTML += '<input type="text" name="review_NO" value="'+ n + '">';
+        	document.getElementById("form_review_NO").innerHTML += '<input type="number" name="review_NO" value="'+ n + '">';
         	document.detailReviewForm.action = "${contextPath}/updateReview.do";
         	var review_contents = document.getElementById("review_contents").innerText;
-        	document.getElementById("wrtie_review").innerText = review_contents;
+        	document.getElementById("write_review").innerText = review_contents;
         	var user_ID = document.getElementById("modal_user_ID").value;
         	document.getElementById("form_user_ID").value = user_ID;
         }
