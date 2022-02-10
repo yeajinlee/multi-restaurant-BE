@@ -28,14 +28,15 @@ public class NewListControllerImpl implements NewListController{
 	public ModelAndView newList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		List<NewListVO> newList= newListService.newRest();
-		List<NewListVO> defaultList= newListService.newDef();
+//		List<NewListVO> defaultList= newListService.newDef();
 		ModelAndView mav = new ModelAndView(viewName);
-		if(!newList.isEmpty()) {
-			mav.addObject("newList", newList);
-	
-		}else {
-				mav.addObject("defaultList",defaultList);	
-		}
+		mav.addObject("newList", newList);
+//		if(!newList.isEmpty()) {
+//			mav.addObject("newList", newList);
+//	
+//		}else {
+//				mav.addObject("defaultList",defaultList);	
+//		}
 		return mav;
 	}
 

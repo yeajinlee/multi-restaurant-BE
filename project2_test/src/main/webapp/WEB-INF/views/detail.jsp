@@ -33,6 +33,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/9623fd1de1.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/detail.css" type="text/css">
 </head>
 <body>
@@ -255,7 +256,7 @@
 		
 		<c:choose>
 			<c:when test="${empty detailReviewList }">
-				<h5 style="margin: 15px;">등록된 리뷰가 없습니다.</h5>
+				<h6 style="margin: 15px;">등록된 리뷰가 없습니다.</h6>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="review" items="${detailReviewList }">

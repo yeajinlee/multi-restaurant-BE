@@ -46,11 +46,7 @@ CREATE TABLE Restaurant_Info (
     rest_View INT DEFAULT 1,
     rest_OpenDate DATE NOT NULL
 );
-
-                   
-                   
-                   
-                   
+              
                    
 CREATE TABLE LikeRest_Info (
     like_NO INT PRIMARY KEY,
@@ -85,15 +81,26 @@ CREATE TABLE Review_Info (
 );
 
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (1, 'a0001', 5, 'Å×½ºÆ® ¸®ºä', 1 , sysdate);
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä', 1 , sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (2, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 2, sysdate);
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 2, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (3, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 3, sysdate);
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 3, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (4, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 4, sysdate);
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 4, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (5, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 5, sysdate);
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 5, sysdate);
+
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä', 1 , sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 2, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 3, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 4, sysdate);
+insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
+    values (review_seq.nextval, 'a0001', 5, 'Å×½ºÆ® ¸®ºä2', 5, sysdate);
     
 CREATE SEQUENCE review_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 
@@ -114,7 +121,8 @@ from Restaurant_Info ri, Review_Info rw where ri.rest_No=rw.rest_No;
      
      
 CREATE SEQUENCE reviewIMG_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
-drop sequence reviewIMG_seq;
+
+
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO) 
 values (reviewimg_seq.nextval, 'han.jpg', 1,'main_image', 1);
 
@@ -146,7 +154,7 @@ insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_
 values (reviewimg_seq.nextval, 'pasta.jpeg', 11,'main_image', 11);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'sushi2.jpeg', 12,'main_image',12);
+values (reviewimg_seq.nextval, 'sushi2.jpg', 12,'main_image',12);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
 values (reviewimg_seq.nextval, 'burger.jpeg', 13,'main_image', 13);
@@ -233,7 +241,7 @@ review.USER_ID,
 review.REVIEW_SCOPE,
 review.REVIEW_TEXT,
 review.REST_NO,
-
+review.review_date,
 review_img.IMAGES from review_info review left outer join review_img on review.review_no = review_img.review_no;
 select * from  review_content_img;
 
@@ -243,6 +251,8 @@ drop view review_content_img;
 create view review_img as
 select review_no, listagg(img_filename, '/') within group(order by img_filename) as images from reviewimg_info group by review_no;
 select * from review_img;
+drop view review_img;
+
 
 SELECT * FROM user_info;
 SELECT * FROM restaurant_info;
@@ -262,8 +272,29 @@ DROP TABLE user_info;
 
 drop sequence reviewIMG_seq;
 drop sequence like_seq;
+drop sequence review_seq;
+drop sequence tag_seq;
 
 select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
 from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
 inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7;
 
+select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_Theme, b.rest_opendate, a.img_filename 
+from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6;
+
+SELECT * FROM restaurant_info order by rest_opendate desc ;
+
+select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, b.rest_theme, a.img_filename 
+from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
+inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7;
+
+-- ½Å±Ô°³¾÷ 
+select a.rest_NO, a.rest_name, a.rest_price, a.rest_address, a.rest_scope, a.rest_filename, a.rest_theme, a.rest_opendate, b.review_cnt
+from (
+(select rest_NO, rest_name, rest_price, rest_address, rest_scope, rest_filename, rest_theme, rest_opendate from restaurant_info order by rest_opendate desc) a
+left outer join (select rest_no, count(*) as review_cnt from review_info group by rest_no) b on a.rest_no = b.rest_no
+) where review_cnt is null;
+
+
+commit;

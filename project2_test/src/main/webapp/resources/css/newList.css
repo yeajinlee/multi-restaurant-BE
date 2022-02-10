@@ -127,11 +127,11 @@ div.l_map {
 span.r_list {
     /* float: right; */
     width: 800px;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     /* border: solid black; */
 }
 .r_list table {
-    width: 450px;
+    width: 600px;
 }
 .r_list table th {
     font-size: 17px;

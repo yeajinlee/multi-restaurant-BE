@@ -1,32 +1,37 @@
 package com.spring.project2_test.newList.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 @Component("newListVO")
 public class NewListVO {
 	private String rest_Name;
-	private String rest_fileName;
-	private String rest_OpenDate;
+	private String rest_FileName;
+	private Date rest_OpenDate;
 	private int rest_NO;
 	private String rest_Price;
 	private String rest_Address;
 	private String rest_Scope;
 	private String rest_Social;
+	private String rest_Theme;
+	private int review_Cnt;
+	
 	public String getRest_Name() {
 		return rest_Name;
 	}
 	public void setRest_Name(String rest_Name) {
 		this.rest_Name = rest_Name;
 	}
-	public String getRest_fileName() {
-		return rest_fileName;
+	public String getRest_FileName() {
+		return rest_FileName;
 	}
-	public void setRest_fileName(String rest_fileName) {
-		this.rest_fileName = rest_fileName;
+	public void setRest_FileName(String rest_FileName) {
+		this.rest_FileName = rest_FileName;
 	}
-	public String getRest_OpenDate() {
+	public Date getRest_OpenDate() {
 		return rest_OpenDate;
 	}
-	public void setRest_OpenDate(String rest_OpenDate) {
+	public void setRest_OpenDate(Date rest_OpenDate) {
 		this.rest_OpenDate = rest_OpenDate;
 	}
 	public int getRest_NO() {
@@ -59,8 +64,21 @@ public class NewListVO {
 	public void setRest_Social(String rest_Social) {
 		this.rest_Social = rest_Social;
 	}
-	
-	public NewListVO() {
-		// TODO Auto-generated constructor stub
+	public void setRest_NO(int rest_NO) {
+		this.rest_NO = rest_NO;
 	}
+	public String getRest_Theme() {
+		return rest_Theme;
+	}
+	public void setRest_Theme(String rest_Theme) {
+		this.rest_Theme = rest_Theme;
+	}
+	public int getReview_Cnt() {
+		return review_Cnt;
+	}
+	public void setReview_Cnt(int review_Cnt) {
+		this.review_Cnt = review_Cnt;
+	}
+	
+	
 }

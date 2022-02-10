@@ -30,6 +30,8 @@ public interface DetailDAO {
 
 	public void insertNewReview(DetailReviewVO detailReviewVO) throws DataAccessException;
 
+	public void insertNewReviewImg(ImageVO imageVO) throws DataAccessException;
+
 
 	
 

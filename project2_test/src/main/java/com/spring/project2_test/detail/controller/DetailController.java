@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.project2_test.detail.vo.DetailReviewVO;
+import com.spring.project2_test.detail.vo.ImageVO;
 import com.spring.project2_test.detail.vo.ReviewVO;
 
 public interface DetailController {

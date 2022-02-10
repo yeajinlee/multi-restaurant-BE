@@ -68,7 +68,7 @@ public class DetailControllerImpl implements DetailController {
 	@Override
 	@RequestMapping(value="/addNewReview.do", method= {RequestMethod.POST, RequestMethod.GET}, headers = ("content-type=multipart/*"))
 	@ResponseBody
-	public ResponseEntity writeReview(DetailReviewVO detailReviewVO, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	public ResponseEntity writeReview(DetailReviewVO detailReviewVO,  MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
@@ -78,16 +78,19 @@ public class DetailControllerImpl implements DetailController {
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		String img_FileName = null;
-
-		
 
 		HttpSession sess = multipartRequest.getSession();
 		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
 		String user_ID = memberVO.getUser_ID();
 		detailReviewVO.setUser_ID(user_ID);
 //		System.out.println(user_ID);
-
+		
+//		Map imgFileMap = new HashMap();
+//		String imgFileName = addImages(multipartRequest);
+//		imageVO.setImg_FileName(imgFileName);
+//		imgFileMap.put("img_FileName", imgFileList);
+//		imgFileMap.put("rest_NO", detailReviewVO.getRest_NO());
+//		System.out.println(detailReviewVO.getRest_NO());
 //		List<String> imgNameList = addImages(multipartRequest);
 //		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
 //		if(imgNameList != null && imgNameList.size() != 0) {
@@ -111,6 +114,8 @@ public class DetailControllerImpl implements DetailController {
 //				}
 //			}
 			detailService.addNewReview(detailReviewVO);
+//			imageVO.setReview_NO(detailReviewVO.getReview_NO());
+//			detailService.addNewReviewImg(imageVO);
 			
 			msg = "<script>";
 			msg += "alert('리뷰 작성 완료');";
@@ -140,23 +145,15 @@ public class DetailControllerImpl implements DetailController {
 	}
 
 
-	private List<String> addImages(MultipartHttpServletRequest multipartRequest) throws Exception{
-		List<String> imgFileList = new ArrayList<String>();
+	private String addImages(MultipartHttpServletRequest multipartRequest) throws Exception{
+		String img_FileName=null;
 		Iterator<String> imgFileNames = multipartRequest.getFileNames();
 		while (imgFileNames.hasNext()) {
 			String imgFileName = imgFileNames.next();
 			MultipartFile mpf = multipartRequest.getFile(imgFileName);
-			String originalImgName = mpf.getOriginalFilename();
-			imgFileList.add(originalImgName);
-			File file = new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + imgFileName);
-			if(mpf.getSize() != 0 ) {
-				if(!file.exists()) {
-					mpf.transferTo(new File(REVIEW_IMG_REPO + "\\" + "temp" + "\\" + imgFileName));
-				}
-				
-			}
+			img_FileName = mpf.getOriginalFilename();
 		}
-		return imgFileList;
+		return img_FileName;
 	}
 
 	@Override
@@ -199,6 +196,7 @@ public class DetailControllerImpl implements DetailController {
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
 		
 //		List<String> imgNameList = addImages(multipartRequest);
 //		List<ImageVO> imgFileList = new ArrayList<ImageVO>();

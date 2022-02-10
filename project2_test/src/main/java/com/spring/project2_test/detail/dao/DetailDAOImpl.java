@@ -69,8 +69,13 @@ public class DetailDAOImpl implements DetailDAO{
 	@Override
 	public void insertNewReview(DetailReviewVO detailReviewVO) throws DataAccessException {
 		sqlSession.insert("mappers.detailReview.addNewReview", detailReviewVO);
+	
+	}
+	
+	@Override
+	public void insertNewReviewImg(ImageVO imageVO) throws DataAccessException {
+		sqlSession.insert("mappers.detailReview.addNewReviewImg", imageVO);
 		
-
 	}
 	
 	private int selectNewReviewNO() {

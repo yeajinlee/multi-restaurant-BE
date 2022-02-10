@@ -133,7 +133,7 @@ padding: 5px;
                                 <span><h1><b>${rest.rest_Name }</b></h1></span><br>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
-                                       	 (메뉴)
+                                       	 ${rest.rest_Theme }
                                     </li>
                                     <li class="mb-2">
                                         ${rest.rest_Price }

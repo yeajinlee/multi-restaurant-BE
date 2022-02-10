@@ -13,13 +13,14 @@
 		<result property="rest_Scope" column="rest_Scope"/>
 		<result property="rest_Social" column="rest_Social"/>
 		<result property="rest_OpenDate" column="rest_OpenDate"/>
+		<result property="rest_Theme" column="rest_Theme"/>
 		<result property="img_FileName" column="img_FileName"/>
 	</resultMap>
 	
 	
 	<select id="selectRestList" resultMap="mainResult">
 		<![CDATA[
-			select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
+			select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_theme, b.rest_opendate, a.img_filename 
 			from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
 			inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7
 		]]>

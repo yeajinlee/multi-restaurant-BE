@@ -16,7 +16,7 @@ public class NewListDAOImpl implements NewListDAO{
 	
 	@Override
 	public List<NewListVO> selectNewList() throws Exception {
-		List<NewListVO> newList=sqlSession.selectList("mappers.newlist.selectNewList");
+		List<NewListVO> newList=sqlSession.selectList("mappers.newList.selectNewList");
 		return newList;
 	}
 	@Override
