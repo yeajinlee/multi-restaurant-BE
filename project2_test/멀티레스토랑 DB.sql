@@ -262,6 +262,7 @@ SELECT * FROM reviewimg_info;
 SELECT * FROM tag_info;
 SELECT * FROM rest_tag;
 
+--!! 드롭입니다 !!
 DROP TABLE rest_tag;
 DROP TABLE tag_info;
 DROP TABLE reviewimg_info;
@@ -269,32 +270,12 @@ DROP TABLE review_info;
 DROP TABLE likerest_info;
 DROP TABLE restaurant_info;
 DROP TABLE user_info;
-
+-- !!드롭입니다 !!
 drop sequence reviewIMG_seq;
 drop sequence like_seq;
 drop sequence review_seq;
 drop sequence tag_seq;
-
-select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, a.img_filename 
-from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
-inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7;
-
-select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_Theme, b.rest_opendate, a.img_filename 
-from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
-inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 6;
-
-SELECT * FROM restaurant_info order by rest_opendate desc ;
-
-select * from (select * from (select b.rest_no, b.rest_name, b.rest_price, b.rest_address, b.rest_scope, b.rest_social, b.rest_opendate, b.rest_theme, a.img_filename 
-from (select row_number() over(partition by rest_no order by img_fileno desc) as rnum, reviewimg_info.* from reviewimg_info) a 
-inner join restaurant_info b on a.rest_no = b.rest_no where rnum = 1) order by SYS.dbms_random.value) where rownum < 7;
-
--- 신규개업 
-select a.rest_NO, a.rest_name, a.rest_price, a.rest_address, a.rest_scope, a.rest_filename, a.rest_theme, a.rest_opendate, b.review_cnt
-from (
-(select rest_NO, rest_name, rest_price, rest_address, rest_scope, rest_filename, rest_theme, rest_opendate from restaurant_info order by rest_opendate desc) a
-left outer join (select rest_no, count(*) as review_cnt from review_info group by rest_no) b on a.rest_no = b.rest_no
-) where review_cnt is null;
+-- !! 드롭입니다 !!
 
 
 commit;

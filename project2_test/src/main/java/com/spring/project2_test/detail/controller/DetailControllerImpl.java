@@ -68,7 +68,7 @@ public class DetailControllerImpl implements DetailController {
 	@Override
 	@RequestMapping(value="/addNewReview.do", method= {RequestMethod.POST, RequestMethod.GET}, headers = ("content-type=multipart/*"))
 	@ResponseBody
-	public ResponseEntity writeReview(DetailReviewVO detailReviewVO,  MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	public ResponseEntity writeReview(DetailReviewVO detailReviewVO, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");

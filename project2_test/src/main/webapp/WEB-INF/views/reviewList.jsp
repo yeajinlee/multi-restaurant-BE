@@ -269,7 +269,7 @@
 	<div id="write_modal" class="modal">
             <span class="close cursor" onclick="closeWriteModal()">&times;</span>
             <div class="write_content">
-                <form action="${contextPath}/addNewReview.do" enctype="multipart/form-data" method="post" name="detailReviewForm">
+                <form action="${contextPath}/reviewList/updateReview.do" enctype="multipart/form-data" method="post" name="detailReviewForm">
                     <table class="write_form">
                         <tr>
                         	<td>
@@ -363,7 +363,7 @@
     			rest_NO = document.getElementById('review_rest_NO_e').value;
     		}
     		
-    		location.href="${contextPath}/deleteReview.do?review_NO=" + review_NO + "&rest_NO=" + rest_NO;
+    		location.href="${contextPath}/reviewList/deleteReview.do?review_NO=" + review_NO + "&rest_NO=" + rest_NO;
    		}
 		
 		function clickStar(clicked_id) {
@@ -414,7 +414,6 @@
         	document.getElementById("write_modal").style.display = "block";
         	/* document.getElementById("update_review").style.display = "block"; */
         	document.getElementById("form_review_NO").innerHTML += '<input type="number" name="review_NO" value="'+ n + '">';
-        	document.detailReviewForm.action = "${contextPath}/updateReview.do";
         	var review_contents;
         	var rest_name;
         	var rest_NO;

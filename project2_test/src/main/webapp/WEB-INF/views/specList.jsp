@@ -90,13 +90,13 @@ width:200px;
                         </div>
                 </li>
                 <li class="nav-item">
-                 <a class="nav-link" href="../main/reco1.html" style="color:white">&nbsp;&nbsp;&nbsp;<strong>추천 메뉴</strong> </a>
+                 <a class="nav-link" href="${contextPath}/reconList.do" style="color:white">&nbsp;&nbsp;&nbsp;<strong>추천 메뉴</strong> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>최근 후기</strong> </a>
+                    <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
+                    <a class="nav-link" href="${contextPath}/newList.do" style="color:white"><strong>신규 개업</strong> </a>
                 </li>
             </ul>
             <form class="d-flex">
