@@ -1,8 +1,9 @@
 package com.spring.project2_test.newList.vo;
 
 import org.springframework.stereotype.Component;
-@Component("newListVO")
-public class NewListVO {
+
+@Component("newListVO2")
+public class NewListVO2 {
 	private String rest_Name;
 	private String rest_fileName;
 	private String rest_OpenDate;
@@ -11,7 +12,6 @@ public class NewListVO {
 	private String rest_Address;
 	private String rest_Scope;
 	private String rest_Social;
-	private String user_ID;
 	public String getRest_Name() {
 		return rest_Name;
 	}
@@ -61,19 +61,7 @@ public class NewListVO {
 		this.rest_Social = rest_Social;
 	}
 	
-	public NewListVO() {
+	public NewListVO2() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public String getUser_ID() {
-		return user_ID;
-	}
-	public void setRest_NO(int rest_NO) {
-		this.rest_NO = rest_NO;
-	}
-	public void setUser_ID(String user_ID) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

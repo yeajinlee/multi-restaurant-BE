@@ -86,7 +86,7 @@ public class DetailControllerImpl implements DetailController {
 		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
 		String user_ID = memberVO.getUser_ID();
 		detailReviewVO.setUser_ID(user_ID);
-//		System.out.println(user_ID);
+System.out.println(user_ID);
 
 //		List<String> imgNameList = addImages(multipartRequest);
 //		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
