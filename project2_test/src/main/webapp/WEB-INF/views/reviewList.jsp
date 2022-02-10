@@ -87,8 +87,15 @@
 						</a>
 					</div>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
-						<a class="dropdown-item" href="../login_join/join.html">회원가입</a>
+						<c:if test="${member == null}">
+                        <a class="dropdown-item" href="${contextPath}/loginForm.do">로그인</a>
+                        <a class="dropdown-item" href="${contextPath}/joinForm.do">회원가입</a>
+                    </c:if>
+
+                    <c:if test="${member != null}">
+                        <a class="dropdown-item" href="${contextPath}/logout.do">로그아웃</a>
+                        <a class="dropdown-item" href="${contextPath}/mypage.do">마이페이지</a>
+                    </c:if>
 					</div>
 					</div>
 				</li>
@@ -136,6 +143,8 @@
 			</div>
 			
 			<div class="modal" id="review_${reviewO.review_NO }">
+				<input type="number" id="review_NO_o" name="review_NO" style="display: none" value="${reviewO.review_NO }">
+				<input type="number" id="review_rest_NO_o" name="rest_NO" style="display: none" value="${reviewO.rest_NO }">
             	<span class="close cursor" onclick="closeReviewModal('review_${reviewO.review_NO }')">&times;</span>
             	<div class="review_modal_content">
                 	<div id="modal_profile_img">
@@ -149,7 +158,7 @@
 						</c:choose>
                 	</div>
                 	<div id="modal_profile">
-                		<span style="padding-left: 9px; font-size:20px; color: salmon"><a href="${contextPath}/detail.do?rest_NO=${reviewO.rest_NO}"><b>${reviewO.rest_Name}</b></a></span><br>
+                		<span id="rest_name_o" style="padding-left: 9px; font-size:20px; color: salmon"><a href="${contextPath}/detail.do?rest_NO=${reviewO.rest_NO}"><b>${reviewO.rest_Name}</b></a></span><br>
                     	<span class="username"><b>${reviewO.user_Nickname }</b></span>
                     	<span class="level">&nbsp;Lv. ${reviewO.review_Scope } <br></span>
                     	<span class="star">
@@ -160,12 +169,13 @@
                     	<span class="star_date">&nbsp;${reviewO.review_Date }</span>
                 	</div>
                 	<div class="review_modal_btn">
-                		<input type="button" value="수정" id="review_edit"><input type="button" value="삭제" id="review_delete" onclick="check_delete()">
+                		<c:if test="${member.user_ID == reviewO.user_ID}">
+                		<input type="button" value="수정" id="review_edit" onclick="update_review_form('${reviewO.review_NO }')">
+                		<input type="button" value="삭제" id="review_delete" onclick="delete_review('${reviewO.review_NO }')">
+                		</c:if>
                 	</div>
                 	<br>
-                	<div class="review_contents">
-                    	${reviewO.review_Text }
-                	</div>
+                	<div id="review_contents_o">${reviewO.review_Text }</div>
                		<div class="review_modal_img">
                     	<c:forTokens items="${reviewO.images }" delims="/" var="img">
 							<img src="${contextPath}/resources/image/${img}" alt="">
@@ -211,6 +221,8 @@
 			</div>
 			
 			<div class="modal" id="review_${reviewE.review_NO }">
+				<input type="number" id="review_NO_e" name="review_NO" style="display: none" value="${reviewE.review_NO }">
+				<input type="number" id="review_rest_NO_e" name="rest_NO" style="display: none" value="${reviewE.rest_NO }">
             	<span class="close cursor" onclick="closeReviewModal('review_${reviewE.review_NO }')">&times;</span>
             	<div class="review_modal_content">
                 	<div id="modal_profile_img">
@@ -224,7 +236,7 @@
 						</c:choose>
                 	</div>
                 	<div id="modal_profile">
-                		<span style="padding-left: 9px; font-size:20px; color: salmon"><a href="${contextPath}/detail.do?rest_NO=${reviewE.rest_NO}"><b>${reviewE.rest_Name}</b></a></span><br>
+                		<span id="rest_name_e" style="padding-left: 9px; font-size:20px; color: salmon"><a href="${contextPath}/detail.do?rest_NO=${reviewE.rest_NO}"><b>${reviewE.rest_Name}</b></a></span><br>
                     	<span class="username"><b>${reviewE.user_Nickname }</b></span>
                     	<span class="level">&nbsp;Lv. ${reviewE.review_Scope } <br></span>
                     	<span class="star">
@@ -235,12 +247,13 @@
                     	<span class="star_date">&nbsp;${reviewE.review_Date }</span>
                 	</div>
                 	<div class="review_modal_btn">
-                		<input type="button" value="수정" id="review_edit"><input type="button" value="삭제" id="review_delete" onclick="check_delete()">
+                		<c:if test="${member.user_ID == reviewE.user_ID}">
+                		<input type="button" value="수정" id="review_edit" onclick="update_review_form('${reviewE.review_NO }')">
+                		<input type="button" value="삭제" id="review_delete" onclick="delete_review('${reviewE.review_NO }')">
+                		</c:if>
                 	</div>
                 	<br>
-                	<div class="review_contents">
-                    	${reviewE.review_Text }
-                	</div>
+                	<div id="review_contents_e">${reviewE.review_Text }</div>
                		<div class="review_modal_img">
                     	<c:forTokens items="${reviewE.images }" delims="/" var="img">
 							<img src="${contextPath}/resources/image/${img}" alt="">
@@ -252,6 +265,42 @@
 			</c:forEach>
 		</div>
 	</div>
+	
+	<div id="write_modal" class="modal">
+            <span class="close cursor" onclick="closeWriteModal()">&times;</span>
+            <div class="write_content">
+                <form action="${contextPath}/addNewReview.do" enctype="multipart/form-data" method="post" name="detailReviewForm">
+                    <table class="write_form">
+                        <tr>
+                        	<td>
+                        		<p id="write_title"><span id="rest_name"></span> 어떠셨나요?</p>
+                        		<%-- <input type="number" style="display:none" id="form_rest_NO" value="${detail.rest_NO}" name="rest_NO"> --%>
+                        		<input type="number" id="form_review_NO" style="display: none" name="review_NO">
+                        		<input type="number" id="form_rest_NO" style="display: none" name="rest_NO">
+                        	</td>
+                        </tr>
+                        <%-- <tr><td><div><input type="text" name="user_ID" id="form_user_ID"></div></td></tr> --%>
+                        <tr><td><p id="write_star">
+                            <i class="fas fa-star" id="star1" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star2" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star3" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star4" onclick="clickStar(this.id)"></i>
+                            <i class="fas fa-star" id="star5" onclick="clickStar(this.id)"></i>
+                           	<input type="text" id="scope" name="review_Scope" style="display:none">
+                        </p></td></tr>
+                        <tr><td><textarea name="review_Text" id="write_review" placeholder="리뷰를 남겨주세요."></textarea></td></tr>
+                        <%-- <tr><td><input type="file" id="add_file"><p id="add_file_btn" onclick="add_file()"><i class="fas fa-plus"></i></p></td></tr> --%>
+                        <tr><td><input type="file" id="add_file" name="img_FileName"></td></tr>
+                        <tr>
+                        	<td>
+                        		<p id="update_review"><input type="button" value="수정 완료" id="update_review_btn" onclick="update_review()"></p>
+                        	</td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+	
 
 	<footer>
 		<div class="column1">
@@ -290,12 +339,120 @@
 		</div>
 	</footer>
 	<script type="text/javascript">
-	function openReviewModal(n) {
-    	document.getElementById("review_"+n).style.display = "block";
+		function openReviewModal(n) {
+    		document.getElementById("review_"+n).style.display = "block";
 		}
-	function closeReviewModal(review_NO) {
-    	document.getElementById(review_NO).style.display = "none";
-	}
+	
+		function closeReviewModal(review_NO) {
+    		document.getElementById(review_NO).style.display = "none";
+		}
+		
+		function closeWriteModal() {
+	          document.getElementById("write_modal").style.display = "none";
+	          
+	    }
+		
+		function delete_review(n) {
+    		var review_NO;
+    		var rest_NO;
+    		if (n%2 == 1) {
+    			review_NO = document.getElementById('review_NO_o').value;
+    			rest_NO = document.getElementById('review_rest_NO_o').value;
+    		} else {
+    			review_NO = document.getElementById('review_NO_e').value;
+    			rest_NO = document.getElementById('review_rest_NO_e').value;
+    		}
+    		
+    		location.href="${contextPath}/deleteReview.do?review_NO=" + review_NO + "&rest_NO=" + rest_NO;
+   		}
+		
+		function clickStar(clicked_id) {
+            var id = clicked_id;
+            var scope = 0;
+            if (id == 'star1' ) {
+                document.getElementById('star1').style="color:salmon";
+                document.getElementById('star2').style="color:lightgrey";
+                document.getElementById('star3').style="color:lightgrey";
+                document.getElementById('star4').style="color:lightgrey";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 1;
+            } else if (id == 'star2') {
+                document.getElementById('star1').style="color:salmon";
+                document.getElementById('star2').style="color:salmon";
+                document.getElementById('star3').style="color:lightgrey";
+                document.getElementById('star4').style="color:lightgrey";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 2;
+            } else if (id == 'star3') {
+                document.getElementById('star1').style="color:salmon";
+                document.getElementById('star2').style="color:salmon";
+                document.getElementById('star3').style="color:salmon";
+                document.getElementById('star4').style="color:lightgrey";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 3;
+            } else if (id == 'star4') {
+                document.getElementById('star1').style="color:salmon";
+                document.getElementById('star2').style="color:salmon";
+                document.getElementById('star3').style="color:salmon";
+                document.getElementById('star4').style="color:salmon";
+                document.getElementById('star5').style="color:lightgrey";
+                scope = 4;
+            } else if (id == 'star5') {
+                document.getElementById('star1').style="color:salmon";
+                document.getElementById('star2').style="color:salmon";
+                document.getElementById('star3').style="color:salmon";
+                document.getElementById('star4').style="color:salmon";
+                document.getElementById('star5').style="color:salmon";
+                scope = 5;
+            }  
+            
+            document.getElementById('scope').value = scope;
+        }
+		
+		function update_review_form(n) {
+        	document.getElementById("review_"+n).style.display = "none";
+        	document.getElementById("write_modal").style.display = "block";
+        	/* document.getElementById("update_review").style.display = "block"; */
+        	document.getElementById("form_review_NO").innerHTML += '<input type="number" name="review_NO" value="'+ n + '">';
+        	document.detailReviewForm.action = "${contextPath}/updateReview.do";
+        	var review_contents;
+        	var rest_name;
+        	var rest_NO;
+        	var review_NO;
+        	if(n%2 == 1) {
+        		review_contents = document.getElementById("review_contents_o").textContent;
+        		document.getElementById("write_review").textContent = review_contents;
+ 
+        		rest_name = document.getElementById("rest_name_o").textContent;
+        		document.getElementById("rest_name").textContent = rest_name;
+        		
+        		rest_NO = document.getElementById("review_rest_NO_o").value;
+        		document.getElementById("form_rest_NO").value = rest_NO;
+        		
+        		review_NO = document.getElementById("review_NO_o").value;
+        		document.getElementById("form_review_NO").value = review_NO;
+        		
+        	} else {
+        		review_contents = document.getElementById("review_contents_e").textContent;
+        		document.getElementById("write_review").textContent = review_contents;
+        		
+        		rest_name = document.getElementById("rest_name_e").textContent;
+        		document.getElementById("rest_name").textContent = rest_name;
+        		
+        		rest_NO = document.getElementById("review_rest_NO_e").value;
+        		document.getElementById("form_rest_NO").value = rest_NO;
+        		
+        		review_NO = document.getElementById("review_NO_e").value;
+        		document.getElementById("form_review_NO").value = review_NO;
+        	}
+        	
+        	var user_ID = document.getElementById("modal_user_ID").value;
+        	document.getElementById("form_user_ID").value = user_ID;
+        }
+		
+        function update_review() {
+        	document.detailReviewForm.submit();
+        }
 	</script>
 </body>
 </html>

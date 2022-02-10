@@ -17,9 +17,10 @@ public interface DetailController {
 
 	public ModelAndView detailView(@RequestParam("rest_NO") int rest_NO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ResponseEntity writeReview(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	public ResponseEntity writeReview(DetailReviewVO detailReviewVO, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
-	public ResponseEntity deleteReview(@RequestParam("review_NO") int review_NO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity deleteReview(@RequestParam("rest_NO") int rest_NO, DetailReviewVO detailReviewVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ResponseEntity updateReview(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	public ResponseEntity updateReview(DetailReviewVO detailReviewVO, MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
 }

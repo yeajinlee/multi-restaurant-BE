@@ -41,7 +41,7 @@
 <body>
     <!-- header -->
     <div id="header">
-        <a href="${pageContext.request.contextPath}/main.do" target="_self" title="메인 페이지로"><img src="resources/image/logo_to_main.png" id="logo"></a>
+        <a href="${pageContext.request.contextPath}/main.do" target="_self" title="메인 페이지로"><img src="${pageContext.request.contextPath}/resources/image/logo_to_main.png" id="logo"></a>
     </div>
 
 

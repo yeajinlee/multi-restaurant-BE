@@ -99,8 +99,10 @@ width:200px;
                     <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="밥 뭐 먹지?" aria-label="Search">
+            <form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
+               
+                <input class="form-control me-2" name="searchWord" class="main_input" type="text" placeholder="밥 뭐 먹지?"  onKeyUp="keywordSearch()"> 
+         
                 <button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
             </form>
         </div>
@@ -158,7 +160,7 @@ width:200px;
 
 
           <div id="map" style="width:750px;height:300px;"></div><br>
-        
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5323.178435194255!2d127.02970191924717!3d37.50365287385709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e27e4118bb%3A0x9f15de5d1b0f6ed6!2z7ZmU6riw7JWg7JWg!5e0!3m2!1sko!2skr!4v1644391301229!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
          
             <footer>
               <div class="column1">

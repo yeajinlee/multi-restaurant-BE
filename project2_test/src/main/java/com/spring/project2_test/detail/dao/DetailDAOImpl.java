@@ -56,14 +56,21 @@ public class DetailDAOImpl implements DetailDAO{
 //		sqlSession.insert("mappers.detailReview.addNewReview", reviewVO);
 		
 //	}
+//	@Override
+//	public int insertNewReview(Map reviewMap) throws DataAccessException {
+//		int review_NO = selectNewReviewNO();
+////		int rest_NO = selectRestNO();
+//		reviewMap.put("review_NO", review_NO);
+////		reviewMap.put("rest_NO", rest_NO);
+//		sqlSession.insert("mappers.detailReview.addNewReview", reviewMap);
+//		return review_NO;
+//	}
+	
 	@Override
-	public int insertNewReview(Map reviewMap) throws DataAccessException {
-		int review_NO = selectNewReviewNO();
-//		int rest_NO = selectRestNO();
-		reviewMap.put("review_NO", review_NO);
-//		reviewMap.put("rest_NO", rest_NO);
-		sqlSession.insert("mappers.detailReview.addNewReview", reviewMap);
-		return review_NO;
+	public void insertNewReview(DetailReviewVO detailReviewVO) throws DataAccessException {
+		sqlSession.insert("mappers.detailReview.addNewReview", detailReviewVO);
+		
+
 	}
 	
 	private int selectNewReviewNO() {
@@ -86,14 +93,18 @@ public class DetailDAOImpl implements DetailDAO{
 //	}
 	
 	@Override
-	public void deleteReview(int review_NO) throws DataAccessException {
-		sqlSession.delete("mappers.detailReview.deleteReview", review_NO);
+
+	public void deleteReview(DetailReviewVO detailReviewVO) throws DataAccessException {
+		sqlSession.delete("mappers.detailReview.deleteReview", detailReviewVO);
+
 		
 	}
 	
 	@Override
-	public void updateReview(Map reviewMap) throws DataAccessException {
-		sqlSession.update("mappers.detailReview.updateReview", reviewMap);
+
+	public void updateReview(DetailReviewVO detailReviewVO) throws DataAccessException {
+		sqlSession.update("mappers.detailReview.updateReview", detailReviewVO);
+
 		
 	}
 }
