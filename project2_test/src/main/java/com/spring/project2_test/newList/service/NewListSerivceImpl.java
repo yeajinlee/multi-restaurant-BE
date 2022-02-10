@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.project2_test.newList.dao.NewListDAO;
 import com.spring.project2_test.newList.vo.NewListVO;
+import com.spring.project2_test.newList.vo.NewListVO2;
 @Service("newListService")
 public class NewListSerivceImpl implements NewListService{
 
@@ -19,8 +20,8 @@ public class NewListSerivceImpl implements NewListService{
 		return newList;
 	}
 	@Override
-	public List<NewListVO> newDef() throws Exception {
-	List<NewListVO> defaultList= newListDAO.defaultNewList();
+	public List<NewListVO2> newDef() throws Exception {
+	List<NewListVO2> defaultList= newListDAO.defaultNewList();
 		return defaultList;
 	}
 }

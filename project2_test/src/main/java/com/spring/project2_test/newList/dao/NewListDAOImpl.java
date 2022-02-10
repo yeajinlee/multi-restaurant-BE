@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.project2_test.newList.vo.NewListVO;
+import com.spring.project2_test.newList.vo.NewListVO2;
 
 @Repository("newListDAO")
 public class NewListDAOImpl implements NewListDAO{
@@ -20,8 +21,8 @@ public class NewListDAOImpl implements NewListDAO{
 		return newList;
 	}
 	@Override
-	public List<NewListVO> defaultNewList() throws Exception {
-		List<NewListVO> defaultList=sqlSession.selectList("mappers.newlist.defaultNewList");
+	public List<NewListVO2> defaultNewList() throws Exception {
+		List<NewListVO2> defaultList=sqlSession.selectList("mappers.newlist.defaultNewList");
 		return defaultList;
 	}
 }
