@@ -30,6 +30,10 @@ left:150px;
 padding: 5px;
 
 }
+.card-body{
+height: 300px;
+
+}
    </style>
 <body>
 
@@ -100,15 +104,8 @@ padding: 5px;
                                       
                             <form name="frmSearch" action="${contextPath}/searchRest.do" >
                                 <div class="col">
-                                    <!-- <input class="form-control form-control-lg" id="search"
-                                        placeholder="지역, 식당 또는 음식 검색하기" data-sb-validations="required,email" /> -->
-                                	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
-                                
-                               
-            
-                            <!--     <button class="btn btn-lg btn-outline-light" id="submitButton"
-                                        type="submit">SEARCH</button></div> -->
-                                <input type="submit" name="search" class="btn1"  value="검색" >
+                                  	<input name="searchWord" class="main_input" type="text"  onKeyUp="keywordSearch()"> 
+                                    <input type="submit" name="search" class="btn1"  value="검색" >
                          </div></form>
                             </div>
                         </div>
@@ -133,7 +130,7 @@ padding: 5px;
                                 <span><h1><b>${rest.rest_Name }</b></h1></span><br>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
-                                       	 (메뉴)
+                                       	 ${rest.rest_Theme}
                                     </li>
                                     <li class="mb-2">
                                         ${rest.rest_Price }

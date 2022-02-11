@@ -68,10 +68,10 @@
 </style>
 <script>
 	$(function() {
-		$(".content").slice(0, 2).show();
+		$(".content").slice(0, 4).show();
 		$("#loadMore").on('click', function(e) {
 			e.preventDefault();
-			$(".content:hidden").slice(0, 2).slideDown();
+			$(".content:hidden").slice(0, 4).slideDown();
 			if ($(".content").length == 0) {
 				$("#load").fadeOut('slow');
 				$('#loadmore').replaceWith("<p class='p'>No More</p>");
@@ -88,11 +88,11 @@
 	<nav class="heading">
 		<nav
 			class="navbar navbar-default navbar-expand-lg navbar-dark fixedtop">
-			<a href="../main/main.html">
+			<a href="${contextPath}/main.do">
 			<img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt="">
 			</a>
 			<a class="navbar-brand"
-				href="../main/main.html"> MULTI <br> RESTAURANT
+				href="${contextPath}/main.do"> MULTI <br> RESTAURANT
 			</a>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -120,9 +120,9 @@
 							href="${contextPath}/newList.do" style="color: white"><strong>신규
 									개업</strong> </a></li>
 					</ul>
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="밥 뭐 먹지?" aria-label="Search">
+							
+					<form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
+						<input class="form-control me-2" name="searchWord" type="text" placeholder="밥 뭐 먹지?" aria-label="Search">
 						<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
 					</form>
 				</div>
@@ -164,7 +164,7 @@
 				<h5>관련맛집</h5>
 			</div>
 			<div>	<c:forEach var="items" items="${sideLists}">
-				<a href="items.html"><img src="${contextPath}/resources/image/${items.img_fileName}" alt="">
+				<a href="${pageContext.request.contextPath}/detail.do?rest_NO=${items.rest_NO}"><img src="${contextPath}/resources/image/${items.img_fileName}" alt="">
 				
 					<div class="sidepic">${items.rest_Name}</div></a> 
 					</c:forEach>
@@ -213,7 +213,7 @@
 		<div class="column1">
 
 			<h2 class="text-left1">
-				About Us <img src="./footer_nav.png" alt="">
+				About Us <img src=${contextPath}/resources/image/footer_nav.png alt="" alt="">
 			</h2>
 			<p>모든 음식점을 위하여</p>
 

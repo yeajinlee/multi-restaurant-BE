@@ -15,25 +15,24 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<SearchVO> searchRest(String searchWord) throws Exception {
 		List<SearchVO> restLists = searchDAO.selectBySearchWord(searchWord);
-		System.out.println("여기옴 서비스");
+		System.out.println("this is service");
 		return restLists;
 	}
-
+	public void searchCount(String searchWord) throws Exception {
+		searchDAO.countBy(searchWord);
+	}
+	@Override
+	public List<SearchVO> sideRest(String searchWord) throws Exception {
+		List<SearchVO> sideLists = searchDAO.sideBySearchWord(searchWord);
+		System.out.println("this is side Service");
+		return sideLists;
+	}
+	
+	
+	
 	@Override
 	public List<String> keywordSearch(String keyword) {
 		List<String> list = searchDAO.selectKeywordSearch(keyword);
 		return list;
-	}
-
-	public void searchCount(String searchWord) throws Exception {
-		searchDAO.countBy(searchWord);
-
-	}
-
-	@Override
-	public List<SearchVO> sideRest(String searchWord) throws Exception {
-		List<SearchVO> sideLists = searchDAO.sideBySearchWord(searchWord);
-		System.out.println("여기옴 서비스");
-		return sideLists;
 	}
 }

@@ -63,6 +63,11 @@ public class DetailServiceImpl implements DetailService{
 		detailDAO.insertNewReview(detailReviewVO);
 	}
 	
+	@Override
+	public void addNewReviewImg(ImageVO imageVO) throws Exception {
+		detailDAO.insertNewReviewImg(imageVO);
+		
+	}
 
 //	@Override
 //	public int selectRestNO() throws Exception {

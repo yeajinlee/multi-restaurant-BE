@@ -10,6 +10,7 @@ public class MainVO {
 	private int rest_Scope;
 	private String rest_Social;
 	private Date rest_OpenDate;
+	private String rest_Theme;
 	private String img_FileName;
 	
 	
@@ -61,6 +62,13 @@ public class MainVO {
 	public void setRest_OpenDate(Date rest_OpenDate) {
 		this.rest_OpenDate = rest_OpenDate;
 	}
+	public String getRest_Theme() {
+		return rest_Theme;
+	}
+	public void setRest_Theme(String rest_Theme) {
+		this.rest_Theme = rest_Theme;
+	}
+	
 	
 	
 }

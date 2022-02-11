@@ -52,11 +52,10 @@
             </div>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="밥 뭐 먹지?">&nbsp;&nbsp;
-
-                    <button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
-                </form>
+					<form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
+						<input class="form-control me-2" name="searchWord" type="text" placeholder="밥 뭐 먹지?" aria-label="Search">
+						<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
+					</form>
             </div>
 
             <ul class="navbar-nav">
@@ -92,7 +91,7 @@
                         <div class="caption">
                             <div class="caption-content">
                                 <div class="h2">${item.rest_theme}</div>
-                                <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                                <p class="mb-0">코멘트 미정</p>
                             </div>
                       
                         </div>
@@ -119,7 +118,7 @@
     <footer>
         <div class="column1">
          
-            <h2 class="text-left1">About Us  <img src="../추천/footer_nav.png" alt=""></h2>
+            <h2 class="text-left1">About Us  <img src="${contextPath}/resources/image/footer_nav.png" alt=""></h2>
             <p>모든 음식점을 위하여</p>
           
         </div>

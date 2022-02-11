@@ -69,12 +69,13 @@ p{
 .content .title{
   text-decoration: none;
   color: black;
-  
+  z-index:-999;
 }
 .content .Nbtn{
 text-decoration: none;
 float: right;
 margin-bottom: 10px;
+index-z:-999;
 }
 
 
@@ -127,6 +128,7 @@ margin: 0 auto;
   color: #fff;
   position:relative;
   font-size: small;
+  z-index:-999;
 }
 
 .wordy:before {
@@ -139,6 +141,7 @@ margin: 0 auto;
   border-top: 10px solid rgb(255, 176, 167);
   border-bottom: 10px solid transparent;
   right: -10px;
+  z-index:-999;
   top: 6px;
 }
 

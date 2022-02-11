@@ -30,7 +30,7 @@
 		parameterType="String">
     <![CDATA[
     
-  	SELECT ri.rest_Name, rm.img_fileName from Restaurant_Info ri, ReviewIMG_Info rm where
+  	SELECT ri.rest_Name, ri.rest_NO, rm.img_fileName from Restaurant_Info ri, ReviewIMG_Info rm where
      ri.rest_NO=rm.rest_NO and rm.filetype='main_image'
        and ri.rest_theme || ri.rest_Address||ri.rest_name like '%'|| #{searchWord} || '%'
      order by ri.rest_View desc

@@ -36,8 +36,8 @@ ResultSet rs = pstmt.executeQuery();
 
 
 /*  if(user_ID == null){
-	response.sendRedirect("loginForm.do");
-} */
+	response.sendRedirect("loginForm.do"); */
+
  
 
 %>
@@ -73,8 +73,13 @@ ResultSet rs = pstmt.executeQuery();
                     </li>
                 </ul>
             </div>
+    
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
+						<input class="form-control me-2" name="searchWord" type="text" placeholder="밥 뭐 먹지?" aria-label="Search">
+						<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
+					</form>
             </div>
-
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <div class="col-lg-6"></div>

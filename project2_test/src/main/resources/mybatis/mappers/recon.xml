@@ -12,7 +12,8 @@
 	<select id="selectReconList" resultMap="reconResult">
 	<![CDATA[
 	
-	SELECT rest_theme, count(*) from Restaurant_Info group by rest_theme having count(*) >4
+	SELECT rest_theme, count(*) from Restaurant_Info group by rest_theme having count(*) >3
+	
 
 	
 			]]> <!-- 카운트 해서 4개 이하인것은 안보이게 하기!!! rest_theme count 사용 -->
