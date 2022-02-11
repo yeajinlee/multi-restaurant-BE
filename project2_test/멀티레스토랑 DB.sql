@@ -16,10 +16,10 @@ insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, 
     values ('a0002', 'a0002', '테스트이름2', '1992', 2, '강남구', 'a0002@gmail.com', '02000000000', 2, 'pasta.jpg');
 insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level, user_profile) 
     values ('a0003', 'a0003', '테스트이름3', '1993', 1, '파주시', 'a0003@gmail.com', '03000000000', 1, 'sushi.jpg');
-insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level) 
-    values ('a0004', 'a0004', '테스트이름4', '1994', 2, '파주시', 'a0004@gmail.com', '04000000000', 2);
-insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level) 
-    values ('a0005', 'a0005', '테스트이름5', '1995', 1, '여의도시', 'a0005@gmail.com', '05000000000', 1);
+insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level, user_profile) 
+    values ('a0004', 'a0004', '테스트이름4', '1994', 2, '파주시', 'a0004@gmail.com', '04000000000', 2, 'pasta.jpg');
+insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level, user_profile) 
+    values ('a0005', 'a0005', '테스트이름5', '1995', 1, '여의도시', 'a0005@gmail.com', '05000000000', 1,'sushi.jpg');
 insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level, user_profile) 
     values ('a0006', 'a0006', '테스트이름6', '1996', 2, '파주시', 'a0006@gmail.com', '06000000000', 2, 'sushi2.jpg');
 insert into user_info(user_ID, user_PW, user_Nickname, user_Birth, user_gender, user_City, user_Email, user_Phone, user_level, user_profile) 
@@ -92,22 +92,9 @@ drop table Review_Info;
 drop table Review_Info cascade constraints;
 drop sequence review_seq;
 select * from v$nls_parameters;
+SELECT to_char sysdate;
 
 
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (1, 'a0001', 5, '테스트 리뷰', 1 , sysdate);
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (2, 'a0001', 5, '테스트 리뷰2', 2, sysdate);
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (3, 'a0001', 5, '테스트 리뷰2', 3, sysdate);
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (4, 'a0001', 4, '테스트 리뷰2', 4, sysdate);
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (5, 'a0001', 5, '테스트 리뷰2', 5, sysdate);
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (6, 'a0001', 6, '테스트 리뷰2', 6, sysdate);
-insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_Date)
-    values (7, 'a0001', 7, '테스트 리뷰2', 7, sysdate);
     
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
     values (review_seq.nextval, 'a0001', 5, '테스트 리뷰1', 1, sysdate);
@@ -122,14 +109,18 @@ insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, 
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
     values (review_seq.nextval, 'a0002', 2, '테스트 리뷰6', 6, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (review_seq.nextval, 'a0003', 3, '테스트 리뷰7', 1, sysdate);
+    values (review_seq.nextval, 'a0003', 3, '테스트 리뷰7', 7, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (review_seq.nextval, 'a0004', 4, '테스트 리뷰8', 2, sysdate);
+    values (review_seq.nextval, 'a0004', 4, '테스트 리뷰8', 8, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (review_seq.nextval, 'a0005', 5, '테스트 리뷰9', 3, sysdate);
+    values (review_seq.nextval, 'a0005', 5, '테스트 리뷰9', 9, sysdate);
 insert into review_info(review_NO, user_ID, review_scope, review_Text, rest_NO, review_date)
-    values (review_seq.nextval, 'a0006', 5, '테스트 리뷰10', 4, sysdate);    
+    values (review_seq.nextval, 'a0006', 5, '테스트 리뷰10', 10, sysdate);    
     
+    select ri.rest_no, ri.rest_name, ri.rest_fileName, rw.review_text, ri.rest_theme , ri.rest_Address
+from Restaurant_Info ri, Review_Info rw where ri.rest_theme=Meat and ri.rest_No=rw.rest_No
+and ri.rest_no=rw.review_NO;
+
     drop SEQUENCE review_seq;
 CREATE SEQUENCE review_seq START WITH 1 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 
@@ -164,9 +155,12 @@ insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_
 values (reviewimg_seq.nextval, 'kang.jpg', 2,'main_image', 2);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO) 
-values (reviewimg_seq.nextval, 'lee.jpg', 4,'main_image', 4);
+values (reviewimg_seq.nextval, 'kill.jpg', 3,'main_image', 3);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO,fileType, rest_NO)
+values (reviewimg_seq.nextval, 'lee.jpg',4,'main_image', 4);
+
+insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
 values (reviewimg_seq.nextval, 'sam.jpg',5,'main_image', 5);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
@@ -176,38 +170,35 @@ insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_
 values (reviewimg_seq.nextval, 'hwakill.jpg',7,'main_image', 7);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'da.jpg',8,'main_image', 8);
+values (reviewimg_seq.nextval, 'da.jpg', 8,'main_image', 8);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
 values (reviewimg_seq.nextval, 'ryu.jpg', 9,'main_image', 9);
-
+ 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
 values (reviewimg_seq.nextval, 'inn.jpg', 10,'main_image', 10);
------------------------------------------------------------------------------------
-insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, '3ch.jpg', 11,'main_image', 11);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'sushi2.jpeg', 12,'main_image',12);
+values (reviewimg_seq.nextval, '3ch.jpg', 11,'main_image',11);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'burger.jpeg', 13,'main_image', 13);
+values (reviewimg_seq.nextval, 'cham.jpg', 12,'main_image', 12);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'sushi3.jpeg', 14,'main_image', 14);
+values (reviewimg_seq.nextval, 'cham2.jpg', 13,'main_image', 13);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'kimbap.jpeg', 15,'main_image', 15);
+values (reviewimg_seq.nextval, 'cham3.jpg', 14,'main_image', 14);
 
 insert into reviewimg_info (img_fileNo, img_fileName, review_NO, fileType, rest_NO)
-values (reviewimg_seq.nextval, 'sushi4.jpeg', 16,'main_image', 16);
+values (reviewimg_seq.nextval, 'yeon.jpg', 15,'main_image', 15);
 commit;
 
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate ,rest_City)
                       values(1,'han.jpg', '한미옥', '10만원대', '서울 강남구 봉은사로 319 한미옥', '02-1234-5678', '1', '인스타그램','K-Traditional',1, sysdate, '강남구');
                       
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
-                      values(2,'kang.jpg', '강남한우정육식당', '10만원대', '서울 강남구 삼성로 546 1층 101호', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '파주시');
+                      values(2,'kang.jpg', '강남한우정육식당', '10만원대', '서울 강남구 삼성로 546 1층 101호', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');
                       
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
                      values(3,'kill.jpg', '길목', '10만원대', '서울 강남구 영동대로129길 10 진성빌딩', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');     
@@ -216,13 +207,13 @@ insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_
                    values(4,'lee.jpg', '리북집', '10만원대', '서울 강남구 학동로2길 45', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');
                    
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
-                    values(5,'sam.jpg', '삼육가본점', '10만원대', '서울 강남구 강남대로114길 8', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '파주시');
+                    values(5,'sam.jpg', '삼육가본점', '10만원대', '서울 강남구 강남대로114길 8', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');
                     
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
                  values(6, 'hwa.jpg' , '화덕고깃간 ', '10만원대', '서울 강남구 테헤란로19길 17', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');
    
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
-                   values(7,'hwakill.jpg', '화기애애', '10만원대', '서울 강남구 강남대로106길 12 화기애애', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '파주시');  
+                   values(7,'hwakill.jpg', '화기애애', '10만원대', '서울 강남구 강남대로106길 12 화기애애', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');  
                    
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
                    values(8,'da.jpg', '다몽집', '10만원대', '서울 강남구 강남대로100길 13 2층 다몽집', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate, '강남구');
@@ -231,19 +222,47 @@ insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_
                    values(9,'ryu.jpg', '류몽민', '10만원대', '서울 강남구 학동로25길 11 씨플레이스 2층', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'강남구');
                    
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
-                   values(10,'inn.jpg', '경청애인', '10만원대', '서울 강남구 테헤란로 421 암천빌딩 3층', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'파주시' );
+                   values(10,'inn.jpg', '경청애인', '10만원대', '서울 강남구 테헤란로 421 암천빌딩 3층', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'강남구' );
 insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
                    values(11,'3ch.jpg', '3마리각색치킨', '3만원대', '경기 파주시 금촌동', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'파주시');
+                 
 
-
-select ri.rest_NO, ri.rest_Name, ri.rest_Price, ri.rest_Address, ri.rest_fileName, ri.rest_Scope 
-from Restaurant_Info ri, User_Info ui where ri.rest_Address like '%시%' order by rest_OpenDate;
-
-select ri.rest_NO, ri.rest_Name, ri.rest_Price, ri.rest_Address, ri.rest_fileName, ri.rest_Scope 
-from Restaurant_Info ri
-LEFT JOIN User_Info ui ON ri.rest_Address LIKE '%'+ui.user_City+'%';
-
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(12,'cham.jpg', '참치여행', '3만원대', '경기 파주시 금촌동', '02-1234-5678', '1', '인스타그램','Fish',1, sysdate,'파주시');
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(13,'cham2.jpg', '광어횟와찜', '3만원대', '경기 파주시 금촌동', '02-1234-5678', '1', '인스타그램','Fish',1, sysdate,'파주시');
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(14,'cham3.jpg', '초밥제왕', '3만원대', '경기 파주시 금촌동', '02-1234-5678', '1', '인스타그램','Fish',1, sysdate,'파주시');
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(15,'yeon.jpg', '연어만', '3만원대', '경기 파주시 금촌동', '02-1234-5678', '1', '인스타그램','Fish',1, sysdate,'파주시');                   
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(16,'chick2.jpg', '닭도리', '10만원대', '서울 강남구 테헤란로 11 ', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'강남구' );
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(17,'chang.jpg', '참꺠고기', '10만원대', '서울 강남구 테헤란로 4', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'강남구' );
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(18,'chang3.jpg', '돌려고기', '10만원대', '서울 강남구 테헤란로 21', '02-1234-5678', '1', '인스타그램','Meat',1, sysdate,'강남구' );
+insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(19,'ok.jpg', '한옥분식', '10만원대', '경기 파주시 금촌동', '02-1234-5678', '1', '인스타그램','Meal',1, sysdate,'파주시' );
+                   
+                   insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(20,'C1.jpg', '스타벅스', '10만원대', '인천시 계양구 동양동', '02-1234-5678', '1', '인스타그램','COFFEE',1, sysdate,'계양구' );
+                   
+                   insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(21,'C2.jpg', '카페베네', '10만원대', '인천시 계양구 동양동', '02-1234-5678', '1', '인스타그램','COFFEE',1, sysdate,'계양구' );
+                   
+                   insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(22,'C3.jpg', '톰스', '10만원대', '인천시 계양구 동양동', '02-1234-5678', '1', '인스타그램','COFFEE',1, sysdate,'계양구' );
+                   
+                   insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(23,'C4.jpg', '리얼다방', '10만원대', '인천시 계양구 동양동', '02-1234-5678', '1', '인스타그램','COFFEE',1, sysdate,'계양구' );
+                   
+                   insert into restaurant_info (rest_NO,rest_filename, rest_Name, rest_Price, rest_Address, rest_Phone, rest_Scope, rest_Social,rest_theme,rest_View, rest_OpenDate,rest_City)
+                   values(24,'C5.jpg', '엔젤', '10만원대', '인천시 계양구 동양동', '02-1234-5678', '1', '인스타그램','COFFEE',1, sysdate,'계양구' );
+                   SELECT rest_theme, count(*) from Restaurant_Info group by rest_theme having count(*) >3;
 commit;
+
+SELECT rest_theme, count(*) from Restaurant_Info group by rest_theme having count(*) >3;
+
 CREATE TABLE Tag_Info (
     tag_NO INT PRIMARY KEY,
     tag_Name VARCHAR(20)

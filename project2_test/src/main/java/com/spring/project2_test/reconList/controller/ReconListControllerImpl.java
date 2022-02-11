@@ -26,16 +26,11 @@ public class ReconListControllerImpl implements ReconListController{
 	@Override
 	@RequestMapping(value="/reconList.do", method= RequestMethod.GET)
 	public ModelAndView reconList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		String viewName = (String) request.getAttribute("viewName");
-		
 		List<ReconListVO> ReconList = reconListService.ReconRest();
 		System.out.println("controll"+ReconList.toString());
-
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("ReconList", ReconList);
-	
-		
 		return mav;
 	
 	}

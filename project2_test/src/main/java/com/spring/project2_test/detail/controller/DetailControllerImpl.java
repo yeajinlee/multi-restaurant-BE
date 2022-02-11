@@ -86,7 +86,7 @@ public class DetailControllerImpl implements DetailController {
 		MemberVO memberVO = (MemberVO) sess.getAttribute("member");
 		String user_ID = memberVO.getUser_ID();
 		detailReviewVO.setUser_ID(user_ID);
-System.out.println(user_ID);
+		System.out.println(user_ID);
 
 //		List<String> imgNameList = addImages(multipartRequest);
 //		List<ImageVO> imgFileList = new ArrayList<ImageVO>();
@@ -113,7 +113,7 @@ System.out.println(user_ID);
 			detailService.addNewReview(detailReviewVO);
 			
 			msg = "<script>";
-			msg += "alert('���� �ۼ� �Ϸ�');";
+			msg += "alert('COMPLETE');";
 			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailReviewVO.getRest_NO() +"';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
@@ -126,7 +126,7 @@ System.out.println(user_ID);
 //				} 
 //			}
 			msg = "<script>";
-			msg += "alert('���� �������Դϴ�.')";
+			msg += "alert('Try Again')";
 			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailReviewVO.getRest_NO() +"';";
 
 			msg += "</script>";
@@ -175,13 +175,13 @@ System.out.println(user_ID);
 //			File destDir = new File(REVIEW_IMG_REPO + "\\" + imgFileName);
 			
 			msg = "<script>";
-			msg += "alert('���� ���� �Ϸ�');";
+			msg += "alert('DELETE COMPLETE');";
 			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			msg = "<script>";
-			msg += "alert('�ٽ� �õ��ϼ���');";
+			msg += "alert('Try Again');";
 			msg += "location.href='" + request.getContextPath() + "/detail.do?rest_NO=" + rest_NO +"';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
@@ -224,7 +224,7 @@ System.out.println(user_ID);
 			detailService.updateReview(detailReviewVO);
 			
 			msg = "<script>";
-			msg += "alert('���� ���� �Ϸ�');";
+			msg += "alert('UPDATE COMPLETE');";
 			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailReviewVO.getRest_NO() +"';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
@@ -238,7 +238,7 @@ System.out.println(user_ID);
 //			}
 			
 			msg = "<script>";
-			msg += "alert('���� �������Դϴ�.')";
+			msg += "alert('UPDATE COMPLETE.')";
 			msg += "location.href='" + multipartRequest.getContextPath() + "/detail.do?rest_NO=" + detailReviewVO.getRest_NO() +"';";
 
 			msg += "</script>";

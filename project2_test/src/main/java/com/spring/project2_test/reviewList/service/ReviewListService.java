@@ -9,5 +9,4 @@ public interface ReviewListService {
 
 	public List<ReviewListVO> reviewListOdd() throws Exception;
 	public List<ReviewListVO> reviewListEven() throws Exception;
-
 }

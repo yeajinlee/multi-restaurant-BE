@@ -17,9 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.project2_test.search.service.SearchService;
 import com.spring.project2_test.search.vo.SearchVO;
 @Controller("searchController")
-
 public class SearchControllerImpl implements SearchController {
-//sidesearch
+
 
 	@Autowired
 	private SearchService searchService;
@@ -29,13 +28,11 @@ public class SearchControllerImpl implements SearchController {
 	public ModelAndView searchRest(@RequestParam("searchWord") String searchWord,
 			HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
 		String viewName = (String) request.getAttribute("viewName");
 		List<SearchVO> restLists = searchService.searchRest(searchWord);
 		List<SearchVO> sideLists = searchService.sideRest(searchWord);
 		searchService.searchCount(searchWord);
 		ModelAndView mav = new ModelAndView(viewName);
-		
 		mav.addObject("sideLists",sideLists);
 		mav.addObject("searchWord",searchWord);
 		mav.addObject("restLists", restLists);

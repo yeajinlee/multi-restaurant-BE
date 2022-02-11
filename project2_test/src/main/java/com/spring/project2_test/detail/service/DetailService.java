@@ -26,6 +26,8 @@ public interface DetailService {
 
 	public void addNewReview(DetailReviewVO detailReviewVO) throws Exception;
 
+	public void addNewReviewImg(ImageVO imageVO) throws Exception;
+
 
 	
 

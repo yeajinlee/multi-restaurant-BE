@@ -33,7 +33,9 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/9623fd1de1.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/detail.css" type="text/css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1576f2dfa1dab042d66ec76de07d40d5"></script>
 </head>
 <body>
 	<nav
@@ -69,11 +71,10 @@
 						href="${contextPath}/newList.do" style="color: white"><strong>신규
 								개업</strong> </a></li>
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search"
-						placeholder="밥 뭐 먹지?" aria-label="Search">
-					<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
-				</form>
+								<form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
+						<input class="form-control me-2" name="searchWord" type="text" placeholder="밥 뭐 먹지?" aria-label="Search">
+						<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
+					</form>
 			</div>
 			</div>
 
@@ -129,31 +130,39 @@
 
 
 	<aside class='l_map'>
-		<span> <iframe
+		<span>
+			<%-- <iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.390980157256!2d126.98338321450412!3d37.569410079797336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2e8bd68ec11%3A0x6ee78e54814af2d9!2z6rCT64207Iqk7Iuc!5e0!3m2!1sko!2skr!4v1641207292048!5m2!1sko!2skr"
 				width="300" height="300" style="border: 0;" allowfullscreen=""
-				loading="lazy"></iframe> <br>
+				loading="lazy"></iframe> --%>
+				<div id="map" style="width:300px;height:300px; z-index: 0"></div>
+			<br>
 		</span>
 		<div class='map_btn'>
 			<%-- <button id="map_view">크게보기</button> --%>
-			<button id="myBtn">길찾기</button>
+			<%-- <button id="myBtn">길찾기</button> --%>
 
 		</div>
 	</aside>
 
 	<section class="r_info">
 		<div class="detail_info">
-			<span class="place_name">${detail.rest_Name }</span>
+			<span class="place_name" id="detail_rest_Name">${detail.rest_Name }</span>
 			<span class="theme">${detail.rest_Theme }</span>
 			<span class="star_wish">
 				<i class="fas fa-star"></i>&nbsp; <span><b>${detail.rest_Scope} / 5</b></span>&nbsp;&nbsp;&nbsp;
-				<span class="wish_cnt">리뷰 ${reviewCnt} 찜 12</span>&nbsp; 
-				<i class="far fa-heart" id="heart" onclick="setWishList();"></i>
+				<span class="wish_cnt">리뷰 ${reviewCnt}</span>&nbsp;
+				<c:if test="${member != null}">
+					<i class="far fa-heart" id="heart" onclick="setWishList();"></i>
+				</c:if>
+				<c:if test="${member == null}">
+					<i class="far fa-heart" id="heart" onclick="login_check_wish();"></i>
+				</c:if>
 			</span>
 			<table>
 				<tr>
 					<td>주소</td>
-					<td>${detail.rest_Address }</td>
+					<td id="rest_Address">${detail.rest_Address }</td>
 				</tr>
 				<tr>
 					<td>전화번호</td>
@@ -207,7 +216,7 @@
 					<table onclick="openWriteModal()">
 				</c:if>
 				<c:if test="${member == null}">
-					<table onclick="login_check()">
+					<table onclick="login_check_write()">
 				</c:if>
 					<tr>
 						<td>&nbsp;<i class="far fa-edit" id="write_btn"></i></td>
@@ -255,7 +264,7 @@
 		
 		<c:choose>
 			<c:when test="${empty detailReviewList }">
-				<h5 style="margin: 15px;">등록된 리뷰가 없습니다.</h5>
+				<h6 style="margin: 15px;">등록된 리뷰가 없습니다.</h6>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="review" items="${detailReviewList }">
@@ -380,6 +389,41 @@
 	</footer>
 	
 	<script>
+		
+		var rest_Name = document.getElementById('rest_name').innerText;
+	
+		//주소-좌표 변환
+		var markerPosition  = new kakao.maps.LatLng(37.51053931228002, 127.05508409768704); 
+
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(37.51053931228002, 127.05508409768704), //지도의 중심좌표.
+			level: 3 //지도의 레벨(확대, 축소 정도)
+		};
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+
+		var iwContent = '<div style="padding:5px;">' + rest_Name + '<br><a href="https://map.kakao.com/link/map/'+ rest_Name +',37.51053931228002, 127.05508409768704" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/'+ rest_Name+ ',37.51053931228002, 127.05508409768704" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwPosition = new kakao.maps.LatLng(37.51053931228002, 127.05508409768704); //인포윈도우 표시 위치입니다
+
+		// 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+		    position : iwPosition, 
+		    content : iwContent 
+		});
+		  
+		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+		infowindow.open(map, marker); 
+	
+	
+	
         // Open the Modal
         function openTopModal(n) {
           document.getElementById("top_modal_"+n).style.display = "block";
@@ -419,8 +463,14 @@
        		document.getElementById('star5').style="color:lightgrey"
         }
         
-        function login_check() {
+        function login_check_write() {
         	if(confirm("후기 작성을 위해 로그인이 필요합니다. 로그인화면으로 이동할까요?") == true) {
+        		location.href="${contextPath}/loginForm.do";
+        	}
+        }
+        
+        function login_check_wish() {
+        	if(confirm("찜하기 위해 로그인이 필요합니다. 로그인화면으로 이동할까요?") == true) {
         		location.href="${contextPath}/loginForm.do";
         	}
         }

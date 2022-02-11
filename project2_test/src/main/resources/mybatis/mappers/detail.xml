@@ -41,7 +41,7 @@
 	</select>
 	<select id="selectRestImg" resultMap="imageResult">
 		<![CDATA[
-			select img_FileName from reviewimg_info where rest_NO = #{rest_NO}
+			select img_FileName from reviewimg_info where rest_NO = #{rest_NO} order by img_fileno desc
 		]]>
 	</select>
 	<select id="selectAllReview" resultMap="detailReviewResult">

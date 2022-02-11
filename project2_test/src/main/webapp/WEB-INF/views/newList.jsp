@@ -43,6 +43,24 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/newList.css"
 	type="text/css">
 </head>
+
+<style>
+
+.r_list table {
+    width: 600px;
+}
+.r_list table th {
+    font-size: 17px;
+    padding-left: 3px;
+}
+span.r_list img {
+    width: 100px;
+    height: 100px;
+    margin: 10px 0px 10px 10px;
+}
+
+
+</style>
 <body>
 	<nav
 		class="navbar navbar-default navbar-expand-lg navbar-dark fixed-top">
@@ -76,11 +94,10 @@
 						href="${contextPath}/newList.do" style="color: white"><strong>신규
 								개업</strong> </a></li>
 				</ul>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search"
-						placeholder="밥 뭐 먹지?" aria-label="Search">
-					<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
-				</form>
+									<form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
+						<input class="form-control me-2" name="searchWord" type="text" placeholder="밥 뭐 먹지?" aria-label="Search">
+						<button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
+					</form>
 			</div>
 			</div>
 
@@ -150,10 +167,10 @@
 									%>
 								
 								<tr>
-									<td><a href="../detail/detail.html"><img
+									<td><a href="${pageContext.request.contextPath}/detail.do?rest_NO=<%=rs.getInt("rest_NO")%>"><img
 											src="${contextPath}/resources/image/<%=rs.getString("rest_fileName")%>"
 											alt=""></a></td>
-									<td><a href="../detail/detail.html"><%=rs.getString("rest_name")%></a><br>$<%=rs.getString("rest_Price")%><br><%=rs.getString("rest_Address")%></td>
+									<td><a href="${pageContext.request.contextPath}/detail.do?rest_NO=<%=rs.getInt("rest_NO")%>"><%=rs.getString("rest_name")%></a><br>$<%=rs.getString("rest_Price")%><br><%=rs.getString("rest_Address")%></td>
 									<td><b>후기<%=rs.getInt("rest_Scope")%>개
 									</b>
 										<p class="open_date">
@@ -169,18 +186,23 @@
 							<c:otherwise>
 								<c:forEach var="itemS" items="${defaultList}">
 									<tr>
-										<td><a href="../detail/detail.html"><img
+										<td><a href="${pageContext.request.contextPath}/detail.do?rest_NO=${itemS.rest_NO}"><img
 												src="${contextPath}/resources/image/${itemS.rest_fileName}"
 												alt=""></a></td>
-										<td><a href="../detail/detail.html">${itemS.rest_Name}</a><br>${itemS.rest_Address}<br>${itemS.rest_Price}</td>
+										<td><a href="${pageContext.request.contextPath}/detail.do?rest_NO=${itemS.rest_NO}">${itemS.rest_Name}</a><br>${itemS.rest_Address}<br>${itemS.rest_Price}</td>
 										<td><b>후기:${itemS.rest_Scope}개</b>
 											<p class="open_date">개업: ${itemS.rest_OpenDate}</p></td>
 									</tr>
 								</c:forEach>
+								
 							</c:otherwise>
+							
 						</c:choose>
+						
 					</table>
+			
 				</span>
+				
 			</div>
 
 		</div>
@@ -234,7 +256,8 @@
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(37.75211051868948,
+					126.77080355814198), // 지도의 중심좌표
 			level : 3
 		// 지도의 확대 레벨 
 		};
@@ -266,7 +289,7 @@
 						callback);
 
 				var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-				message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+				message = '<div style="padding:5px;">현제 위치입니다</div>'; // 인포윈도우에 표시될 내용입니다
 
 				// 마커와 인포윈도우를 표시합니다
 				displayMarker(locPosition, message);
@@ -275,7 +298,8 @@
 
 		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-			var locPosition = new kakao.maps.LatLng(33.450701, 126.570667), message = 'geolocation을 사용할수 없어요..'
+			var locPosition = new kakao.maps.LatLng(37.75211051868948,
+					126.77080355814198), message = 'geolocation을 사용할수 없어요..'
 
 			displayMarker(locPosition, message);
 		}
@@ -316,20 +340,41 @@
 							126.76974457714924)
 				},
 				{
-					title : '타코야끼',
+					title : '참치여행',
 					latlng : new kakao.maps.LatLng(37.7527057064471,
 							126.77129477221693)
 				},
 				{
-					title : '스타벅스',
+					title : '연어만',
 					latlng : new kakao.maps.LatLng(37.75368909025995,
 							126.77020159865623)
 				},
 				{
-					title : '부대찌개',
+					title : '광어횟와찜',
+					latlng : new kakao.maps.LatLng(37.750366891797526, 126.77243445851688)
+				},
+				{
+					title : '초밥제왕',
 					latlng : new kakao.maps.LatLng(37.75168454290963,
 							126.77329339402652)
-				} ];
+				},
+				  {
+				        title: '길목', 
+				        latlng: new kakao.maps.LatLng(37.50459189980535, 127.04510155620922)
+				    },
+				    {
+				        title: '강남한우정육식당', 
+				        latlng: new kakao.maps.LatLng(37.50770929379197, 127.0372676478831)
+				    },
+				    {
+				        title: '리북집', 
+				        latlng: new kakao.maps.LatLng(37.514215606406344, 127.06722645927539)
+				    },
+				    {
+				        title: '화덕고깃간',
+				        latlng: new kakao.maps.LatLng(37.503539243865376, 127.03532830901408)
+				    }
+				];
 
 		// 마커 이미지의 이미지 주소입니다
 		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";

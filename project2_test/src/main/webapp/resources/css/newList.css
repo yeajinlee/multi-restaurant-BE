@@ -131,18 +131,7 @@ span.r_list {
     /* border: solid black; */
   
 }
-.r_list table {
-    width: 370px;
-}
-.r_list table th {
-    font-size: 17px;
-    padding-left: 5px;
-}
-span.r_list img {
-    width: 100px;
-    height: 100px;
-    margin: 10px 0px 10px 10px;
-}
+
 .open_date {
     margin-top: 3px;
 }

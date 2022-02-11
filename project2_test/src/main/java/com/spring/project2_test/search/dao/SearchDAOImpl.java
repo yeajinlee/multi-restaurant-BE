@@ -18,16 +18,12 @@ public class SearchDAOImpl implements SearchDAO{
 	@Autowired
 	private SqlSession sqlSession;
 
-	@Override
-	public List<String> selectKeywordSearch(String keyword) throws DataAccessException {
-		List<String> list = (ArrayList)sqlSession.selectList("mappers.search.selectKeywordSearch",keyword);
-		return list;
-	}
+
 
 	@Override
 	public ArrayList<SearchVO> selectBySearchWord(String searchWord) throws DataAccessException{
 		ArrayList restLists= (ArrayList)sqlSession.selectList("mappers.search.selectBySearchWord",searchWord);
-		System.out.println("¿©±â¿È ´Ù¿À");
+		System.out.println("this is search dao");
 		 return restLists;
 		 
 	}
@@ -39,7 +35,13 @@ public class SearchDAOImpl implements SearchDAO{
 @Override
 public List<SearchVO> sideBySearchWord(String searchWord) throws DataAccessException {
 	ArrayList sideLists= (ArrayList)sqlSession.selectList("mappers.search.sideBySearchWord",searchWord);
-	System.out.println("¿©±â¿È ´Ù¿À");
+	System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½");
 	 return sideLists;
+}
+
+@Override
+public List<String> selectKeywordSearch(String keyword) throws DataAccessException {
+	List<String> list = (ArrayList)sqlSession.selectList("mappers.search.selectKeywordSearch",keyword);
+	return list;
 }
 }

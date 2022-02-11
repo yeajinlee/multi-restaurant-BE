@@ -26,7 +26,7 @@
 	type="text/css">
   <script>
 	$(function() {
-		$(".about").slice(0, 2).show();
+		$(".about").slice(0, 4).show();
 		$("#loadMore").on('click', function(e) {
 			e.preventDefault();
 			$(".about:hidden").slice(0, 4).slideDown();
@@ -40,7 +40,12 @@
 </script>
 	
 <style>
+.content .Nbtn{
+text-decoration: none;
+float: right;
+margin-bottom: 10px;
 
+}
 .content p{
 margin-buttom:120px;
  font-weight: bolder;
@@ -71,8 +76,8 @@ width:200px;
 <body>
 
   <nav class="navbar navbar-default navbar-expand-lg navbar-dark fixedtop" >
-    <a href="../main/main.html"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
-        <a class="navbar-brand" href="../main/main.html"> MULTI <br> RESTAURANT</a>
+    <a href="${contextPath}/main.do"><img src="${contextPath}/resources/image/nav.png" width="80" height="80" alt=""></a>
+        <a class="navbar-brand" href="${contextPath}/main.do"> MULTI <br> RESTAURANT</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
@@ -90,19 +95,17 @@ width:200px;
                         </div>
                 </li>
                 <li class="nav-item">
-                 <a class="nav-link" href="../main/reco1.html" style="color:white">&nbsp;&nbsp;&nbsp;<strong>추천 메뉴</strong> </a>
+                 <a class="nav-link" href="${contextPath}/reconList.do" style="color:white">&nbsp;&nbsp;&nbsp;<strong>추천 메뉴</strong> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../reviewList/reviewList.html" style="color:white"><strong>최근 후기</strong> </a>
+                    <a class="nav-link" href="${contextPath}/reviewList.do" style="color:white"><strong>최근 후기</strong> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../newList/newList.html" style="color:white"><strong>신규 개업</strong> </a>
+                    <a class="nav-link" href="${contextPath}/newList.do" style="color:white"><strong>신규 개업</strong> </a>
                 </li>
             </ul>
-            <form class="d-flex" name="frmSearch" action="${contextPath}/searchRest.do">
-               
-                <input class="form-control me-2" name="searchWord" class="main_input" type="text" placeholder="밥 뭐 먹지?"  onKeyUp="keywordSearch()"> 
-         
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="밥 뭐 먹지?" aria-label="Search">
                 <button class="btn btn-sm btn-outline-light" type="submit">SEARCH</button>
             </form>
         </div>
@@ -137,12 +140,12 @@ width:200px;
           <div class="row">
   
             <div class="image">
-                <a href="../detail/detail.html">
+                <a href="${pageContext.request.contextPath}/detail.do?rest_NO=${spec.rest_No}">
               <img src="${contextPath}/resources/image/${spec.rest_fileName}" alt="이미지">   </a>
             </div>
      
             <div class="content">
-              <h4><a class="title" href="${pageContext.request.contextPath}/reviewList.do?rest_NO=${spec.rest_No}"><c:set var="i" value="${i + 1}"/>${i}.${spec.rest_name}</a></h4>
+              <h4><a class="title" href="${pageContext.request.contextPath}/detail.do?rest_NO=${spec.rest_No}"><c:set var="i" value="${i + 1}"/>${i}.${spec.rest_name}</a></h4>
                 <p>${spec.rest_Address}</p>
                 <p class="sub">${spec.review_text}</p>
                 <br><br>
@@ -160,12 +163,12 @@ width:200px;
 
 
           <div id="map" style="width:750px;height:300px;"></div><br>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5323.178435194255!2d127.02970191924717!3d37.50365287385709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e27e4118bb%3A0x9f15de5d1b0f6ed6!2z7ZmU6riw7JWg7JWg!5e0!3m2!1sko!2skr!4v1644391301229!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        
          
             <footer>
               <div class="column1">
                
-                  <h2 class="text-left1">About Us  <img src="./footer_nav.png" alt=""></h2>
+                  <h2 class="text-left1">About Us  <img src=${contextPath}/resources/image/footer_nav.png alt=""></h2>
                   <p>모든 음식점을 위하여</p>
                 
               </div>
@@ -196,13 +199,10 @@ width:200px;
           </footer>       
 </body>
 <script>
-var coffee = "coffee";
-var meat = "meat";
-
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
-        center: new kakao.maps.LatLng(37.514215606406374, 127.06727845927539), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.50841777427014, 127.03560900279777), // 지도의 중심좌표
         level: 6 // 지도의 확대 레벨
     };
 
@@ -212,20 +212,40 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 
 var positions = [
     {
-        title: '카카오', 
-        latlng: new kakao.maps.LatLng(37.514215106406374, 127.06727845927539)
+        title: '길목', 
+        latlng: new kakao.maps.LatLng(37.50459189980535, 127.04510155620922)
     },
     {
-        title: '생태연못', 
-        latlng: new kakao.maps.LatLng(37.514215606406344, 127.06727845927539)
+        title: '강남한우정육식당', 
+        latlng: new kakao.maps.LatLng(37.50770929379197, 127.0372676478831)
     },
     {
-        title: '텃밭', 
+        title: '리북집', 
         latlng: new kakao.maps.LatLng(37.514215606406344, 127.06722645927539)
     },
     {
-        title: '근린공원',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+        title: '화덕고깃간',
+        latlng: new kakao.maps.LatLng(37.503539243865376, 127.03532830901408)
+    },
+    {
+        title: '삼육가본점',
+        latlng: new kakao.maps.LatLng(37.50155535185006, 127.03239378313012)
+    },
+    {
+        title: '화기애애',
+        latlng: new kakao.maps.LatLng(37.50876189093336, 127.04175874842186)
+    },
+    {
+        title: '다몽집',
+        latlng: new kakao.maps.LatLng(37.503539243865376, 127.03532830901408)
+    },
+    {
+        title: '류몽민',
+        latlng: new kakao.maps.LatLng(37.51033542290811, 127.02901866155297)
+    },
+    {
+        title: '참꺠고기',
+        latlng: new kakao.maps.LatLng(37.51719886870749, 127.04752034288556)
     }
 ];
 

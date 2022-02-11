@@ -17,7 +17,6 @@
 	
 select ri.rest_no, ri.rest_name, ri.rest_fileName, rw.review_text, ri.rest_theme , ri.rest_Address
 from Restaurant_Info ri, Review_Info rw where ri.rest_theme= #{rest_theme} and ri.rest_No=rw.rest_No
-and ri.rest_no=rw.review_NO
 
 			]]>
 </select>
